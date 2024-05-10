@@ -1,0 +1,303 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+
+.container{
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+
+}
+
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+}
+
+ .navBar{
+    width: 100%;
+    height: 10vh;
+    background-color: #1F2833;
+}
+
+.navBarContent{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+}
+.sideNavBarContainer{
+    display: flex;
+    width: 100%;
+    height: 90vh;
+    background-color: white;
+}
+.sideNavBar{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 10%;
+    height: 90vh;
+    background-color: #1F2833;
+
+    cursor: pointer;
+    padding: 2rem;
+}
+.mainScreen{
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    /* height: vh; */
+    overflow: scroll;
+    
+}
+
+button{
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.like-picture{
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.comment-input{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    width: 100%;
+}
+
+#comment-btn{
+    margin: 0.5rem;
+    padding: 0.3rem;
+    border-radius: 0.5rem;
+}
+
+#commentInput{
+    padding: 0.3rem;
+    border-radius: 0.5rem;
+    background-color: #c3b6b6;
+    margin: 0;
+}
+
+.card {
+    width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin: 20px auto;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-header {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .profile-picture {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .user-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .username {
+    font-weight: bold;
+  }
+  
+  .card-body {
+    padding: 10px;
+  }
+  
+  .post-image {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .food-type {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .address {
+    color: #888;
+  }
+
+  .card-footer{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-right: 0.5rch;
+    padding: 0.5rem;
+  }
+
+ 
+
+
+
+  .postDetailCard {
+    width: 50%;
+    background-color: rgba(255, 255, 255, 0.5); /* Adjust the alpha value for transparency */
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Align form items in the center horizontally */
+}
+
+.postHeader {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.postDetailForm {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 0.5rem;
+    width: 100%; 
+    text-align: left; 
+}
+
+select, input[type="text"], input[type="file"], input[type="datetime-local"], button {
+    border: 1px solid #9A1750; 
+    border-radius: 1rem;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    outline: #45a049;
+    box-shadow: 20px;
+    width: 100%; 
+    box-sizing: border-box; 
+}
+
+button {
+    background-color: #9A1750;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color:#D79922 ;
+}
+
+
+
+/* loader */
+
+  .loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7); 
+    display: none;
+    z-index: 9999; 
+}
+
+.loader:before {
+    content: '';
+    border: 4px solid #f3f3f3; /* Light grey */
+    border-top: 4px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -15px; 
+    margin-left: -15px; 
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+/* Job-card
+/* Style for job cards */
+/* Job-card
+/* Style for job cards */
+.job-card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px; /* Adjust margin bottom as needed */
+  background-color: #f9f9f9;
+  width: calc(20.33% - 20px);/* Adjust width for three cards in one row */
+  margin-right: 20px; /* Adjust margin between cards */
+  box-sizing: border-box; /* Ensure padding and border are included in width */
+  flex-direction: column;
+}
+
+.job-card h2 {
+  margin-top: 0;
+}
+
+.job-card p {
+  margin-bottom: 5px;
+}
+/* Job-card
+/* Style for job cards */
+/* Job-card
+/* Style for job cards */
+.job-card {
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px; /* Adjust margin bottom as needed */
+  background-color: gainsboro;
+  width: calc(25.33% - 20px); /* Adjust width for three cards in one row */
+  margin-right: 20px; /* Adjust margin between cards */
+  box-sizing: border-box; /* Ensure padding and border are included in width */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add initial shadow effect */
+  transition: box-shadow 0.3s ease; /* Add transition effect */
+}
+
+.job-card h2 {
+  margin-top: 0;
+}
+
+.job-card p {
+  margin-bottom: 5px;
+}
+
+/* Apply hover effect */
+.job-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Darker shadow on hover */
+}
+
+.mainScreen {
+  display: flex;
+  flex-wrap: wrap; /* Allow cards to wrap to the next row */
+  justify-content: space-between; /* Add space between cards */
+}
