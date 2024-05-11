@@ -1,5 +1,5 @@
 function showAllPost() {
-    const url = 'http://localhost:8080/api/job/fetch/all'; // Replace 'url' with the actual API URL
+    const url = 'http://localhost:8080/api/job/fetch/all'; 
 
     fetch(url)
         .then(response => {
@@ -9,59 +9,73 @@ function showAllPost() {
             return response.json();
         })
         .then(data => {
-            createJobCards(data.jobs); // Call function to create job cards
+            createJobCards(data.jobs); 
+            console.log(data);
         })
         .catch(error => {
              console.error('There was a problem with the fetch operation:', error);
         }); 
 }
-
-
 function createJobCards(jobs) {
     const mainScreen = document.querySelector('.mainScreen');
-    mainScreen.innerHTML = ''; // Clear existing content
+    mainScreen.innerHTML = ''; 
     jobs.forEach(job => {
         const card = document.createElement('div');
         card.classList.add('job-card');
-    
-    
-        const title = document.createElement('h2');
-        title.textContent = job.jobTitle;
-    
+
+        const title = document.createElement('h3');
+        title.textContent = `Post: ${job.title}`;
+
         const companyName = document.createElement('p');
         companyName.textContent = `Company: ${job.companyName}`;
-    
+
         const address = document.createElement('p');
         address.textContent = `Location: ${job.address.city}`;
-    
+
         const description = document.createElement('p');
         description.textContent = `Description: ${job.description}`;
-    
+
         const jobType = document.createElement('p');
         jobType.textContent = `Job Type: ${job.jobType}`;
-    
+
         const status = document.createElement('p');
         status.textContent = `Status: ${job.status}`;
-    
-        // Append content to the card
+
+        // Create an img element for the company logo
+        // const logo = document.createElement('img');
+        // logo.src = job.companyLogo;
+        // logo.alt = `${job.companyName} Logo`;
+
+        // Append other content to the card
+        // card.appendChild(logo);
         card.appendChild(title);
         card.appendChild(companyName);
         card.appendChild(address);
         card.appendChild(description);
         card.appendChild(jobType);
         card.appendChild(status);
-    
-        // Append card to the main screen
+      
+
+        // Check if job.street is defined before accessing it
+        if (job.address.street!="") {
+            const link = document.createElement('a');
+            link.textContent = 'Click Here to Apply!';
+            link.href = job.address.street;
+            link.target = '_blank';
+            card.appendChild(link); 
+        }
         mainScreen.appendChild(card);
     });
-    
 }
+
+
+
 
 document.getElementById('fetchDataButton').addEventListener('click', showAllPost);
 
 //Fethching All categeories:
 function showAllCategeories() {
-    const url = 'http://localhost:8080/api/job/category/fetch/all'; // Replace 'url' with the actual API URL
+    const url = 'http://localhost:8080/api/job/category/fetch/all'; 
 
     fetch(url)
         .then(response => {
@@ -71,15 +85,15 @@ function showAllCategeories() {
             return response.json();
         })
         .then(data => {
-            createCateCards(data.categories); // Call function to create job cards
+            createCateCards(data.categories); 
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
         });
 }
-function createCateCards(categories) {         //create categeories cards:
+function createCateCards(categories) {        
     const mainScreen = document.querySelector('.mainScreen');
-    mainScreen.innerHTML = ''; // Clear existing content
+    mainScreen.innerHTML = ''; 
     categories.forEach(categories => {
         const card = document.createElement('div');
         card.classList.add('job-card');
@@ -89,12 +103,8 @@ function createCateCards(categories) {         //create categeories cards:
     
         const status = document.createElement('p');
         status.textContent = `Status: ${categories.status}`;
-    
-        // Append content to the card
         card.appendChild(name);
         card.appendChild(status);
-    
-        // Append card to the main screen
         mainScreen.appendChild(card);
     });
     
@@ -141,7 +151,6 @@ function createForm() {
 
             element.options.forEach(optionText => {
                 const option = document.createElement('option');
-                // option.value = optionText.toLowerCase();
                 option.value = i++;
                 option.textContent = optionText;
                 selectElement.appendChild(option);
@@ -242,7 +251,6 @@ function createRegistrationForm() {
  
             element.options.forEach(optionText => {
                 const option = document.createElement('option');
-                // option.value = optionText.toLowerCase();
                 option.value = i++;
                 option.textContent = optionText;
                 selectElement.appendChild(option);
@@ -291,7 +299,6 @@ function createRegistrationForm() {
 
 
 //  add categories form
-
 function createCategoriesForm() {
 
     const mainScreen = document.querySelector('.mainScreen');
@@ -333,7 +340,6 @@ function createCategoriesForm() {
  
             element.options.forEach(optionText => {
                 const option = document.createElement('option');
-                // option.value = optionText.toLowerCase();
                 option.value = i++;
                 option.textContent = optionText;
                 selectElement.appendChild(option);
@@ -385,37 +391,38 @@ function createCategoriesForm() {
 function SaveCategories(e) {  
     let name = "";
     let description = "";
-    const admin_jwtTocken=sessionStorage.getItem('admin_jwtTocken');
+    const admin_jwtTocken = sessionStorage.getItem('admin_jwtTocken');
 
-        const formData = {name,description};
-        e.forEach(element => {
-            formData[element.id] = document.getElementById(element.id).value;
-        });
-        console.log(formData);
-    
-        fetch('http://localhost:8080/api/job/category/add', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                 Authorization: "Bearer" + admin_jwtTocken,
-            },
-            body: JSON.stringify(e),
-        })
-        .then(response => {
-            if (response.ok) {
-                console.log('Post saved successfully:');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Category saved successfully:', e);
-        })
-        .catch(error => {
-            console.error('There was a problem saving the post:', error);
-        });
-    }
-    
-    
+    const formData = { name, description };
+    e.forEach(element => {
+        formData[element.id] = document.getElementById(element.id).value;
+    });
+    console.log(formData);
+
+    fetch('http://localhost:8080/api/job/category/add', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + admin_jwtTocken, 
+        },
+        body: JSON.stringify(formData), 
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Post saved successfully:');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Category saved successfully:', data);
+    })
+    .catch(error => {
+        console.error('There was a problem saving the post:', error);
+    });
+}
+
+
+
 // Function to create jobs form
 function createJobs() {
     const mainScreen = document.querySelector('.mainScreen');
@@ -441,9 +448,7 @@ function createJobs() {
             const jobCategorySelect = document.createElement('select');
             jobCategorySelect.id = 'jobCategory';
             jobCategorySelect.name = 'jobCategory';
-            jobCategorySelect.required = true;
-
-            // Loop through the categories and create options for the select field
+            jobCategorySelect.required = true;+
             data.categories.forEach(category => {
                 const option = document.createElement('option');
                 option.value = category.id; // Assuming category has an 'id' property
@@ -451,7 +456,6 @@ function createJobs() {
                 jobCategorySelect.appendChild(option);
             });
 
-            // Append the select field to the form body
             const jobCategoryFormGroup = document.createElement('div');
             jobCategoryFormGroup.classList.add('form-group');
             const label = document.createElement('label');
@@ -463,12 +467,8 @@ function createJobs() {
         .catch(error => console.error('Error fetching job categories:', error));
 
 
-         // Fetch job categories from backend and populate the select options
 
     
-
-    // Fetch job types from the backend and populate the select options
-
     fetch('http://localhost:8080/api/helper/job/type/fetch/all')
     .then(response => response.json())
     .then(data => {
@@ -479,8 +479,8 @@ function createJobs() {
 
         data.forEach(jobType => {
             const option = document.createElement('option');
-            option.value = jobType; // Value is the same as the text content
-            option.textContent = jobType; // Text content is the job type string
+            option.value = jobType; 
+            option.textContent = jobType; 
             jobTypeSelect.appendChild(option);
         });
 
@@ -506,8 +506,8 @@ function createJobs() {
 
         data.forEach(jobType => {
             const option = document.createElement('option');
-            option.value = jobType; // Value is the same as the text content
-            option.textContent = jobType; // Text content is the job type string
+            option.value = jobType;
+            option.textContent = jobType; 
             jobTypeSelect.appendChild(option);
         });
 
@@ -533,8 +533,8 @@ function createJobs() {
 
         data.forEach(jobType => {
             const option = document.createElement('option');
-            option.value = jobType; // Value is the same as the text content
-            option.textContent = jobType; // Text content is the job type string
+            option.value = jobType; 
+            option.textContent = jobType; 
             jobTypeSelect.appendChild(option);
         });
 
@@ -550,23 +550,20 @@ function createJobs() {
 
 
     // Other form elements
-    
-    
-    const formElements = [
+const formElements = [
         { type: 'input', inputType: 'text', id: 'jobTitle', name: 'jobTitle', labelText: 'Job Title:' },
         { type: 'input', inputType: 'text', id: 'companyName', name: 'companyName', labelText: 'Company Name:' },
         { type: 'input', inputType: 'text', id: 'jobDescription', name: 'jobDescription', labelText: 'Job Description:' },
         { type: 'input', inputType: 'text', id: 'name', name: 'CategoryTitle', labelText: 'Skills Required:' },
-        { type: 'input', inputType: 'text', id: 'Street', name: 'Street', labelText: 'Street:' },
+        { type: 'input', inputType: 'text', id: 'visit', name: 'visit', labelText: 'Visit Link:' },
         { type: 'input', inputType: 'text', id: 'City', name: 'City', labelText: 'City:' },
         { type: 'input', inputType: 'text', id: 'description', name: 'CategoryDescription', labelText: 'Pin Code:' },
         { type: 'input', inputType: 'text', id: 'State', name: 'State', labelText: 'State:' },
         { type: 'input', inputType: 'text', id: 'Country', name: 'Country', labelText: 'Country:' },
         { type: 'input', inputType: 'text', id: 'SelectCompanyLogo', name: 'CompanyLogo', labelText: 'Company Logo:' },
-        // Add other form elements as needed
+  
     ];
 
-    // Iterate over form elements and create corresponding input elements
     formElements.forEach(element => {
         const formGroup = document.createElement('div');
         formGroup.classList.add('form-group');
@@ -589,8 +586,6 @@ function createJobs() {
     const saveJobBtn = document.createElement('button');
     saveJobBtn.textContent = 'Add Job';
     saveJobBtn.id = 'saveJobBtn';
-
-    // Add event listener to handle saving the job
     saveJobBtn.addEventListener('click', saveJob);
 
     formContainer.appendChild(formHeader);
