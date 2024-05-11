@@ -24,10 +24,6 @@ function createJobCards(jobs) {
         const card = document.createElement('div');
         card.classList.add('job-card');
     
-        // Create card content
-        // const companyLogo = document.createElement('img');
-        // companyLogo.src = `CompanyLogo: ${job.companyLogo}`;// Set the src attribute to the URL of the company logo
-        // companyLogo.alt = 'companyLogoUrl'; // Add alt text for accessibility
     
         const title = document.createElement('h2');
         title.textContent = job.jobTitle;
