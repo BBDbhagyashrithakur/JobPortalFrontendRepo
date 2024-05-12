@@ -1,55 +1,74 @@
+
 <!DOCTYPE html>
-<html lang="en">
+
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Categories</title>
+
+    <title>Add Category</title>
+
 </head>
+
 <body>
-    <h1>Job Categories</h1>
-    <div id="categoryList"></div>
+ 
+<h2>Add Category</h2>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            fetchCategories();
-        });
+<form id="categoryForm">
 
-        function fetchCategories() {
-            fetch('http://localhost:8080/api/job/category/fetch/all')
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Failed to fetch categories');
-                }
-            })
-            .then(data => {
-                displayCategories(data.categories);
-            })
-            .catch(error => {
-                console.error('Error fetching categories:', error);
-                // Display error message on the screen
-                document.getElementById('categoryList').innerHTML = `<p>Error fetching categories: ${error.message}</p>`;
-            });
-        }
+    <label for="title">Title:</label><br>
 
-        function displayCategories(categories) {
-            const categoryList = document.getElementById('categoryList');
+    <input type="text" id="title" name="title"><br><br>
 
-            // Clear any existing content
-            categoryList.innerHTML = '';
+    <label for="description">Description:</label><br>
 
-            // Create a list of categories
-            const ul = document.createElement('ul');
-            categories.forEach(category => {
-                const li = document.createElement('li');
-                li.textContent = `${category.id}: ${category.name} - ${category.description}`;
-                ul.appendChild(li);
-            });
+    <textarea id="description" name="description"></textarea><br><br>
 
-            // Append the list to the categoryList div
-            categoryList.appendChild(ul);
-        }
-    </script>
+    <input type="submit" value="Submit">
+
+</form>
+ 
+<script>
+
+document.getElementById("categoryForm").addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    var formData = {
+
+        title: document.getElementById("title").value,
+
+        description: document.getElementById("description").value
+
+    };
+ 
+    fetch("http://localhost:8080/api/job/category/add", {
+    method: "POST",
+    
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData)
+})
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    return response.json();
+})
+.then(data => {
+    // Handle the response data
+    console.log(data);
+})
+.catch(error => {
+    // Handle errors
+    console.error('There was a problem with the fetch operation:', error);
+});
+
+
+});
+
+</script>
+ 
 </body>
+
 </html>

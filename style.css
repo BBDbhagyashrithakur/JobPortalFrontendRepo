@@ -301,3 +301,26 @@ button:hover {
   flex-wrap: wrap; /* Allow cards to wrap to the next row */
   justify-content: space-between; /* Add space between cards */
 }
+
+/* category table */
+.job-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.job-table th,
+.job-table td {
+  padding: 12px 15px;
+  border: 1px solid #dddddd;
+  text-align: left;
+}
+
+.job-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.job-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}

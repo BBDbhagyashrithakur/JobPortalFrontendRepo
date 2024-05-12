@@ -85,29 +85,46 @@ function showAllCategeories() {
             return response.json();
         })
         .then(data => {
-            createCateCards(data.categories); 
+            createCateTable(data.categories); 
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
         });
 }
-function createCateCards(categories) {        
+function createCateTable(categories) {
     const mainScreen = document.querySelector('.mainScreen');
     mainScreen.innerHTML = ''; 
-    categories.forEach(categories => {
-        const card = document.createElement('div');
-        card.classList.add('job-card');
 
-        const name = document.createElement('h4');
-        name.textContent = categories.name;
-    
-        const status = document.createElement('p');
-        status.textContent = `Status: ${categories.status}`;
-        card.appendChild(name);
-        card.appendChild(status);
-        mainScreen.appendChild(card);
+    const table = document.createElement('table');
+    table.classList.add('job-table');
+
+    // Create table header
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    const nameHeader = document.createElement('th');
+    nameHeader.textContent = 'Category Name';
+    const statusHeader = document.createElement('th');
+    statusHeader.textContent = 'Status';
+    headerRow.appendChild(nameHeader);
+    headerRow.appendChild(statusHeader);
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    // Create table body
+    const tbody = document.createElement('tbody');
+    categories.forEach(category => {
+        const row = document.createElement('tr');
+        const nameCell = document.createElement('td');
+        nameCell.textContent = category.name;
+        const statusCell = document.createElement('td');
+        statusCell.textContent = category.status;
+        row.appendChild(nameCell);
+        row.appendChild(statusCell);
+        tbody.appendChild(row);
     });
-    
+    table.appendChild(tbody);
+
+    mainScreen.appendChild(table);
 }
 
 
@@ -298,6 +315,7 @@ function createRegistrationForm() {
 }
 
 
+
 //  add categories form
 function createCategoriesForm() {
 
@@ -391,7 +409,7 @@ function createCategoriesForm() {
 function SaveCategories(e) {  
     let name = "";
     let description = "";
-    const admin_jwtTocken = sessionStorage.getItem('admin_jwtTocken');
+   
 
     const formData = { name, description };
     e.forEach(element => {
@@ -399,27 +417,29 @@ function SaveCategories(e) {
     });
     console.log(formData);
 
-    fetch('http://localhost:8080/api/job/category/add', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + admin_jwtTocken, 
-        },
-        body: JSON.stringify(formData), 
-    })
-    .then(response => {
-        if (response.ok) {
-            console.log('Post saved successfully:');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Category saved successfully:', data);
-    })
-    .catch(error => {
-        console.error('There was a problem saving the post:', error);
-    });
+fetch('http://localhost:8080/api/job/category/add', {
+    method: "POST",
+    headers: {
+         'Content-Type': 'application/json', // Specify the content type as JSON
+    
+     },
+    body: JSON.stringify(formData), // Convert formData to JSON string
+})
+.then(response => {
+    if (response.ok) {
+        console.log('Category saved successfully:');
+    }
+    return response.json();
+})
+.then(data => {
+    console.log('Category saved successfully:', data);
+    alert("category add");
+})
+.catch(error => {
+    console.error('There was a problem saving the category:', error);
+});
 }
+
 
 
 
