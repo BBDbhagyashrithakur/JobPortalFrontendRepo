@@ -324,3 +324,36 @@ button:hover {
 .job-table tbody tr:nth-child(even) {
   background-color: #f2f2f2;
 }
+
+
+/* popup style */
+.alert {
+  position: fixed;
+  top: 60px; /* Adjust this value to position the alert below the header */
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  overflow: hidden; /* Ensure overflow is hidden to hide the line */
+  z-index: 1000; /* Ensure the alert is on top of other elements */
+}
+
+/* Rest of the CSS remains the same */
+
+.success {
+    background-color: #4CAF50; /* Green */
+}
+
+.error {
+    background-color: #f44336; /* Red */
+}
+
+.line {
+    height: 3px;
+    background-color: #ffffff;
+    width: 100%; /* Initially set to 100% */
+    transition: width linear; /* Smooth transition for width changes */
+}

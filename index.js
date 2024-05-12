@@ -318,15 +318,12 @@ function createRegistrationForm() {
 
 //  add categories form
 function createCategoriesForm() {
-
     const mainScreen = document.querySelector('.mainScreen');
     mainScreen.style.justifyContent = "center";
     mainScreen.innerHTML = '';
  
- 
     const formContainer = document.createElement('div');
     formContainer.classList.add('AddCategories');
- 
  
     const formHeader = document.createElement('div');
     formHeader.classList.add('postHeader');
@@ -334,113 +331,103 @@ function createCategoriesForm() {
     formTitle.textContent = 'Add Category';
     formHeader.appendChild(formTitle);
  
- 
     const formBody = document.createElement('div');
     formBody.classList.add('AddCategories');
  
-   
     const formElements = [
-        { type: 'input', inputType: 'text', id: 'name', name: 'CategoryTitle', labelText: ' Category Title:' },
-        { type: 'input', inputType: 'text', id: 'description', name: 'CategoryDescription', labelText: 'Category Description:' },
-
+        { type: 'input', inputType: 'text', id: 'name', name: 'CategoryTitle', labelText: ' Category Title:',required: true },
+        { type: 'input', inputType: 'text', id: 'description', name: 'CategoryDescription', labelText: 'Category Description:',required: true },
     ];
  
- let i=0;
     formElements.map(element => {
         const formGroup = document.createElement('div');
         formGroup.classList.add('form-group');
  
-        if (element.type === 'select') {
-            const selectElement = document.createElement('select');
-            selectElement.id = element.id;
-            selectElement.name = element.name;
-            selectElement.required = true;
+        const inputElement = document.createElement('input');
+        inputElement.type = element.inputType;
+        inputElement.id = element.id;
+        inputElement.name = element.name;
+        inputElement.required = element.required; // Set required attribute    
  
-            element.options.forEach(optionText => {
-                const option = document.createElement('option');
-                option.value = i++;
-                option.textContent = optionText;
-                selectElement.appendChild(option);
-            });
+        const label = document.createElement('label');
+        label.textContent = element.labelText;
  
-            
-            const label = document.createElement('label');
-            label.textContent = element.labelText;
- 
-            formGroup.appendChild(label);
-            formGroup.appendChild(selectElement);
-        } else if (element.type === 'input') {
-            const inputElement = document.createElement('input');
-            inputElement.type = element.inputType;
-            inputElement.id = element.id;
-            inputElement.name = element.name;
-            inputElement.required = true;
- 
-            const label = document.createElement('label');
-            label.textContent = element.labelText;
- 
-            formGroup.appendChild(label);
-            formGroup.appendChild(inputElement);
- 
-       
-        }
+        formGroup.appendChild(label);
+        formGroup.appendChild(inputElement);
  
         formBody.appendChild(formGroup);
     });
- 
  
     const savePostBtn = document.createElement('button');
     savePostBtn.textContent = 'Add Category';
     savePostBtn.id = 'SavePostbtn';
     savePostBtn.addEventListener('click', () => SaveCategories(formElements))
  
-   
     formContainer.appendChild(formHeader);
     formContainer.appendChild(formBody);
     formContainer.appendChild(savePostBtn);
  
- 
     mainScreen.appendChild(formContainer);
     loader.style.display = 'none';
-    
 }
 
-//post categeories:
-function SaveCategories(e) {  
+// Display alert function
+function displayAlert(message, type) {
+    const alertBox = document.createElement('div');
+    alertBox.className = `alert ${type}`;
+    alertBox.textContent = message;
+
+    // Add the alert box to the DOM
+    document.body.appendChild(alertBox);
+
+    // Automatically remove the alert after a certain duration
+    setTimeout(() => {
+        alertBox.remove();
+    }, 2000); // Remove after 3 seconds (adjust as needed)
+}
+
+// Save categories function
+function SaveCategories(e) {
     let name = "";
     let description = "";
-   
 
     const formData = { name, description };
     e.forEach(element => {
         formData[element.id] = document.getElementById(element.id).value;
     });
-    console.log(formData);
 
-fetch('http://localhost:8080/api/job/category/add', {
-    method: "POST",
-    headers: {
-         'Content-Type': 'application/json', // Specify the content type as JSON
-    
-     },
-    body: JSON.stringify(formData), // Convert formData to JSON string
-})
-.then(response => {
-    if (response.ok) {
-        console.log('Category saved successfully:');
-    }
-    return response.json();
-})
-.then(data => {
-    console.log('Category saved successfully:', data);
-    alert("category add");
-})
-.catch(error => {
-    console.error('There was a problem saving the category:', error);
-});
+    fetch('http://localhost:8080/api/job/category/add', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json', 
+        },
+        body: JSON.stringify(formData), 
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Category saved successfully:');
+            clearFormFields(e); 
+            displayAlert('Category saved successfully', 'success');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Category saved successfully:', data);
+    })
+    .catch(error => {
+        console.error('There was a problem saving the category:', error);
+        displayAlert('Failed to save category', 'error');
+    });
 }
 
+// Clear form fields function
+function clearFormFields(elements) {
+    elements.forEach(element => {
+        document.getElementById(element.id).value = ""; 
+    });
+}
 
+// Call the function to create categories form
 
 
 // Function to create jobs form
