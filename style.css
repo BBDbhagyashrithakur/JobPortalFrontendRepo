@@ -136,10 +136,6 @@ button{
     border-bottom: 1px solid #ccc;
   }
   
-  .food-type {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
   
   .address {
     color: #888;
@@ -152,10 +148,6 @@ button{
     margin-right: 0.5rch;
     padding: 0.5rem;
   }
-
- 
-
-
 
   .postDetailCard {
     width: 50%;
@@ -185,7 +177,7 @@ label {
     text-align: left; 
 }
 
-select, input[type="text"], input[type="file"], input[type="datetime-local"], button {
+select, input[type="text"], input[type="url"] ,input[type="file"], input[type="datetime-local"], button {
     border: 1px solid #9A1750; 
     border-radius: 1rem;
     padding: 0.5rem;
@@ -244,9 +236,6 @@ button:hover {
 }
 
 
-/* Job-card
-/* Style for job cards */
-/* Job-card
 /* Style for job cards */
 .job-card {
   border: 1px solid #ccc;
@@ -267,8 +256,7 @@ button:hover {
 .job-card p {
   margin-bottom: 5px;
 }
-/* Job-card
-/* Style for job cards */
+
 /* Job-card
 /* Style for job cards */
 .job-card {
@@ -356,4 +344,9 @@ button:hover {
     background-color: #ffffff;
     width: 100%; /* Initially set to 100% */
     transition: width linear; /* Smooth transition for width changes */
+}
+.validation-message {
+  color: red;
+  /* font-size: 0.8rem; */
+  /* display: none; */
 }

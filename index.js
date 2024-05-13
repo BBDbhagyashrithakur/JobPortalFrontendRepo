@@ -41,13 +41,6 @@ function createJobCards(jobs) {
         const status = document.createElement('p');
         status.textContent = `Status: ${job.status}`;
 
-        // Create an img element for the company logo
-        // const logo = document.createElement('img');
-        // logo.src = job.companyLogo;
-        // logo.alt = `${job.companyName} Logo`;
-
-        // Append other content to the card
-        // card.appendChild(logo);
         card.appendChild(title);
         card.appendChild(companyName);
         card.appendChild(address);
@@ -56,7 +49,7 @@ function createJobCards(jobs) {
         card.appendChild(status);
       
 
-        // Check if job.street is defined before accessing it
+       
         if (job.address.street!="") {
             const link = document.createElement('a');
             link.textContent = 'Click Here to Apply!';
@@ -67,9 +60,6 @@ function createJobCards(jobs) {
         mainScreen.appendChild(card);
     });
 }
-
-
-
 
 document.getElementById('fetchDataButton').addEventListener('click', showAllPost);
 
@@ -91,6 +81,7 @@ function showAllCategeories() {
             console.error('There was a problem with the fetch operation:', error);
         });
 }
+
 function createCateTable(categories) {
     const mainScreen = document.querySelector('.mainScreen');
     mainScreen.innerHTML = ''; 
@@ -113,19 +104,90 @@ function createCateTable(categories) {
     // Create table body
     const tbody = document.createElement('tbody');
     categories.forEach(category => {
-        const row = document.createElement('tr');
-        const nameCell = document.createElement('td');
-        nameCell.textContent = category.name;
-        const statusCell = document.createElement('td');
-        statusCell.textContent = category.status;
-        row.appendChild(nameCell);
-        row.appendChild(statusCell);
-        tbody.appendChild(row);
-    });
-    table.appendChild(tbody);
+    const row = document.createElement('tr');
+    const nameCell = document.createElement('td');
+    nameCell.textContent = category.name;
+    row.appendChild(nameCell);
 
-    mainScreen.appendChild(table);
+    const statusCell = document.createElement('td');
+    statusCell.textContent = category.status;
+    row.appendChild(statusCell);
+    
+    const deleteButtonCell = document.createElement('td');
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.addEventListener('click', () => deleteCategory(category.id));
+    deleteButtonCell.appendChild(deleteButton);
+    row.appendChild(deleteButtonCell);
+
+    const editButtonCell = document.createElement('td');
+    const editButton = document.createElement('button');
+    editButton.textContent = 'Edit';
+    editButton.addEventListener('click', () => updateCategory(category.id));
+    editButtonCell.appendChild(editButton);
+    row.appendChild(editButtonCell);
+
+    tbody.appendChild(row);
+});
+table.appendChild(tbody);
+
+mainScreen.appendChild(table);
+
 }
+
+function deleteCategory(categoryId){
+    console.log(categoryId);
+    fetch(
+        `http://localhost:8080/api/job/category/delete?categoryId=${categoryId}`,
+        {
+            method: "DELETE",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+        }
+    )
+    .then((response) => {
+        if (response.ok) {
+            console.log("Category deleted successfully");
+            const row = document.getElementById(`categoryRow_${categoryId}`);
+            if (row) {
+                row.remove();
+            }
+        } else {
+            throw new Error("Failed to delete category");
+        }
+    })
+    .catch((error) => {
+        console.error("Error deleting category:", error);
+    });
+};
+function updateCategory(categoryId, updatedCategory) {
+    const url = `http://localhost:8080/api/job/category/update/${categoryId}`;
+
+    fetch(url, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedCategory)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Handle successful update
+        console.log('Category updated successfully:', data);
+    })
+    .catch(error => {
+        console.error('There was a problem with the update operation:', error);
+    });
+}
+
+
 
 
 function createForm() {
@@ -221,6 +283,344 @@ function createForm() {
 }
 
 
+function createCategoriesForm() {
+    const mainScreen = document.querySelector('.mainScreen');
+    mainScreen.style.justifyContent = "center";
+    mainScreen.innerHTML = '';
+
+    const formContainer = document.createElement('div');
+    formContainer.classList.add('AddCategories');
+
+    const formHeader = document.createElement('div');
+    formHeader.classList.add('postHeader');
+    const formTitle = document.createElement('h2');
+    formTitle.textContent = 'Add Category';
+    formHeader.appendChild(formTitle);
+
+    const formBody = document.createElement('div');
+    formBody.classList.add('AddCategories');
+
+    const formElements = [
+        { type: 'input', inputType: 'text', id: 'name', name: 'CategoryTitle', labelText: ' Category Title:', required: true },
+        { type: 'input', inputType: 'text', id: 'description', name: 'CategoryDescription', labelText: 'Category Description:', required: true },
+    ];
+
+    formElements.map(element => {
+        const formGroup = document.createElement('div');
+        formGroup.classList.add('form-group');
+
+        const inputElement = document.createElement('input');
+        inputElement.type = element.inputType;
+        inputElement.id = element.id;
+        inputElement.name = element.name;
+        inputElement.required = element.required; 
+
+        const label = document.createElement('label');
+        label.textContent = element.labelText;
+
+        formGroup.appendChild(label);
+        formGroup.appendChild(inputElement);
+
+        formBody.appendChild(formGroup);
+    });
+
+    const savePostBtn = document.createElement('button');
+    savePostBtn.textContent = 'Add Category';
+    savePostBtn.id = 'addCategoryBtn'; 
+    savePostBtn.addEventListener('click', () => {
+        const allFieldsFilled = formElements.every(element => {
+            const inputElement = document.getElementById(element.id);
+            return inputElement.value.trim() !== ''; 
+        });
+        if (!allFieldsFilled) {
+            displayAlert('Please Enter All the fields', 'error');
+        } else {
+    
+            SaveCategories(formElements);
+        }
+    });
+
+    formContainer.appendChild(formHeader);
+    formContainer.appendChild(formBody);
+    formContainer.appendChild(savePostBtn);
+
+    mainScreen.appendChild(formContainer);
+    loader.style.display = 'none';
+}
+
+function displayAlert(message, type) {
+    const alertBox = document.createElement('div');
+    alertBox.className = `alert ${type}`;
+    alertBox.textContent = message;
+
+    document.body.appendChild(alertBox);
+    setTimeout(() => {
+        alertBox.remove();
+    }, 2000); 
+}
+function SaveCategories(e) {
+    let name = "";
+    let description = "";
+
+    const formData = { name, description };
+    e.forEach(element => {
+        formData[element.id] = document.getElementById(element.id).value;
+    });
+
+    fetch('http://localhost:8080/api/job/category/add', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json', 
+        },
+        body: JSON.stringify(formData), 
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Category saved successfully:');
+            clearFormFields(e); 
+            displayAlert('Category saved successfully', 'success');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Category saved successfully:', data);
+    })
+    .catch(error => {
+        console.error('There was a problem saving the category:', error);
+        displayAlert('Failed to save category', 'error');
+    });
+}
+function clearFormFields(elements) {
+    elements.forEach(element => {
+        document.getElementById(element.id).value = ""; 
+    });
+}
+
+function createJobs() {
+    const mainScreen = document.querySelector('.mainScreen');
+    mainScreen.style.justifyContent = "center";
+    mainScreen.innerHTML = '';
+
+    const formContainer = document.createElement('div');
+    formContainer.classList.add('AddCategories');
+
+    const formHeader = document.createElement('div');
+    formHeader.classList.add('postHeader');
+    const formTitle = document.createElement('h2');
+    formTitle.textContent = 'Add Job';
+    formHeader.appendChild(formTitle);
+
+    const formBody = document.createElement('div');
+    formBody.classList.add('AddCategories');
+
+    // Fetch job categories from backend 
+    fetch('http://localhost:8080/api/job/category/fetch/all')
+        .then(response => response.json())
+        .then(data => {
+            const jobCategorySelect = document.createElement('select');
+            jobCategorySelect.id = 'jobCategory';
+            jobCategorySelect.name = 'jobCategory';
+            jobCategorySelect.required = true;
+            data.categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category.id;
+                option.textContent = category.name;
+                jobCategorySelect.appendChild(option);
+            });
+
+            const jobCategoryFormGroup = document.createElement('div');
+            jobCategoryFormGroup.classList.add('form-group');
+            const label = document.createElement('label');
+            label.textContent = 'Job Category:';
+            jobCategoryFormGroup.appendChild(label);
+            jobCategoryFormGroup.appendChild(jobCategorySelect);
+            formBody.appendChild(jobCategoryFormGroup);
+
+            // Create and append the submit button here
+            const submitButton = document.createElement('button');
+            submitButton.type = 'submit';
+            submitButton.addEventListener('click', () => saveJob(formElements))
+ 
+            submitButton.textContent = 'Submit';
+            submitButton.classList.add('btn', 'btn-primary');
+            formBody.appendChild(submitButton);
+        })
+        .catch(error => console.error('Error fetching job categories:', error));
+
+        // Fetch salary ranges from backend 
+    fetch('http://localhost:8080/api/helper/job/salary/range/fetch/all')
+        .then(response => response.json())
+        .then(data => {
+            const salaryRangeSelect = document.createElement('select');
+            salaryRangeSelect.id = 'salaryRange';
+            salaryRangeSelect.name = 'salaryRange';
+            salaryRangeSelect.required = true;
+            data.forEach(range => {
+                const option = document.createElement('option');
+                option.value = range;
+                option.textContent = range;
+                salaryRangeSelect.appendChild(option);
+            });
+
+            const salaryRangeFormGroup = document.createElement('div');
+            salaryRangeFormGroup.classList.add('form-group');
+            const label = document.createElement('label');
+            label.textContent = 'Salary Range:';
+            salaryRangeFormGroup.appendChild(label);
+            salaryRangeFormGroup.appendChild(salaryRangeSelect);
+            formBody.appendChild(salaryRangeFormGroup);
+        })
+        .catch(error => console.error('Error fetching salary ranges:', error));
+
+      // Fetch experience level from backend 
+      fetch('http://localhost:8080/api/helper/job/expereince/fetch/all')
+      .then(response => response.json())
+      .then(data => {
+          const experienceSelect = document.createElement('select');
+          experienceSelect.id = 'experienceLevel';
+          experienceSelect.name = 'experienceLevel';
+          experienceSelect.required = true;
+          data.forEach(level => {
+              const option = document.createElement('option');
+              option.value = level;
+              option.textContent = level;
+              experienceSelect.appendChild(option);
+          });
+
+          const experienceFormGroup = document.createElement('div');
+          experienceFormGroup.classList.add('form-group');
+          const label = document.createElement('label');
+          label.textContent = 'Experience Level:';
+          experienceFormGroup.appendChild(label);
+          experienceFormGroup.appendChild(experienceSelect);
+          formBody.appendChild(experienceFormGroup);
+      })
+      .catch(error => console.error('Error fetching experience levels:', error));
+    
+      fetch('http://localhost:8080/api/helper/job/type/fetch/all')
+      .then(response => response.json())
+      .then(data => {
+          const experienceSelect = document.createElement('select');
+          experienceSelect.id = 'jobType';
+          experienceSelect.name = 'jobType';
+          experienceSelect.required = true;
+          data.forEach(level => {
+              const option = document.createElement('option');
+              option.value = level;
+              option.textContent = level;
+              experienceSelect.appendChild(option);
+          });
+
+          const experienceFormGroup = document.createElement('div');
+          experienceFormGroup.classList.add('form-group');
+          const label = document.createElement('label');
+          label.textContent = 'Experience Level:';
+          experienceFormGroup.appendChild(label);
+          experienceFormGroup.appendChild(experienceSelect);
+          formBody.appendChild(experienceFormGroup);
+      })
+      .catch(error => console.error('Error fetching experience levels:', error));
+    
+    const formElements = [
+        { type: 'input', inputType: 'text', id: 'jobTitle', name: 'jobTitle', labelText: 'Job Title:' },
+        { type: 'input', inputType: 'text', id: 'companyName', name: 'companyName', labelText: 'Company Name:' },
+        { type: 'input', inputType: 'text', id: 'jobDescription', name: 'jobDescription', labelText: 'Job Description:' },
+        { type: 'input', inputType: 'text', id: 'skillsRequired', name: 'skillsRequired', labelText: 'Skills Required:' },
+        { type: 'input', inputType: 'text', id: 'street', name: 'street', labelText: 'Visit Link:' },
+        { type: 'input', inputType: 'text', id: 'city', name: 'city', labelText: 'city:' },
+        { type: 'input', inputType: 'text', id: 'pinCode', name: 'pinCode', labelText: 'Pin Code:' },
+        { type: 'input', inputType: 'text', id: 'state', name: 'state', labelText: 'State:' },
+        { type: 'input', inputType: 'text', id: 'country', name: 'country', labelText: 'Country:' },
+    ];
+
+    formElements.forEach(element => {
+        const formGroup = document.createElement('div');
+        formGroup.classList.add('form-group');
+
+        const inputElement = document.createElement(element.type);
+        inputElement.type = element.inputType || 'text';
+        inputElement.id = element.id;
+        inputElement.name = element.name;
+        inputElement.required = true;
+
+        const label = document.createElement('label');
+        label.textContent = element.labelText;
+
+        formGroup.appendChild(label);
+        formGroup.appendChild(inputElement);
+
+        formBody.appendChild(formGroup);
+    });
+
+    formContainer.appendChild(formHeader);
+    formContainer.appendChild(formBody);
+
+    mainScreen.appendChild(formContainer);
+   
+}
+
+// Save job function
+function saveJob(formElements) {
+    let formData = {
+        jobTitle: "",
+        companyName: "",
+        jobDescription: "",
+        skillsRequired: "",
+        street: "",
+        pinCode: "",
+        state: "",
+        jobCategory:"",
+        country: "",
+        experienceLevel:"",
+        salaryRange:"",
+        jobType:"",
+    };
+    formElements.forEach(element => {
+        formData[element.id] = document.getElementById(element.id).value;
+    });
+
+    // Make a fetch request to save the job data
+    fetch('http://localhost:8080/api/job/add', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to save job. Server responded with status ' + response.status);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Job saved successfully:', data);
+        clearFormFields(formElements);
+        displayAlert('Job saved successfully', 'success');
+    })
+    .catch(error => {
+        console.error('Error saving job:', error);
+        displayAlert('Failed to save job. Please check the form data and try again.', 'error');
+    });
+     
+        const allFieldsFilled = formElements.every(element => {
+        const inputElement = document.getElementById(element.id);
+        return inputElement.value.trim() !== ''; 
+    });
+
+    
+    if (!allFieldsFilled) {
+        displayAlert('Please Enter All the fields', 'error');
+    } else {
+       
+        saveJob(formElements);
+    }
+}
+
+
+
+
+
 function createRegistrationForm() {
 
     const mainScreen = document.querySelector('.mainScreen');
@@ -313,339 +713,10 @@ function createRegistrationForm() {
     loader.style.display = 'none';
     
 }
+function saveRegform()
+{
 
-
-
-//  add categories form
-function createCategoriesForm() {
-    const mainScreen = document.querySelector('.mainScreen');
-    mainScreen.style.justifyContent = "center";
-    mainScreen.innerHTML = '';
- 
-    const formContainer = document.createElement('div');
-    formContainer.classList.add('AddCategories');
- 
-    const formHeader = document.createElement('div');
-    formHeader.classList.add('postHeader');
-    const formTitle = document.createElement('h2');
-    formTitle.textContent = 'Add Category';
-    formHeader.appendChild(formTitle);
- 
-    const formBody = document.createElement('div');
-    formBody.classList.add('AddCategories');
- 
-    const formElements = [
-        { type: 'input', inputType: 'text', id: 'name', name: 'CategoryTitle', labelText: ' Category Title:',required: true },
-        { type: 'input', inputType: 'text', id: 'description', name: 'CategoryDescription', labelText: 'Category Description:',required: true },
-    ];
- 
-    formElements.map(element => {
-        const formGroup = document.createElement('div');
-        formGroup.classList.add('form-group');
- 
-        const inputElement = document.createElement('input');
-        inputElement.type = element.inputType;
-        inputElement.id = element.id;
-        inputElement.name = element.name;
-        inputElement.required = element.required; // Set required attribute    
- 
-        const label = document.createElement('label');
-        label.textContent = element.labelText;
- 
-        formGroup.appendChild(label);
-        formGroup.appendChild(inputElement);
- 
-        formBody.appendChild(formGroup);
-    });
- 
-    const savePostBtn = document.createElement('button');
-    savePostBtn.textContent = 'Add Category';
-    savePostBtn.id = 'SavePostbtn';
-    savePostBtn.addEventListener('click', () => SaveCategories(formElements))
- 
-    formContainer.appendChild(formHeader);
-    formContainer.appendChild(formBody);
-    formContainer.appendChild(savePostBtn);
- 
-    mainScreen.appendChild(formContainer);
-    loader.style.display = 'none';
 }
-
-// Display alert function
-function displayAlert(message, type) {
-    const alertBox = document.createElement('div');
-    alertBox.className = `alert ${type}`;
-    alertBox.textContent = message;
-
-    // Add the alert box to the DOM
-    document.body.appendChild(alertBox);
-
-    // Automatically remove the alert after a certain duration
-    setTimeout(() => {
-        alertBox.remove();
-    }, 2000); // Remove after 3 seconds (adjust as needed)
-}
-
-// Save categories function
-function SaveCategories(e) {
-    let name = "";
-    let description = "";
-
-    const formData = { name, description };
-    e.forEach(element => {
-        formData[element.id] = document.getElementById(element.id).value;
-    });
-
-    fetch('http://localhost:8080/api/job/category/add', {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json', 
-        },
-        body: JSON.stringify(formData), 
-    })
-    .then(response => {
-        if (response.ok) {
-            console.log('Category saved successfully:');
-            clearFormFields(e); 
-            displayAlert('Category saved successfully', 'success');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Category saved successfully:', data);
-    })
-    .catch(error => {
-        console.error('There was a problem saving the category:', error);
-        displayAlert('Failed to save category', 'error');
-    });
-}
-
-// Clear form fields function
-function clearFormFields(elements) {
-    elements.forEach(element => {
-        document.getElementById(element.id).value = ""; 
-    });
-}
-
-// Call the function to create categories form
-
-
-// Function to create jobs form
-function createJobs() {
-    const mainScreen = document.querySelector('.mainScreen');
-    mainScreen.style.justifyContent = "center";
-    mainScreen.innerHTML = '';
-
-    const formContainer = document.createElement('div');
-    formContainer.classList.add('AddCategories');
-
-    const formHeader = document.createElement('div');
-    formHeader.classList.add('postHeader');
-    const formTitle = document.createElement('h2');
-    formTitle.textContent = 'Add Job';
-    formHeader.appendChild(formTitle);
-
-    const formBody = document.createElement('div');
-    formBody.classList.add('AddCategories');
-
-    // Fetch job categories from backend and populate the select options
-    fetch('http://localhost:8080/api/job/category/fetch/all')
-        .then(response => response.json())
-        .then(data => {
-            const jobCategorySelect = document.createElement('select');
-            jobCategorySelect.id = 'jobCategory';
-            jobCategorySelect.name = 'jobCategory';
-            jobCategorySelect.required = true;+
-            data.categories.forEach(category => {
-                const option = document.createElement('option');
-                option.value = category.id; // Assuming category has an 'id' property
-                option.textContent = category.name; // Assuming category has a 'name' property
-                jobCategorySelect.appendChild(option);
-            });
-
-            const jobCategoryFormGroup = document.createElement('div');
-            jobCategoryFormGroup.classList.add('form-group');
-            const label = document.createElement('label');
-            label.textContent = 'Job Category:';
-            jobCategoryFormGroup.appendChild(label);
-            jobCategoryFormGroup.appendChild(jobCategorySelect);
-            formBody.appendChild(jobCategoryFormGroup);
-        })
-        .catch(error => console.error('Error fetching job categories:', error));
-
-
-
-    
-    fetch('http://localhost:8080/api/helper/job/type/fetch/all')
-    .then(response => response.json())
-    .then(data => {
-        const jobTypeSelect = document.createElement('select');
-        jobTypeSelect.id = 'jobType';
-        jobTypeSelect.name = 'jobType';
-        jobTypeSelect.required = true;
-
-        data.forEach(jobType => {
-            const option = document.createElement('option');
-            option.value = jobType; 
-            option.textContent = jobType; 
-            jobTypeSelect.appendChild(option);
-        });
-
-        const jobTypeFormGroup = document.createElement('div');
-        jobTypeFormGroup.classList.add('form-group');
-        const label = document.createElement('label');
-        label.textContent = 'Job Type:';
-        jobTypeFormGroup.appendChild(label);
-        jobTypeFormGroup.appendChild(jobTypeSelect);
-        formBody.appendChild(jobTypeFormGroup);
-    })
-    .catch(error => console.error('Error fetching job types:', error));
-
-    // fetch the salary range
-
-    fetch('http://localhost:8080/api/helper/job/salary/range/fetch/all')
-    .then(response => response.json())
-    .then(data => {
-        const jobTypeSelect = document.createElement('select');
-        jobTypeSelect.id = 'salary';
-        jobTypeSelect.name = 'salary';
-        jobTypeSelect.required = true;
-
-        data.forEach(jobType => {
-            const option = document.createElement('option');
-            option.value = jobType;
-            option.textContent = jobType; 
-            jobTypeSelect.appendChild(option);
-        });
-
-        const jobTypeFormGroup = document.createElement('div');
-        jobTypeFormGroup.classList.add('form-group');
-        const label = document.createElement('label');
-        label.textContent = 'Salary Range:';
-        jobTypeFormGroup.appendChild(label);
-        jobTypeFormGroup.appendChild(jobTypeSelect);
-        formBody.appendChild(jobTypeFormGroup);
-    })
-    .catch(error => console.error('Error fetching job types:', error));
-
-    // experience
-
-    fetch('http://localhost:8080/api/helper/job/expereince/fetch/all')
-    .then(response => response.json())
-    .then(data => {
-        const jobTypeSelect = document.createElement('select');
-        jobTypeSelect.id = 'salary';
-        jobTypeSelect.name = 'salary';
-        jobTypeSelect.required = true;
-
-        data.forEach(jobType => {
-            const option = document.createElement('option');
-            option.value = jobType; 
-            option.textContent = jobType; 
-            jobTypeSelect.appendChild(option);
-        });
-
-        const jobTypeFormGroup = document.createElement('div');
-        jobTypeFormGroup.classList.add('form-group');
-        const label = document.createElement('label');
-        label.textContent = 'Experience:';
-        jobTypeFormGroup.appendChild(label);
-        jobTypeFormGroup.appendChild(jobTypeSelect);
-        formBody.appendChild(jobTypeFormGroup);
-    })
-    .catch(error => console.error('Error fetching job types:', error));
-
-
-    // Other form elements
-const formElements = [
-        { type: 'input', inputType: 'text', id: 'jobTitle', name: 'jobTitle', labelText: 'Job Title:' },
-        { type: 'input', inputType: 'text', id: 'companyName', name: 'companyName', labelText: 'Company Name:' },
-        { type: 'input', inputType: 'text', id: 'jobDescription', name: 'jobDescription', labelText: 'Job Description:' },
-        { type: 'input', inputType: 'text', id: 'name', name: 'CategoryTitle', labelText: 'Skills Required:' },
-        { type: 'input', inputType: 'text', id: 'visit', name: 'visit', labelText: 'Visit Link:' },
-        { type: 'input', inputType: 'text', id: 'City', name: 'City', labelText: 'City:' },
-        { type: 'input', inputType: 'text', id: 'description', name: 'CategoryDescription', labelText: 'Pin Code:' },
-        { type: 'input', inputType: 'text', id: 'State', name: 'State', labelText: 'State:' },
-        { type: 'input', inputType: 'text', id: 'Country', name: 'Country', labelText: 'Country:' },
-        { type: 'input', inputType: 'text', id: 'SelectCompanyLogo', name: 'CompanyLogo', labelText: 'Company Logo:' },
-  
-    ];
-
-    formElements.forEach(element => {
-        const formGroup = document.createElement('div');
-        formGroup.classList.add('form-group');
-
-        const inputElement = document.createElement(element.type);
-        inputElement.type = element.inputType || 'text';
-        inputElement.id = element.id;
-        inputElement.name = element.name;
-        inputElement.required = true;
-
-        const label = document.createElement('label');
-        label.textContent = element.labelText;
-
-        formGroup.appendChild(label);
-        formGroup.appendChild(inputElement);
-
-        formBody.appendChild(formGroup);
-    });
-
-    const saveJobBtn = document.createElement('button');
-    saveJobBtn.textContent = 'Add Job';
-    saveJobBtn.id = 'saveJobBtn';
-    saveJobBtn.addEventListener('click', saveJob);
-
-    formContainer.appendChild(formHeader);
-    formContainer.appendChild(formBody);
-    formContainer.appendChild(saveJobBtn);
-    mainScreen.appendChild(formContainer);
-}
-
-
-// Function to save the job
-function saveJob() {
-    // Implement saving logic here
-}
-
-
-//post categeories:
-/*function SaveCategories(e) {  
-    let name = "";
-    let description = "";
-    const admin_jwtTocken=sessionStorage.getItem('admin_jwtTocken');
-
-        const formData = {name,description};
-        e.forEach(element => {
-            formData[element.id] = document.getElementById(element.id).value;
-        });
-        console.log(formData);
-    
-        fetch('http://localhost:8080/api/job/category/add', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                 Authorization: "Bearer" + admin_jwtTocken,
-            },
-            body: JSON.stringify(e),
-        })
-        .then(response => {
-            if (response.ok) {
-                console.log('Post saved successfully:');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Post saved successfully:', e);
-        })
-        .catch(error => {
-            console.error('There was a problem saving the post:', error);
-        });
-    }
-
-    */
-    
-
-
 
 //About us page:
 function showAboutContent() {
@@ -660,5 +731,6 @@ function showAboutContent() {
     and apply for that.`;
  
     aboutPage.appendChild(heading);
+    
    
 }
