@@ -151,14 +151,14 @@ button{
 
   .postDetailCard {
     width: 50%;
-    background-color: rgba(255, 255, 255, 0.5); /* Adjust the alpha value for transparency */
+    background-color: rgba(255, 255, 255, 0.5);
     padding: 1.5rem;
     border-radius: 1rem;
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
 
     display: flex;
     flex-direction: column;
-    align-items: center; /* Align form items in the center horizontally */
+    align-items: center; 
 }
 
 .postHeader {
@@ -200,52 +200,15 @@ button:hover {
     background-color:#D79922 ;
 }
 
-
-
-/* loader */
-
-  .loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.7); 
-    display: none;
-    z-index: 9999; 
-}
-
-.loader:before {
-    content: '';
-    border: 4px solid #f3f3f3; /* Light grey */
-    border-top: 4px solid #3498db; /* Blue */
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -15px; 
-    margin-left: -15px; 
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-
-/* Style for job cards */
 .job-card {
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
-  margin-bottom: 20px; /* Adjust margin bottom as needed */
+  margin-bottom: 20px; 
   background-color: #f9f9f9;
-  width: calc(20.33% - 20px);/* Adjust width for three cards in one row */
-  margin-right: 20px; /* Adjust margin between cards */
-  box-sizing: border-box; /* Ensure padding and border are included in width */
+  width: calc(20.33% - 20px);
+  margin-right: 20px; 
+  box-sizing: border-box; 
   flex-direction: column;
 }
 
@@ -257,40 +220,17 @@ button:hover {
   margin-bottom: 5px;
 }
 
-/* Job-card
-/* Style for job cards */
-.job-card {
-  border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 20px; /* Adjust margin bottom as needed */
-  background-color: gainsboro;
-  width: calc(25.33% - 20px); /* Adjust width for three cards in one row */
-  margin-right: 20px; /* Adjust margin between cards */
-  box-sizing: border-box; /* Ensure padding and border are included in width */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add initial shadow effect */
-  transition: box-shadow 0.3s ease; /* Add transition effect */
-}
-
-.job-card h2 {
-  margin-top: 0;
-}
-
-.job-card p {
-  margin-bottom: 5px;
-}
-
-/* Apply hover effect */
 .job-card:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Darker shadow on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); 
 }
 
 .mainScreen {
   display: flex;
-  flex-wrap: wrap; /* Allow cards to wrap to the next row */
-  justify-content: space-between; /* Add space between cards */
+  flex-wrap: wrap; 
+  justify-content: space-between; 
 }
 
-/* category table */
+
 .job-table {
   width: 100%;
   border-collapse: collapse;
@@ -313,11 +253,9 @@ button:hover {
   background-color: #f2f2f2;
 }
 
-
-/* popup style */
 .alert {
   position: fixed;
-  top: 60px; /* Adjust this value to position the alert below the header */
+  top: 60px; 
   left: 50%;
   transform: translateX(-50%);
   padding: 10px 20px;
@@ -325,28 +263,45 @@ button:hover {
   color: #fff;
   font-size: 16px;
   font-weight: bold;
-  overflow: hidden; /* Ensure overflow is hidden to hide the line */
-  z-index: 1000; /* Ensure the alert is on top of other elements */
+  overflow: hidden; 
+  z-index: 1000; 
 }
 
-/* Rest of the CSS remains the same */
-
 .success {
-    background-color: #4CAF50; /* Green */
+    background-color: #4CAF50; 
 }
 
 .error {
-    background-color: #f44336; /* Red */
+    background-color: #f44336;
 }
 
 .line {
     height: 3px;
     background-color: #ffffff;
-    width: 100%; /* Initially set to 100% */
-    transition: width linear; /* Smooth transition for width changes */
+    width: 100%; 
+    transition: width linear; 
 }
 .validation-message {
   color: red;
-  /* font-size: 0.8rem; */
-  /* display: none; */
+
+}
+
+.job-card {
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px; 
+  background-color: gainsboro;
+  width: calc(25.33% - 20px);
+  margin-right: 20px; 
+  box-sizing: border-box; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  transition: box-shadow 0.3s ease; 
+}
+
+.job-card h2 {
+  margin-top: 0;
+}
+
+.job-card p {
+  margin-bottom: 5px;
 }

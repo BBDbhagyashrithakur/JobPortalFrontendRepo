@@ -725,7 +725,7 @@ function showAboutContent() {
 
     const heading = document.createElement('p');
     heading.textContent = `
-    Internship for All is portal in which we can easily apply for the internship or jobs.
+    Job portal  in which we can easily apply for the internship or jobs.
     You can easily see the job with Job category, Job type company name etc..
     Admin can easy add the category and Employee can easy create job and user can see that job or internship
     and apply for that.`;
