@@ -1,5 +1,5 @@
 function showAllPost() {
-    const url = 'http://localhost:8080/api/job/fetch/all'; 
+    const url = 'http://63.32.164.90:8080/api/job/fetch/all'; 
 
     fetch(url)
         .then(response => {
@@ -65,7 +65,7 @@ document.getElementById('fetchDataButton').addEventListener('click', showAllPost
 
 //Fethching All categeories:
 function showAllCategeories() {
-    const url = 'http://localhost:8080/api/job/category/fetch/all'; 
+    const url = 'http://63.32.164.90:8080/api/job/category/fetch/all'; 
 
     fetch(url)
         .then(response => {
@@ -138,7 +138,7 @@ mainScreen.appendChild(table);
 function deleteCategory(categoryId){
     console.log(categoryId);
     fetch(
-        `http://localhost:8080/api/job/category/delete?categoryId=${categoryId}`,
+        `http://63.32.164.90:8080/api/job/category/delete?categoryId=${categoryId}`,
         {
             method: "DELETE",
             headers: {
@@ -163,7 +163,7 @@ function deleteCategory(categoryId){
     });
 };
 function updateCategory(categoryId, updatedCategory) {
-    const url = `http://localhost:8080/api/job/category/update/${categoryId}`;
+    const url = `http://63.32.164.90:8080/api/job/category/update/${categoryId}`;
 
     fetch(url, {
         method: 'PUT',
@@ -367,7 +367,7 @@ function SaveCategories(e) {
         formData[element.id] = document.getElementById(element.id).value;
     });
 
-    fetch('http://localhost:8080/api/job/category/add', {
+    fetch('http://63.32.164.90:8080/api/job/category/add', {
         method: "POST",
         headers: {
             'Content-Type': 'application/json', 
@@ -414,7 +414,7 @@ function createJobs() {
     formBody.classList.add('AddCategories');
 
     // Fetch job categories from backend 
-    fetch('http://localhost:8080/api/job/category/fetch/all')
+    fetch('http://63.32.164.90:8080/api/job/category/fetch/all')
         .then(response => response.json())
         .then(data => {
             const jobCategorySelect = document.createElement('select');
@@ -448,7 +448,7 @@ function createJobs() {
         .catch(error => console.error('Error fetching job categories:', error));
 
         // Fetch salary ranges from backend 
-    fetch('http://localhost:8080/api/helper/job/salary/range/fetch/all')
+    fetch('http://63.32.164.90:8080/api/helper/job/salary/range/fetch/all')
         .then(response => response.json())
         .then(data => {
             const salaryRangeSelect = document.createElement('select');
@@ -473,7 +473,7 @@ function createJobs() {
         .catch(error => console.error('Error fetching salary ranges:', error));
 
       // Fetch experience level from backend 
-      fetch('http://localhost:8080/api/helper/job/expereince/fetch/all')
+      fetch('http://63.32.164.90:8080/api/helper/job/expereince/fetch/all')
       .then(response => response.json())
       .then(data => {
           const experienceSelect = document.createElement('select');
@@ -497,7 +497,7 @@ function createJobs() {
       })
       .catch(error => console.error('Error fetching experience levels:', error));
     
-      fetch('http://localhost:8080/api/helper/job/type/fetch/all')
+      fetch('http://63.32.164.90:8080/api/helper/job/type/fetch/all')
       .then(response => response.json())
       .then(data => {
           const experienceSelect = document.createElement('select');
@@ -580,7 +580,7 @@ function saveJob(formElements) {
     });
 
     // Make a fetch request to save the job data
-    fetch('http://localhost:8080/api/job/add', {
+    fetch('http://63.32.164.90:8080/api/job/add', {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
