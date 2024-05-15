@@ -358,26 +358,37 @@ function displayAlert(message, type) {
         alertBox.remove();
     }, 2000); 
 }
+// Save categories function
 function SaveCategories(e) {
     let name = "";
     let description = "";
-
+ 
     const formData = { name, description };
     e.forEach(element => {
-        formData[element.id] = document.getElementById(element.id).value;
+        let value = document.getElementById(element.id).value;
+        if (element.id === 'name') {
+            value = capitalizeFirstLetter(value);
+        }
+        formData[element.id] = value;
     });
+<<<<<<< HEAD
 
+=======
+ 
+ 
+ 
+>>>>>>> 65ea33feadc1cafaf78e64836a92d2e096e28bdb
     fetch('http://63.32.164.90:8080/api/job/category/add', {
         method: "POST",
         headers: {
-            'Content-Type': 'application/json', 
+            'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData), 
+        body: JSON.stringify(formData),
     })
     .then(response => {
         if (response.ok) {
             console.log('Category saved successfully:');
-            clearFormFields(e); 
+            clearFormFields(e);
             displayAlert('Category saved successfully', 'success');
         }
         return response.json();
@@ -390,12 +401,17 @@ function SaveCategories(e) {
         displayAlert('Failed to save category', 'error');
     });
 }
+ 
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+ 
+// Clear form fields function
 function clearFormFields(elements) {
     elements.forEach(element => {
-        document.getElementById(element.id).value = ""; 
+        document.getElementById(element.id).value = "";
     });
 }
-
 function createJobs() {
     const mainScreen = document.querySelector('.mainScreen');
     mainScreen.style.justifyContent = "center";
@@ -526,7 +542,7 @@ function createJobs() {
         { type: 'input', inputType: 'text', id: 'companyName', name: 'companyName', labelText: 'Company Name:' },
         { type: 'input', inputType: 'text', id: 'jobDescription', name: 'jobDescription', labelText: 'Job Description:' },
         { type: 'input', inputType: 'text', id: 'skillsRequired', name: 'skillsRequired', labelText: 'Skills Required:' },
-        { type: 'input', inputType: 'text', id: 'street', name: 'street', labelText: 'Visit Link:' },
+        { type: 'input', inputType: 'text', id: 'street', name: 'visitLink', labelText: 'Visit Link:' },
         { type: 'input', inputType: 'text', id: 'city', name: 'city', labelText: 'city:' },
         { type: 'input', inputType: 'text', id: 'pinCode', name: 'pinCode', labelText: 'Pin Code:' },
         { type: 'input', inputType: 'text', id: 'state', name: 'state', labelText: 'State:' },
@@ -558,15 +574,24 @@ function createJobs() {
     mainScreen.appendChild(formContainer);
    
 }
-
 // Save job function
 function saveJob(formElements) {
+    const allFieldsFilled = formElements.every(element => {
+        const inputElement = document.getElementById(element.id);
+        return inputElement.value.trim() !== ''; 
+    });
+
+    if (!allFieldsFilled) {
+        displayAlert('Please Enter All the fields', 'error');
+        return; // Exit the function if not all fields are filled
+    }
+
     let formData = {
         jobTitle: "",
         companyName: "",
         jobDescription: "",
         skillsRequired: "",
-        street: "",
+        // visitLink: "",
         pinCode: "",
         state: "",
         jobCategory:"",
@@ -590,6 +615,7 @@ function saveJob(formElements) {
     .then(response => {
         if (!response.ok) {
             throw new Error('Failed to save job. Server responded with status ' + response.status);
+           
         }
         return response.json();
     })
@@ -602,20 +628,8 @@ function saveJob(formElements) {
         console.error('Error saving job:', error);
         displayAlert('Failed to save job. Please check the form data and try again.', 'error');
     });
-     
-        const allFieldsFilled = formElements.every(element => {
-        const inputElement = document.getElementById(element.id);
-        return inputElement.value.trim() !== ''; 
-    });
-
-    
-    if (!allFieldsFilled) {
-        displayAlert('Please Enter All the fields', 'error');
-    } else {
-       
-        saveJob(formElements);
-    }
 }
+
 
 
 
@@ -644,9 +658,11 @@ function createRegistrationForm() {
  
    
     const formElements = [
+        { type: 'input', inputType: 'text', id: 'Role', name: 'Role', labelText: 'Role:' },
         { type: 'input', inputType: 'text', id: 'FirstName', name: 'FirstName', labelText: 'First Name:' },
         { type: 'input', inputType: 'text', id: 'LastName', name: 'LastName', labelText: 'Last Name:' },
         { type: 'input', inputType: 'text', id: 'email', name: 'Email', labelText: 'Email:' },
+        { type: 'input', inputType: 'hidden', id: 'password', name: 'password', labelText: '' },
         { type: 'input', inputType: 'text', id: 'ContactNo', name: 'ContactNo', labelText: 'Contact No:' },
         { type: 'input', inputType: 'text', id: 'street', name: 'street', labelText: 'Street:' },
         { type: 'input', inputType: 'text', id: 'city', name: 'city', labelText: 'City:' },
@@ -696,8 +712,9 @@ function createRegistrationForm() {
  
         formBody.appendChild(formGroup);
     });
- 
- 
+
+   
+    
     const savePostBtn = document.createElement('button');
     savePostBtn.textContent = 'Register';
     savePostBtn.id = 'SavePostbtn';
@@ -712,11 +729,69 @@ function createRegistrationForm() {
     mainScreen.appendChild(formContainer);
     loader.style.display = 'none';
     
+    
 }
-function saveRegform()
-{
+// Define a function to handle form submission
+function SavePost() {
+    // Get form inputs
+    const role = document.getElementById("Role").value;
+    const firstName = document.getElementById("FirstName").value;
+    const lastName = document.getElementById("LastName").value;
+    const emailId = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const phoneNo = document.getElementById("ContactNo").value;
+    const street = document.getElementById("street").value;
+    const city = document.getElementById("city").value;
+    const state = document.getElementById("State").value;
+    const pincode = document.getElementById("pincode").value;
+    const country = document.getElementById("country").value;
 
+    // Construct user object
+    const user = {
+        role,
+        firstName,
+        lastName,
+        emailId,
+        password,
+        phoneNo,
+        street,
+        city,
+        state,
+        pincode,
+        country
+    };
+
+    // Send user data to server
+    fetch("http://63.32.164.90:8080/api/user/register", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+    })
+    .then(response => {
+        if (response.ok) {
+          console.log("ok");
+        } else {
+            console.log("not ok");
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        toast.error("Failed to register user. Server error.", {
+            position: "top-center",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+    });
 }
+
+// Add event listener to form submission
+document.getElementById("userRegisterForm").addEventListener("submit", SavePost);
 
 //About us page:
 function showAboutContent() {
