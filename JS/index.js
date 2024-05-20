@@ -493,7 +493,6 @@ function clearFormFields(elements) {
   const addJobsLink = document.getElementById("addJobsLink");
   // localStorage.setItem("email","baviskarritu02@gmail.com")
   if(userEmail!="baviskarritu02@gmail.com"){
-    
     const formContainer = document.createElement("div");
     formContainer.classList.add("AddCategories");
   
@@ -983,3 +982,4 @@ function showAboutContent() {
 
   aboutPage.appendChild(heading);
 }
+
