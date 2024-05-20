@@ -6,17 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="./CSS/style.css" />
   <title></title>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-Z30py3k2Yd8bbEVwEahQmQVez1i4FzAaAtfQzXdkMXChyyNn6RjQJ+s1ZL0G3B3xx3d+aFY67BeD3zHIUslN/g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
   <div class="loader"></div>
-  
   <div class="container">
     <div class="mainContainer">
       <nav class="navbar navbar-expand-custom navbar-mainbg">
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
               <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
+              <!-- <li class="nav-item">
+                <a class="nav-link" href="#" id="loginLink" onclick="createForm()">Login</a>
+              </li> -->
               <li class="nav-item">
                 <a class="nav-link" href="#" id="jobsLink" onclick="showAllPost()">Jobs</a>
               </li>
@@ -35,12 +37,26 @@
             </ul>
           </div>
         </nav>
-        
+       
       </nav>
       <div class="navBar">
         <div class="navBarContent">
+   
+          <!-- <h1>JobHub</h1> -->
+         
         </div>
       </div>
+      <div class="sideNavBarContainer">
+         <div class="sideNavBar">
+          <!-- <div class="sideNavBar">
+           <a href="#" id="registrationLink" onclick="createRegistrationForm()">Registration</a>
+            <a href="#" id="loginLink" onclick="createForm()">Login</a>
+            <a href="#" id="jobsLink" onclick="showAllPost()">Jobs</a>
+            <a href="#" id="categoriesLink" onclick="showAllCategeories()">Categories</a>
+            <a href="#" id="addCategoriesLink" onclick="createCategoriesForm()">Add Categories</a>
+            <a href="#" id="addJobsLink" onclick="createJobs()">Add Jobs</a>
+            <a href="#" id="aboutLink" onclick="showAboutContent()">About</a>
+          </div> -->
         </div>
         <div class="mainScreen">
           <main>
@@ -54,7 +70,8 @@
                 <div class='content'>
                   <b><h2 class='title'>"Welcome to JobHub"</h2></b>
                   <p class='description'>  Easy Way to see the job On JobHub according to the category wise and find the Job Details where the Job vacances are available.</p>
-                  <!-- <button onclick="">LogIn</button> -->
+                  <button onclick="">LogIn</button>
+                  <!-- <button onclick="LogOut()">Admin</button> -->
                   <span> <button onclick="SignIn()">SignUp</button></span>
                 </div>
               </div>
@@ -63,10 +80,11 @@
           <div id="about"></div>
           <div id="categoryListContainer"></div>
         </div>
-      </div> 
+      </div>
     </div>
   </div>
   <div id="status"></div>
+  <script src="./JS/index.js"></script>
   <script>
      window.addEventListener("load", function () {
         let params = new URLSearchParams(window.location.hash.substring(1));
@@ -84,9 +102,34 @@
        
     //     window.location.href = oauthUrl;
     // }
+ 
+//     function updateNavbar() {
+//     // Get the elements of the navbar links
+//     var addCategoriesLink = document.getElementById("addCategoriesLink");
+//     var addJobsLink = document.getElementById("addJobsLink");
+//     var loginLink = document.getElementById("loginLink");
+ 
+//     // Check if the user is logged in
+//     var userEmail = localStorage.getItem("email");
+//     if (userEmail === "baviskarritu02@gamil.com@gmail.com") {
+//         // Show the "Add Categories" and "Add Jobs" links
+//         addCategoriesLink.style.display = "block";
+//         addJobsLink.style.display = "block";
+//         // Hide the login link
+//         loginLink.style.display = "none";
+//     } else {
+//         // Hide the "Add Categories" and "Add Jobs" links
+//         addCategoriesLink.style.display = "none";
+//         addJobsLink.style.display = "none";
+//         // Show the login link
+//         loginLink.style.display = "block";
+//     }
+// }
+ 
+    // Call the updateNavbar function when the page loads
+    // window.addEventListener("load", updateNavbar);
   </script>
-  <script src="./JS/index.js"></script>
   <script src="./auth.js"></script>
-
+ 
 </body>
 </html>

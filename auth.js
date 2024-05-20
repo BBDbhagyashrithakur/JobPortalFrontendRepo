@@ -1,6 +1,7 @@
+
 async function getUserInfo(accessToken) {
   fetch(
-    "https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=" + 
+    "https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=" +
       accessToken
   )
     .then((response) => {
@@ -67,10 +68,10 @@ async function getJwtToken(data) {
     console.error("Error:", error);
   }
   setTimeout(() => {
-    window.location.href = "http://127.0.0.1:5502/index.html";
+    window.location.href = "https://jobportal.projects.bbdgrad.com/web/index.html";
   }, 1500);
 }
-
+ 
 function LogOut() {
   let authToken = sessionStorage.getItem("authToken");
   if (sessionStorage.getItem("userToken") != null) {
@@ -91,24 +92,24 @@ function LogOut() {
     return;
   }
 }
-
+ 
 function SignIn() {
   let oauth2Endpoint = "https://accounts.google.com/o/oauth2/v2/auth";
   let form = document.createElement("form");
   form.setAttribute("method", "GET");
   form.setAttribute("action", oauth2Endpoint);
-
+ 
   let params = {
     client_id:
       "468372946465-krq376qfcuqklalvshtilmbhgt34auvg.apps.googleusercontent.com",
-    redirect_uri: "http://jobportal.projects.bbdgrad.com/web/index.html",
+    redirect_uri: "https://jobportal.projects.bbdgrad.com/web/index.html",
     response_type: "token",
     scope:
       "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email",
     include_granted_scopes: "true",
     state: "pass-through-value",
   };
-
+ 
   for (var p in params) {
     let input = document.createElement("input");
     input.setAttribute("type", "hidden");
@@ -116,8 +117,9 @@ function SignIn() {
     input.setAttribute("value", params[p]);
     form.appendChild(input);
   }
-
+ 
   document.body.appendChild(form);
-
+ 
   form.submit();
 }
+ 
