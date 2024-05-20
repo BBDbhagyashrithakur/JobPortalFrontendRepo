@@ -1,6 +1,6 @@
 const token=sessionStorage.getItem("userToken");
 function showAllPost() {
-  const url = "https://jobportal.projects.bbdgrad.com/api/jobs/all";
+  const url = "https://jobportal.projects.bbdgrad.com/web/api/jobs/all";
 
   fetch(url,
     {
