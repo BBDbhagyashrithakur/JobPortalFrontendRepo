@@ -1,0 +1,54 @@
+.home-container {
+    padding: 100px;
+    height: 100vh;
+    padding-bottom: 200px;
+    text-align: center;
+    color: white;
+    position: relative; /* Add relative positioning */
+    background-image: url(../assets/image/image.png);
+    background-size: cover; /* This ensures that the background image covers the entire viewport */
+    background-position: center; /* This centers the background image */
+    background-repeat: no-repeat; 
+}
+.home-para {
+    font-size: 2rem;
+}
+.home-h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 20px; /* Add margin to separate from the buttons */
+}
+.button-select {
+    padding: 10px 30px; /* Adjust button padding for better spacing */
+    font-size: 20px;
+    margin-top: 10px; /* Add margin to the top of buttons */
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+.home-style{
+    color: #FF3E41;
+}
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center align buttons */
+    gap: 20px;
+}
+.customer{
+    background-color: #FF3E41;
+}
+.shipper{
+    background-color: #51CFED;
+}
+.home-style {
+    font-weight: bold;
+}
+@media screen and (max-width: 768px) { /* Adjustments for smaller screens */
+    .container {
+        padding: 30px;
+    }
+    .home-para, .home-h1, .button-select {
+        font-size: 1.5rem; /* Reduce font sizes */
+    }
+}

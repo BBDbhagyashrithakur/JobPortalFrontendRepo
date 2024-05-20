@@ -113,21 +113,20 @@ displayPage(currentPage);
 createJobCards(jobs);
 
 function getAddressSymbol() {
-  // Add logic to return appropriate symbol for address
-  return '💼'; // Pin symbol
+  
+  return '💼'; 
 }
 function getWatchSymbol() {
-  // Add logic to return another symbol for watch
-  return '⏰'; // Alarm Clock
+  return '⏰'; 
 }
 
 function getLocation() {
-  // Add logic to return another symbol for watch
-  return '📍'; // Alarm Clock
+  
+  return '📍'; 
 }
 function getSalarySymbol() {
-  // Add logic to return appropriate symbol for salary
-  return '💰'; // Money Bag symbol
+  
+  return '💰'; 
 }
 
 document
@@ -136,8 +135,6 @@ document
 
 //Fethching All categeories:
 function showAllCategeories() {
-  // const url = "http://63.32.164.90:8080/api/job/category/all";
-
   fetch("https://jobportal.projects.bbdgrad.com/api/api/job/category/all",
     {
       method:"GET",
@@ -168,7 +165,7 @@ function showAllCategeories() {
       const errorMessage = document.createElement("p");
       errorMessage.textContent = "No categories found.";
       mainScreen.appendChild(errorMessage);
-      return; // Exit the function if categories are empty
+      return; 
   }
 
   const listContainer = document.createElement("div");
@@ -203,8 +200,6 @@ function showAllCategeories() {
   mainScreen.appendChild(listContainer);
 }
 
-
-
 function deleteCategory(id) {
   console.log(id);
   fetch(`https://jobportal.projects.bbdgrad.com/api/api/job/category/delete/${id}`, {
@@ -229,6 +224,8 @@ function deleteCategory(id) {
     .catch((error) => {
       console.error("Error deleting category:", error);
     });
+    displayAlert(" Delete sccssesfully..!", "success");
+    return;
 }
 
 // function updateCategory(categoryId, updatedCategory) {
@@ -439,6 +436,7 @@ function displayAlert(message, type) {
     alertBox.remove();
   }, 2000);
 }
+
 // Save categories function
 function SaveCategories(e) {
   let name = "";
@@ -452,7 +450,7 @@ function SaveCategories(e) {
     }
     formData[element.id] = value;
   });
-  fetch("https://jobportal.projects.bbdgrad.com/apiapi/job/category/add", {
+  fetch("https://jobportal.projects.bbdgrad.com/api/api/job/category/add", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -727,8 +725,8 @@ function saveJob(formElements) {
       return inputElement.value.trim() !== ''; 
   });
 
-//   let title = "";
 
+//   let title = "";
 //   const formData1 = { title };
 //   formElements.forEach((element) => {
 //     let value = document.getElementById(element.id).value;
@@ -737,13 +735,13 @@ function saveJob(formElements) {
 //     }
 //     formData1[element.id] = value;
 //     console.log(capitalizeFirstLetter(value)); // Output should be "Job title"
-
 // });
+
 
  
   if (!allFieldsFilled) {
       displayAlert('Please Enter All the fields', 'error');
-      return; // Exit the function if not all fields are filled
+      return; 
   }
 
   let formData = {};
@@ -754,7 +752,7 @@ function saveJob(formElements) {
   // Check if the visit link is valid
   if (!isValidUrl(formData.visitLink)) {
       displayAlert('Please enter a valid URL for the visit link', 'error');
-      return; // Exit the function if the URL is invalid
+      return; 
   }
 
   // Update formData with selected values from select elements

@@ -1,6 +1,6 @@
 async function getUserInfo(accessToken) {
   fetch(
-    "https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=" +
+    "https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=" + 
       accessToken
   )
     .then((response) => {
@@ -91,11 +91,6 @@ function LogOut() {
     return;
   }
 }
-
-// function getAddressSymbol() {
-//     // Add logic to return appropriate symbol for address
-//     return '💼'; // Pin symbol
-//   }
 
 function SignIn() {
   let oauth2Endpoint = "https://accounts.google.com/o/oauth2/v2/auth";
