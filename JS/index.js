@@ -1,5 +1,3 @@
-import { AdminNavbar } from "./AdminNavbar";
-
 const token=sessionStorage.getItem("userToken");
 function showAllPost() {
   const url = "https://jobportal.projects.bbdgrad.com/api/jobs/all";
@@ -494,8 +492,7 @@ function clearFormFields(elements) {
   const userEmail = localStorage.getItem("email");
   const addJobsLink = document.getElementById("addJobsLink");
   // localStorage.setItem("email","baviskarritu02@gmail.com")
-  
-  if(userEmail!="baviskarritu02@gmail.com"){
+  if(userEmail==="baviskarritu02@gmail.com"){
     const formContainer = document.createElement("div");
     formContainer.classList.add("AddCategories");
   
