@@ -1,6 +1,6 @@
 async function getUserInfo(accessToken) {
   fetch(
-    "https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=" +
+    "https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=" + 
       accessToken
   )
     .then((response) => {
@@ -67,7 +67,7 @@ async function getJwtToken(data) {
     console.error("Error:", error);
   }
   setTimeout(() => {
-    window.location.href = "https://jobportal.projects.bbdgrad.com/web/index.html";
+    window.location.href = "http://127.0.0.1:5502/index.html";
   }, 1500);
 }
 
@@ -101,7 +101,7 @@ function SignIn() {
   let params = {
     client_id:
       "468372946465-krq376qfcuqklalvshtilmbhgt34auvg.apps.googleusercontent.com",
-    redirect_uri: "https://jobportal.projects.bbdgrad.com/web/index.html",
+    redirect_uri: "http://jobportal.projects.bbdgrad.com/web/index.html",
     response_type: "token",
     scope:
       "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email",
