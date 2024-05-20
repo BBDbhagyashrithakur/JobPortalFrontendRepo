@@ -16,10 +16,12 @@ jobs:
       - name: Deploy to EC2
         uses: appleboy/ssh-action@master
         with:
-          host: 63.32.164.90
+          host: ${{ secrets.PUBLIC_IP }}
           username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_PRIVATE_KEY }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
           script: |
+            echo "Connected"
             # Stop existing Node.js server
             PID=$(sudo lsof -t -i:5500)
             if [ ! -z "$PID" ]; then
