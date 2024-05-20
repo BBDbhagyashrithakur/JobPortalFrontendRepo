@@ -106,7 +106,7 @@ function SignIn() {
   let params = {
     client_id:
       "468372946465-krq376qfcuqklalvshtilmbhgt34auvg.apps.googleusercontent.com",
-    redirect_uri: "http://127.0.0.1:5502/index.html",
+    redirect_uri: "http://jobportal.projects.bbdgrad.com/web/index.html",
     response_type: "token",
     scope:
       "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email",
