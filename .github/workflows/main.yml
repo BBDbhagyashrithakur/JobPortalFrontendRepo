@@ -18,7 +18,7 @@ jobs:
         with:
           host: 63.32.164.90
           username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_PRIVATE_KEY }}
+          key: ${{ secrets.key_new }}
           script: |
             # Stop existing Node.js server
             PID=$(sudo lsof -t -i:5500)
