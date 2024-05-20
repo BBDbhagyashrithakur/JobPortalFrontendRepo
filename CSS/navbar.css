@@ -1,0 +1,78 @@
+.navbar {
+    position: -webkit-sticky;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25em;
+    background-color: #282835;
+}
+
+.navbar-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    cursor: pointer;
+}
+
+.navbar-menu li {
+    margin-right: 1.25em;
+}
+
+.navbar-menu li a {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar-toggle {
+    display: none;
+    cursor: pointer;
+}
+
+.bar {
+    width: 1.563em;
+    height: 0.1875em;
+    background-color: white;
+    margin: 0.313em 0;
+}
+
+@media screen and (max-width: 48em) {
+    .logo {
+        height: 3.75em;
+        width: 100%;
+    }
+
+    .navbar-menu {
+        display: none;
+        transition: opacity 0.5s ease, visibility 0.5s ease; 
+    }
+
+    .navbar-menu.active {
+        display: flex;
+        flex-direction: column;
+        top: 100%;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        padding: 10px 20px;
+        box-sizing: border-box;
+        z-index: 1;
+        align-items: center;
+        background-color: #282835;
+        transition: ease-in-out 1s;
+    }
+
+    .navbar-menu.active li {
+        margin-right: 0;
+        margin-top: 0.625em;
+        transition: ease-in-out 1s;
+    }
+
+    .navbar-toggle {
+        display: block;
+    }
+}
