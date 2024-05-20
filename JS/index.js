@@ -1,6 +1,6 @@
 const token=sessionStorage.getItem("userToken");
 function showAllPost() {
-  const url = "https://jobportal.projects.bbdgrad.com/web/api/jobs/all";
+  const url = "https://jobportal.projects.bbdgrad.com/api/jobs/all";
 
   fetch(url,
     {
@@ -493,6 +493,7 @@ function clearFormFields(elements) {
   const addJobsLink = document.getElementById("addJobsLink");
   // localStorage.setItem("email","baviskarritu02@gmail.com")
   if(userEmail!="baviskarritu02@gmail.com"){
+    
     const formContainer = document.createElement("div");
     formContainer.classList.add("AddCategories");
   
@@ -982,4 +983,3 @@ function showAboutContent() {
 
   aboutPage.appendChild(heading);
 }
-
