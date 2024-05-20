@@ -67,7 +67,7 @@ async function getJwtToken(data) {
     console.error("Error:", error);
   }
   setTimeout(() => {
-    window.location.href = "http://127.0.0.1:5502/index.html";
+    window.location.href = "https://jobportal.projects.bbdgrad.com/web/index.html";
   }, 1500);
 }
 
