@@ -27,7 +27,7 @@ jobs:
             fi
             
             # Remove previous repository
-            rm -rf SaveIt-Frontend
+            rm -rf JobPortalFrontendRepo
 
             # Clone new repository
             git clone https://github.com/BBDbhagyashrithakur/JobPortalFrontendRepo.git
