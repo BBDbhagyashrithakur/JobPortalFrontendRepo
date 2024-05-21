@@ -1,36 +1,33 @@
 document.addEventListener("DOMContentLoaded", function() {
-  // Your code here
-  // if (localStorage.getItem("email") == null) {
-  //     const logOut = document.getElementById("logout");
-  //     const showcate = document.getElementById("categoriesLink");
-  //     const addcate = document.getElementById("addCategoriesLink");
-  //     const addjobs = document.getElementById("addJobsLink");
-  //     const jobs = document.getElementById("jobsLink");
-
-  //     if (logOut) {
-  //         logOut.style.display = "none";
-  //     } else {
-  //         console.error("Element with id 'logOut' not found");
-  //     }
-  // }
+ 
   if (localStorage.getItem("email") == null) {
-    const elementsToHide = [
-        document.getElementById("logout"),
-        document.getElementById("categoriesLink"),
-        document.getElementById("addCategoriesLink"),
-        document.getElementById("addJobsLink"),
-        document.getElementById("jobsLink")
-        // Add more elements here as needed
-    ];
-    elementsToHide.forEach(element => {
-        if (element) {
-            element.style.display = "none";
+      const logOut = document.getElementById("logout");
+      
+
+      if (logOut) {
+          logOut.style.display = "none";
+      } else {
+          console.error("Element with id 'logOut' not found");
+      }
+  }
+//   if (localStorage.getItem("email") == null) {
+//     const elementsToHide = [
+//         document.getElementById("logout"),
+//         document.getElementById("categoriesLink"),
+//         document.getElementById("addCategoriesLink"),
+//         document.getElementById("addJobsLink"),
+//         document.getElementById("jobsLink")
+//         // Add more elements here as needed
+//     ];
+//     elementsToHide.forEach(element => {
+//         if (element) {
+//             element.style.display = "none";
            
-        } else {
-            console.error("Element not found:", element);
-        }
-    });
-}
+//         } else {
+//             console.error("Element not found:", element);
+//         }
+//     });
+// }
 });
 
 const token=sessionStorage.getItem("userToken");
