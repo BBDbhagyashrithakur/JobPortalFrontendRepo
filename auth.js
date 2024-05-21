@@ -14,6 +14,7 @@ async function getUserInfo(accessToken) {
       localStorage.setItem("email", data.email);
       sessionStorage.setItem("authToken", accessToken);
       localStorage.setItem("profileImg", data.picture);
+     
       getJwtToken(data);
       console.log("hello");
     })
