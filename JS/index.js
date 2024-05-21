@@ -1,33 +1,37 @@
 document.addEventListener("DOMContentLoaded", function() {
  
-  if (localStorage.getItem("email") == null) {
-      const logOut = document.getElementById("logout");
+  // if (localStorage.getItem("email") == null) {
+  //     const logOut = document.getElementById("logout");
       
 
-      if (logOut) {
-          logOut.style.display = "none";
-      } else {
-          console.error("Element with id 'logOut' not found");
-      }
-  }
-//   if (localStorage.getItem("email") == null) {
-//     const elementsToHide = [
-//         document.getElementById("logout"),
-//         document.getElementById("categoriesLink"),
-//         document.getElementById("addCategoriesLink"),
-//         document.getElementById("addJobsLink"),
-//         document.getElementById("jobsLink")
-//         // Add more elements here as needed
-//     ];
-//     elementsToHide.forEach(element => {
-//         if (element) {
-//             element.style.display = "none";
+  //     if (logOut) {
+  //         logOut.style.display = "none";
+  //     } else {
+  //         console.error("Element with id 'logOut' not found");
+  //     }
+  // }
+  
+  if (localStorage.getItem("email") == null) {
+    const elementsToHide = [
+        document.getElementById("logout"),
+        document.getElementById("categoriesLink"),
+        document.getElementById("addCategoriesLink"),
+        document.getElementById("addJobsLink"),
+        document.getElementById("jobsLink")
+        // Add more elements here as needed
+    ];
+    elementsToHide.forEach(element => {
+        if (element) {
+            element.style.display = "none";
            
-//         } else {
-//             console.error("Element not found:", element);
-//         }
-//     });
-// }
+        } else {
+            console.error("Element not found:", element);
+        }
+    });
+        // const newHeading = document.createElement("h1");
+        // newHeading.textContent = "Welcome to Job Hub";
+        // document.body.appendChild(newHeading);
+}
 });
 
 const token=sessionStorage.getItem("userToken");
