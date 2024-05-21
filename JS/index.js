@@ -1,75 +1,73 @@
 document.addEventListener("DOMContentLoaded", function() {
- 
-  if (localStorage.getItem("email") == "baviskarritu02@gmail.com") {
-    const elementsToShow = [
-      document.getElementById("logout"),
-      document.getElementById("categoriesLink"),
-      document.getElementById("addCategoriesLink"),
-      document.getElementById("addJobsLink"),
-      document.getElementById("jobsLink")
-  ];
+  const userEmail = localStorage.getItem("email");
 
-      if (elementsToShow) {
-        elementsToShow.style.display = "block";
+  if (userEmail === "baviskarritu02@gmail.com") {
+      const elementsToShow = [
+          document.getElementById("logout"),
+          document.getElementById("categoriesLink"),
+          document.getElementById("addCategoriesLink"),
+          document.getElementById("addJobsLink"),
+          document.getElementById("jobsLink")
+      ];
+      elementsToShow.forEach(element => {
+          if (element) {
+              element.style.display = "block";
+          } else {
+              console.error("Element not found");
+          }
+      });
+      const homeHeading = document.getElementById("Homeheading");
+      if (homeHeading) {
+          homeHeading.style.display = "none";
       } else {
-          console.error("Element not found");
+          console.error("Homeheading element not found");
+      }
+  } else if (userEmail === "") {
+      const elementsToShow = [
+          document.getElementById("logout"),
+          document.getElementById("categoriesLink"),
+          document.getElementById("addCategoriesLink"),
+          document.getElementById("addJobsLink"),
+          document.getElementById("jobsLink")
+      ];
+      elementsToShow.forEach(element => {
+          if (element) {
+              element.style.display = "block";
+          } else {
+              console.error("Element not found");
+          }
+      });
+      const homeHeading = document.getElementById("Homeheading");
+      if (homeHeading) {
+          homeHeading.style.display = "none";
+      } else {
+          console.error("Homeheading element not found");
+      }
+  } else {
+      const elementsToHide = [
+          document.getElementById("logout"),
+          document.getElementById("categoriesLink"),
+          document.getElementById("addCategoriesLink"),
+          document.getElementById("addJobsLink"),
+          document.getElementById("jobsLink")
+      ];
+      elementsToHide.forEach(element => {
+          if (element) {
+              element.style.display = "none";
+          } else {
+              console.error("Element not found:", element);
+          }
+      });
+
+      const homeHeading = document.getElementById("Homeheading");
+      if (homeHeading) {
+          homeHeading.style.display = "block";
+      } else {
+          console.error("Homeheading element not found");
       }
   }
-  
-  
-  if (localStorage.getItem("email") == null) {
-    const elementsToHide = [
-        document.getElementById("logout"),
-        document.getElementById("categoriesLink"),
-        document.getElementById("addCategoriesLink"),
-        document.getElementById("addJobsLink"),
-        document.getElementById("jobsLink")
-    ];
-    elementsToHide.forEach(element => {
-        if (element) {
-            element.style.display = "none";
-        } else {
-            console.error("Element not found:", element);
-        }
-    });
-} else {
-  
-    const homeHeading = document.getElementById("Homeheading");
-    if (homeHeading) {
-        homeHeading.style.display = "none";
-    } else {
-        console.error("Homeheading element not found");
-    }
-}
 });
 
-const token=sessionStorage.getItem("userToken");
-function showAllPost() {
-  const url = "https://jobportal.projects.bbdgrad.com/api/jobs/all";
-
-  fetch(url,
-    {
-      method:"GET",
-      headers:{
-        "Content-Type": "application/json",
-        Authorization:`Bearer ${token}`
-      }
-    }
-  )
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      createJobCards(data);
-      console.log(data);
-    })
-    .catch((error) => {
-      console.error("There was a problem with the fetch operation:", error);
-    });
-}
 function createJobCards(jobs,itemsPerPage=6) {
   const mainScreen = document.querySelector(".mainScreen");
   mainScreen.innerHTML = "";
