@@ -84,7 +84,7 @@ function LogOut() {
     sessionStorage.clear();
     var url = new URL("http://127.0.0.1:5502/index.html");
     localStorage.clear();
-    window.location.href = "http://127.0.0.1:5502/index.html";
+    window.location.href = "https://jobportal.projects.bbdgrad.com/web/index.html";
     displayAlert(" LogOut sccssesfully..!", "success");
     return;
   } else {
