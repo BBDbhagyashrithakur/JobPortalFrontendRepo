@@ -1,72 +1,49 @@
 document.addEventListener("DOMContentLoaded", function() {
-  const userEmail = localStorage.getItem("email");
+ 
+  // if (localStorage.getItem("email") == "baviskarritu02@gmail.com") {
+  //   const elementsToShow = [
+  //     document.getElementById("logout"),
+  //     document.getElementById("categoriesLink"),
+  //     document.getElementById("addCategoriesLink"),
+  //     document.getElementById("addJobsLink"),
+  //     document.getElementById("jobsLink")
+  // ];
 
-  if (userEmail === "baviskarritu02@gmail.com") {
-      const elementsToShow = [
-          document.getElementById("logout"),
-          document.getElementById("categoriesLink"),
-          document.getElementById("addCategoriesLink"),
-          document.getElementById("addJobsLink"),
-          document.getElementById("jobsLink")
-      ];
-      elementsToShow.forEach(element => {
-          if (element) {
-              element.style.display = "block";
-          } else {
-              console.error("Element not found");
-          }
-      });
-      const homeHeading = document.getElementById("Homeheading");
-      if (homeHeading) {
-          homeHeading.style.display = "none";
-      } else {
-          console.error("Homeheading element not found");
-      }
-  } else if (userEmail === "") {
-      const elementsToShow = [
-          document.getElementById("logout"),
-          document.getElementById("categoriesLink"),
-          document.getElementById("addCategoriesLink"),
-          document.getElementById("addJobsLink"),
-          document.getElementById("jobsLink")
-      ];
-      elementsToShow.forEach(element => {
-          if (element) {
-              element.style.display = "block";
-          } else {
-              console.error("Element not found");
-          }
-      });
-      const homeHeading = document.getElementById("Homeheading");
-      if (homeHeading) {
-          homeHeading.style.display = "none";
-      } else {
-          console.error("Homeheading element not found");
-      }
-  } else {
-      const elementsToHide = [
-          document.getElementById("logout"),
-          document.getElementById("categoriesLink"),
-          document.getElementById("addCategoriesLink"),
-          document.getElementById("addJobsLink"),
-          document.getElementById("jobsLink")
-      ];
-      elementsToHide.forEach(element => {
-          if (element) {
-              element.style.display = "none";
-          } else {
-              console.error("Element not found:", element);
-          }
-      });
+  //     if (elementsToShow) {
+  //       elementsToShow.style.display = "block";
+  //     } else {
+  //         console.error("Element not found");
+  //     }
+  // }
+  
+  
 
-      const homeHeading = document.getElementById("Homeheading");
-      if (homeHeading) {
-          homeHeading.style.display = "block";
-      } else {
-          console.error("Homeheading element not found");
-      }
-  }
+  if (localStorage.getItem("email") == null) {
+    const elementsToHide = [
+        document.getElementById("logout"),
+        document.getElementById("categoriesLink"),
+        document.getElementById("addCategoriesLink"),
+        document.getElementById("addJobsLink"),
+        document.getElementById("jobsLink")
+    ];
+    elementsToHide.forEach(element => {
+        if (element) {
+            element.style.display = "none";
+        } else {
+            console.error("Element not found:", element);
+        }
+    });
+} else {
+  
+    const homeHeading = document.getElementById("Homeheading");
+    if (homeHeading) {
+        homeHeading.style.display = "none";
+    } else {
+        console.error("Homeheading element not found");
+    }
+}
 });
+
 const token=sessionStorage.getItem("userToken");
 
 function createJobCards(jobs,itemsPerPage=6) {
