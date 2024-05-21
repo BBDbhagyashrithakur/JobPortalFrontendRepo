@@ -1,15 +1,20 @@
 document.addEventListener("DOMContentLoaded", function() {
  
-  // if (localStorage.getItem("email") == null) {
-  //     const logOut = document.getElementById("logout");
-      
+  if (localStorage.getItem("email") == "baviskarritu02@gmail.com") {
+    const elementsToShow = [
+      document.getElementById("logout"),
+      document.getElementById("categoriesLink"),
+      document.getElementById("addCategoriesLink"),
+      document.getElementById("addJobsLink"),
+      document.getElementById("jobsLink")
+  ];
 
-  //     if (logOut) {
-  //         logOut.style.display = "none";
-  //     } else {
-  //         console.error("Element with id 'logOut' not found");
-  //     }
-  // }
+      if (elementsToShow) {
+        elementsToShow.style.display = "block";
+      } else {
+          console.error("Element not found");
+      }
+  }
   
   if (localStorage.getItem("email") == null) {
     const elementsToHide = [
@@ -27,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 } else {
-    // If email is not null, hide the Homeheading element
+  
     const homeHeading = document.getElementById("Homeheading");
     if (homeHeading) {
         homeHeading.style.display = "none";
@@ -530,7 +535,6 @@ function clearFormFields(elements) {
   const userEmail = localStorage.getItem("email");
   const addJobsLink = document.getElementById("addJobsLink");
   // localStorage.setItem("email","baviskarritu02@gmail.com")
-  if(userEmail!="baviskarritu02@gmail.com"){
     const formContainer = document.createElement("div");
     formContainer.classList.add("AddCategories");
   
@@ -742,18 +746,7 @@ function clearFormFields(elements) {
     submitButton.classList.add("btn", "btn-primary");
     mainScreen.appendChild(submitButton);
 
-  }else{
-    console.log("not a admin");
-    const h1 = document.createElement("h1");
-    h1.textContent = "Not A ADMIN";
-    mainScreen.appendChild(h1);
-
-    // Disable "Add Jobs" link
-    addJobsLink.setAttribute("disabled", true);
-    addJobsLink.classList.add("disabled-link");
   }
- 
-}
 // Save job function
 function saveJob(formElements) {
 
