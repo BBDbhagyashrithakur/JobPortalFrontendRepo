@@ -18,19 +18,22 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("addCategoriesLink"),
         document.getElementById("addJobsLink"),
         document.getElementById("jobsLink")
-        // Add more elements here as needed
     ];
     elementsToHide.forEach(element => {
         if (element) {
             element.style.display = "none";
-           
         } else {
             console.error("Element not found:", element);
         }
     });
-        // const newHeading = document.createElement("h1");
-        // newHeading.textContent = "Welcome to Job Hub";
-        // document.body.appendChild(newHeading);
+} else {
+    // If email is not null, hide the Homeheading element
+    const homeHeading = document.getElementById("Homeheading");
+    if (homeHeading) {
+        homeHeading.style.display = "none";
+    } else {
+        console.error("Homeheading element not found");
+    }
 }
 });
 
