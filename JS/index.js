@@ -15,6 +15,15 @@ document.addEventListener("DOMContentLoaded", function() {
           console.error("Element not found");
       }
   }
+  else {
+  
+    const homeHeading = document.getElementById("Homeheading");
+    if (homeHeading) {
+        homeHeading.style.display = "none";
+    } else {
+        console.error("Homeheading element not found");
+    }
+}
   
   if (localStorage.getItem("email") == null) {
     const elementsToHide = [
