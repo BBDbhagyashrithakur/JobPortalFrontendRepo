@@ -67,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
   }
 });
+const token=sessionStorage.getItem("userToken");
 
 function createJobCards(jobs,itemsPerPage=6) {
   const mainScreen = document.querySelector(".mainScreen");
