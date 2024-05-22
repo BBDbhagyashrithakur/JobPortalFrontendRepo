@@ -166,12 +166,10 @@ function getWatchSymbol() {
 }
 
 function getLocation() {
-  
-  return '📍'; 
+  return '🌐'; // Globe with Meridians
 }
 function getSalarySymbol() {
-  
-  return '💰'; 
+  return '💵'; // Banknote with dollar sign
 }
 
 document
