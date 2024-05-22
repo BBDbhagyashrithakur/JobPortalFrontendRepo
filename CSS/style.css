@@ -1912,3 +1912,14 @@ animation: spin 1s linear infinite; /* Rotate animation */
 .pagination-container button {
   margin-right: 0.5rem;
 }
+
+
+/* Media query for iPhone 12 Pro */
+@media (max-width: 390px) {
+  /* Your styles for iPhone 12 Pro here */
+  /* For example, you can adjust the font size or layout */
+  .job-card {
+    font-size: 14px;
+    width: calc(86.33% - 0.66rem);
+  }
+}
