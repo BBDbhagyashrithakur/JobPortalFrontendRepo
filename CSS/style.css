@@ -1922,3 +1922,27 @@ animation: spin 1s linear infinite; /* Rotate animation */
     width: calc(86.33% - 0.66rem);
   }
 }
+
+
+
+/* CSS for navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem; /* Add padding to navbar */
+}
+
+.navbar img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive CSS for navbar and image */
+.navbar {
+  flex-direction: column;
+}
+
+.navbar img {
+  margin-top: 1rem; /* Add space between navbar and image */
+}
