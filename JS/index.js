@@ -764,6 +764,9 @@ function clearFormFields(elements) {
     addJobsLink.classList.add("disabled-link");
     formContainer.appendChild(formHeader);
     formContainer.appendChild(formBody);
+  
+    mainScreen.appendChild(formContainer);
+  
     // Add submit button
     const submitButton = document.createElement("button");
     submitButton.type = "submit";
@@ -771,10 +774,6 @@ function clearFormFields(elements) {
     submitButton.textContent = "Submit";
     submitButton.classList.add("btn", "btn-primary");
     mainScreen.appendChild(submitButton);
-    
-    mainScreen.appendChild(formContainer);
-  
-   
 
   }
 // Save job function
