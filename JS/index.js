@@ -33,10 +33,11 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 } else {
-  
+    const button =document.getElementById("SignUp");
     const homeHeading = document.getElementById("Homeheading");
-    if (homeHeading) {
+    if (homeHeading,button) {
         homeHeading.style.display = "none";
+        button.style.display = "none";
     } else {
         console.error("Homeheading element not found");
     }
@@ -783,7 +784,6 @@ function saveJob(formElements) {
       const inputElement = document.getElementById(element.id);
       return inputElement.value.trim() !== ''; 
   });
-
 
 //   let title = "";
 //   const formData1 = { title };
