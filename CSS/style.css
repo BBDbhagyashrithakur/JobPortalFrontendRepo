@@ -1923,6 +1923,15 @@ animation: spin 1s linear infinite; /* Rotate animation */
     font-size: 14px;
     width: calc(86.33% - 0.66rem);
   }
+  element.style
+  {
+    margin-left: -3rem;
+  }
+  .AddCategories{
+    width: 92%;
+    padding: 1rem; 
+    margin: 1rem;
+  }
 }
 @media (min-width: 401x) and (max-width: 624px) {
   /* Your styles for iPhone 12 Pro here */
