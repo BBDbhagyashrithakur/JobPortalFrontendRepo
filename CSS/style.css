@@ -1149,10 +1149,6 @@ button:hover {
 .job-card p {
  
   margin-left: 1.4rem;
-<<<<<<< HEAD
-=======
-
->>>>>>> bc351cd9d05751ad456882c101ca442911e7557b
 }
  
  
@@ -1236,7 +1232,7 @@ button:hover {
   margin-bottom: 20px;
   background-color: gainsboro;
   width: calc(25.33% - 20px);
-  margin-right: 20px;
+  margin-right: 4rem;
   box-sizing: border-box;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
