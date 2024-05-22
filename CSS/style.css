@@ -616,6 +616,7 @@ img {
   transition-duration: 0.6s;
   transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
   position: relative;
+  margin-left: 3rem;
 }
  
 #navbarSupportedContent>ul>li.active>a {
@@ -1134,6 +1135,7 @@ button:hover {
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 20px;
+  margin-right: 99px;
   background-color: gainsboro;
   width: calc(25% - 20px);
   box-sizing: border-box;
@@ -1146,7 +1148,7 @@ button:hover {
 .job-card h3,
 .job-card p {
  
-  margin-left: -0.6rem;
+  margin-left: 1.4rem;
 }
  
  
