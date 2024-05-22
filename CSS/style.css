@@ -1901,7 +1901,6 @@ animation: spin 1s linear infinite; /* Rotate animation */
   box-shadow: 0 0.5em 1em 0 rgba(0, 0, 0, 0.2);
 }
 
-
 /* CSS for pagination container */
 .pagination-container {
   width: 100%;
