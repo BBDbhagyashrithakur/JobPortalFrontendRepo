@@ -1899,7 +1899,7 @@ animation: spin 1s linear infinite; /* Rotate animation */
 .job-card:hover {
   box-shadow: 0 0.5em 1em 0 rgba(0, 0, 0, 0.2);
 }
-<<<<<<< HEAD
+
 
 /* CSS for pagination container */
 .pagination-container {
@@ -1923,5 +1923,3 @@ animation: spin 1s linear infinite; /* Rotate animation */
     width: calc(86.33% - 0.66rem);
   }
 }
-=======
->>>>>>> e9c719eb799be1cb52e5191d7f0a4b1020ae1527
