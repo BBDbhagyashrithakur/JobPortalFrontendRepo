@@ -201,48 +201,58 @@ function showAllCategeories() {
     .catch((error) => {
       console.error("There was a problem with the fetch operation:", error);
     });
-}function createCateTable(categories) {
+}
+
+function createCateTable(categories, currentPage, itemsPerPage) {
   const mainScreen = document.querySelector(".mainScreen");
   mainScreen.innerHTML = "";
 
   if (!categories || categories.length == 0) {
-      const errorMessage = document.createElement("p");
-      errorMessage.textContent = "No categories found.";
-      mainScreen.appendChild(errorMessage);
-      return; 
+    const errorMessage = document.createElement("p");
+    errorMessage.textContent = "No categories found.";
+    mainScreen.appendChild(errorMessage);
+    return;
   }
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentCategories = categories.slice(startIndex, endIndex);
 
   const listContainer = document.createElement("div");
   listContainer.classList.add("category-list");
 
-  categories.forEach((category) => {
-      const container = document.createElement("div");
-      container.classList.add("category-container");
+  currentCategories.forEach((category) => {
+    const container = document.createElement("div");
+    container.classList.add("category-container");
 
-      const card = document.createElement("div");
-      card.classList.add("category-card");
+    const card = document.createElement("div");
+    card.classList.add("category-card");
 
-      const categoryName = document.createElement("h3");
-      categoryName.textContent = category.name;
-      card.appendChild(categoryName);
+    const categoryName = document.createElement("h3");
+    categoryName.textContent = category.name;
+    card.appendChild(categoryName);
 
-      const categoryDescription = document.createElement("p");
-      categoryDescription.textContent = category.description;
-      card.appendChild(categoryDescription);
+    const categoryDescription = document.createElement("p");
+    categoryDescription.textContent = category.description;
+    card.appendChild(categoryDescription);
 
-      container.appendChild(card);
+    container.appendChild(card);
 
-      const deleteButton = document.createElement("button");
-      deleteButton.textContent = "Delete";
-      deleteButton.classList.add("delete-button");
-      deleteButton.addEventListener("click", () => deleteCategory(category.id));
-      container.appendChild(deleteButton);
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.classList.add("delete-button");
+    deleteButton.addEventListener("click", () => deleteCategory(category.id));
+    container.appendChild(deleteButton);
 
-      listContainer.appendChild(container);
+    listContainer.appendChild(container);
   });
 
   mainScreen.appendChild(listContainer);
 }
+
+// Usage example:
+// Assuming categories is an array of category objects, currentPage is the current page number, and itemsPerPage is the number of items per page.
+// createCateTable(categories, currentPage, itemsPerPage);
 
 
 function deleteCategory(id) {
