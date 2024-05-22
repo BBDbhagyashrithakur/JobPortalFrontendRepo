@@ -1914,7 +1914,7 @@ animation: spin 1s linear infinite; /* Rotate animation */
 
 
 /* Media query for iPhone 12 Pro */
-@media (max-width: 390px) {
+@media (min-width: 0px) and (max-width: 400px) {
   /* Your styles for iPhone 12 Pro here */
   /* For example, you can adjust the font size or layout */
   .job-card {
@@ -1922,9 +1922,6 @@ animation: spin 1s linear infinite; /* Rotate animation */
     width: calc(86.33% - 0.66rem);
   }
 }
-
-
-
 /* CSS for navbar */
 .navbar {
   display: flex;
