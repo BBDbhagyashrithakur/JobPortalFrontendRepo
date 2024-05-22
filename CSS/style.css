@@ -1875,23 +1875,20 @@ animation: spin 1s linear infinite; /* Rotate animation */
 100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-/* CSS for card container */
 .mainScreen {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 0 1rem;
-  box-sizing: border-box; /* Include padding in the width */
+  padding: 1rem; /* Add padding to card container */
+  box-sizing: border-box;
 }
 
 /* CSS for job card */
-/* CSS for job card */
 .job-card {
-  width: calc(33.33% - 0.66rem); /* Three cards per row with space between */
+  width: calc(33.33% - 0.5rem); /* Three cards per row with space between */
   margin-bottom: 1rem;
-  margin-right: 1rem; /* Add margin between cards */
   padding: 1rem;
-  box-sizing: border-box; /* Include padding in the width */
+  box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f9f9f9;
@@ -1899,23 +1896,6 @@ animation: spin 1s linear infinite; /* Rotate animation */
   transition: 0.3s;
 }
 
-.job-card:nth-child(3n) {
-  margin-right: 0; /* Remove margin for every third card to prevent wrapping */
-}
-
-
 .job-card:hover {
   box-shadow: 0 0.5em 1em 0 rgba(0, 0, 0, 0.2);
-}
-
-/* CSS for pagination container */
-.pagination-container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 1rem;
-}
-
-.pagination-container button {
-  margin-right: 0.5rem;
 }
