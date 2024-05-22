@@ -244,6 +244,7 @@ function showAllCategeories() {
   mainScreen.appendChild(listContainer);
 }
 
+
 function deleteCategory(id) {
   console.log(id);
   fetch(`https://jobportal.projects.bbdgrad.com/api/api/job/category/delete/${id}`, {
