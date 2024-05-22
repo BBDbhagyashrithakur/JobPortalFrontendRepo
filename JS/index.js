@@ -202,7 +202,6 @@ function showAllCategeories() {
       console.error("There was a problem with the fetch operation:", error);
     });
 }
-
 function createCateTable(categories, currentPage, itemsPerPage) {
   const mainScreen = document.querySelector(".mainScreen");
   mainScreen.innerHTML = "";
@@ -248,7 +247,29 @@ function createCateTable(categories, currentPage, itemsPerPage) {
   });
 
   mainScreen.appendChild(listContainer);
+
+  // Add pagination buttons
+  const totalPages = Math.ceil(categories.length / itemsPerPage);
+  const paginationContainer = document.createElement("div");
+  paginationContainer.classList.add("pagination");
+
+  for (let i = 1; i <= totalPages; i++) {
+    const button = document.createElement("button");
+    button.textContent = i;
+    button.addEventListener("click", () => {
+      currentPage = i;
+      createCateTable(categories, currentPage, itemsPerPage);
+    });
+    paginationContainer.appendChild(button);
+  }
+
+  mainScreen.appendChild(paginationContainer);
 }
+
+// Example usage:
+// Assuming categories is an array of category objects, currentPage is the current page number, and itemsPerPage is the number of items per page.
+// createCateTable(categories, currentPage, itemsPerPage);
+
 
 // Usage example:
 // Assuming categories is an array of category objects, currentPage is the current page number, and itemsPerPage is the number of items per page.
