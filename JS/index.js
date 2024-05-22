@@ -276,6 +276,11 @@ function createCateTable(categories, currentPage, itemsPerPage) {
 // createCateTable(categories, currentPage, itemsPerPage);
 
 
+// Example usage:
+// Assuming categories is an array of category objects, currentPage is the current page number, and itemsPerPage is the number of items per page.
+// createCateTable(categories, currentPage, itemsPerPage);
+
+
 // Usage example:
 // Assuming categories is an array of category objects, currentPage is the current page number, and itemsPerPage is the number of items per page.
 // createCateTable(categories, currentPage, itemsPerPage);
