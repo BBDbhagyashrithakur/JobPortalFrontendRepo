@@ -46,8 +46,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
 const token=sessionStorage.getItem("userToken");
 function showAllPost() {
-  const loader = document.getElementById("loader");
-  loader.style.display = "block";
+  document.querySelector('.loader').style.display = 'block';
+  setTimeout(function() {
+    document.querySelector('.loader').style.display = 'none';
+  }, 4000); 
   const url = "https://jobportal.projects.bbdgrad.com/api/jobs/all";
 
   fetch(url,
