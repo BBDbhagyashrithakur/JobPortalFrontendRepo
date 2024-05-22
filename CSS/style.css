@@ -1924,13 +1924,19 @@ animation: spin 1s linear infinite; /* Rotate animation */
 }
 
 
+/* Global reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-/* CSS for navbar */
+/* Navbar styles */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem; /* Add padding to navbar */
+  padding: 1rem;
 }
 
 .navbar img {
@@ -1938,11 +1944,35 @@ animation: spin 1s linear infinite; /* Rotate animation */
   height: auto;
 }
 
-/* Responsive CSS for navbar and image */
-.navbar {
+/* Responsive adjustments */
+.container {
+  display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
-.navbar img {
-  margin-top: 1rem; /* Add space between navbar and image */
+.navbar {
+  margin-bottom: 1rem;
+}
+
+/* Additional styles for the slider */
+.slider {
+  position: relative;
+  width: 100%;
+  height: 300px; /* Adjust as needed */
+  overflow: hidden;
+}
+
+.slider .content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+}
+
+.slider .content h2,
+.slider .content p {
+  margin: 0;
 }
