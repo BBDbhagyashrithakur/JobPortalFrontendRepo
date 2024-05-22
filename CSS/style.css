@@ -1874,3 +1874,28 @@ animation: spin 1s linear infinite; /* Rotate animation */
 0% { transform: translate(-50%, -50%) rotate(0deg); }
 100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
+
+.mainScreen {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 1rem; /* Add padding to card container */
+  box-sizing: border-box;
+}
+
+/* CSS for job card */
+.job-card {
+  width: calc(33.33% - 0.5rem); /* Three cards per row with space between */
+  margin-bottom: 1rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0 0.25em 0.5em 0 rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
+.job-card:hover {
+  box-shadow: 0 0.5em 1em 0 rgba(0, 0, 0, 0.2);
+}
