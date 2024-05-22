@@ -1874,3 +1874,12 @@ label {
   0% { transform: translate(-50%, -50%) rotate(0deg); }
   100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
+/*  */
+/* Media query for iPhone 12 Pro */
+@media (max-width: 390px) {
+  /* Your styles for iPhone 12 Pro here */
+  /* For example, you can adjust the font size or layout */
+  .example-class {
+    font-size: 14px;
+  }
+}
