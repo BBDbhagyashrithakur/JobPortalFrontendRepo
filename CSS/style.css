@@ -1422,7 +1422,7 @@ button {
  
 /* 7 */
 .btn-7 {
-background: linear-gradient(0deg, rgba(255,151,0,1) 0%, rgba(251,75,2,1) 100%);
+  background: linear-gradient(0deg, rgb(30 143 187) 0%, rgb(92 159 254) 100%);
   line-height: 42px;
   padding: 0;
   border-radius: 3rem;
