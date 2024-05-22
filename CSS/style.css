@@ -1885,9 +1885,11 @@ animation: spin 1s linear infinite; /* Rotate animation */
 }
 
 /* CSS for job card */
+/* CSS for job card */
 .job-card {
   width: calc(33.33% - 0.66rem); /* Three cards per row with space between */
   margin-bottom: 1rem;
+  margin-right: 1rem; /* Add margin between cards */
   padding: 1rem;
   box-sizing: border-box; /* Include padding in the width */
   border: 1px solid #ccc;
@@ -1896,6 +1898,11 @@ animation: spin 1s linear infinite; /* Rotate animation */
   box-shadow: 0 0.25em 0.5em 0 rgba(0, 0, 0, 0.1);
   transition: 0.3s;
 }
+
+.job-card:nth-child(3n) {
+  margin-right: 0; /* Remove margin for every third card to prevent wrapping */
+}
+
 
 .job-card:hover {
   box-shadow: 0 0.5em 1em 0 rgba(0, 0, 0, 0.2);
