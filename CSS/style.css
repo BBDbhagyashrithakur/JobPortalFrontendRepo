@@ -1763,7 +1763,7 @@ label {
   background: #0056b3;
 }
 .AddCategories h2 {
-  color: blue; /* Change the color to blue */
+  color: cornflowerblue; /* Change the color to blue */
 }
  
  
@@ -1845,6 +1845,7 @@ label {
   pointer-events: none;
 }
  
+<<<<<<< HEAD
 
 /* CSS for card container */
 .mainScreen {
@@ -1882,4 +1883,43 @@ label {
 
 .pagination-container button {
   margin-right: 0.5rem;
+=======
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
+  z-index: 9999; /* Make sure the loader is above other elements */
+  display: none; /* Initially hide the loader */
+}
+
+.loader::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50px;
+  height: 50px;
+  border: 4px solid gray; /* Light gray border */
+  border-radius: 50%;
+  border-top: 4px solid rgb(173, 161, 161); /* Blue border on top */
+  border-bottom: 4px solid gray; /* Blue border on bottom */
+  animation: spin 1s linear infinite; /* Rotate animation */
+}
+
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+/*  */
+/* Media query for iPhone 12 Pro */
+@media (max-width: 390px) {
+  /* Your styles for iPhone 12 Pro here */
+  /* For example, you can adjust the font size or layout */
+  .example-class {
+    font-size: 14px;
+  }
+>>>>>>> 02356b0a8060ddf654748ea4092dfe51b550c173
 }

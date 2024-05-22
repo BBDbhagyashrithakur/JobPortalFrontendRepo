@@ -248,29 +248,6 @@ function createCateTable(categories) {
   mainScreen.appendChild(listContainer);
 }
 
-
-
-
-// Example usage:
-// Assuming categories is an array of category objects, currentPage is the current page number, and itemsPerPage is the number of items per page.
-// createCateTable(categories, currentPage, itemsPerPage);
-
-
-// Example usage:
-// Assuming categories is an array of category objects, currentPage is the current page number, and itemsPerPage is the number of items per page.
-// createCateTable(categories, currentPage, itemsPerPage);
-
-
-// Example usage:
-// Assuming categories is an array of category objects, currentPage is the current page number, and itemsPerPage is the number of items per page.
-// createCateTable(categories, currentPage, itemsPerPage);
-
-
-// Usage example:
-// Assuming categories is an array of category objects, currentPage is the current page number, and itemsPerPage is the number of items per page.
-// createCateTable(categories, currentPage, itemsPerPage);
-
-
 function deleteCategory(id) {
   console.log(id);
   fetch(`https://jobportal.projects.bbdgrad.com/api/api/job/category/delete/${id}`, {
