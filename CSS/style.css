@@ -820,7 +820,7 @@ label {
 /* Styling for the button */
 #addCategoryBtn {
   display: block;
-  width: 19%;
+  width: 100%;
   padding: 7px;
   background: #007bff;
   color: #fff;
@@ -829,6 +829,7 @@ label {
   cursor: pointer;
   margin-left: 22rem;
   margin-top: 2rem;
+  
 }
  
 #addCategoryBtn:hover {
