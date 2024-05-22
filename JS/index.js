@@ -166,7 +166,7 @@ function getWatchSymbol() {
 }
 
 function getLocation() {
-  return '🌐'; // Globe with Meridians
+  return '🌎'; // Globe Showing Americas
 }
 function getSalarySymbol() {
   return '💵'; // Banknote with dollar sign
