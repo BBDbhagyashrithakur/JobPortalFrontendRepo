@@ -11,6 +11,108 @@ body{
 
 }
 
+/* Global reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Navbar styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #333; /* Adjust as needed */
+  color: white;
+}
+
+.navbar img {
+  max-width: 100%;
+  height: auto;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav-item {
+  margin-right: 1rem; /* Adjust spacing between nav items */
+}
+
+/* Slider styles */
+.slider {
+  position: relative;
+  width: 100%;
+  padding-top: 50%; /* Aspect ratio (1:2), adjust as needed */
+  overflow: hidden;
+}
+
+.slider .content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  z-index: 1;
+}
+
+.slider .content .title {
+  font-size: 2rem; /* Adjust font size as needed */
+  margin-bottom: 1rem; /* Adjust spacing as needed */
+}
+
+.slider .content .description {
+  font-size: 1.25rem; /* Adjust font size for larger screens */
+  margin-bottom: 2rem; /* Adjust spacing for larger screens */
+}
+
+/* Main container styles */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Side navigation styles */
+.sideNavBarContainer {
+  width: 100%;
+}
+
+.sideNavBar {
+  display: flex;
+  flex-direction: column;
+}
+
+.sideNavBar a {
+  margin-bottom: 0.5rem; /* Adjust spacing between links */
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 414px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar-nav {
+    margin-top: 1rem; /* Adjust spacing between navbar and content */
+  }
+
+  .slider {
+    padding-top: 100%; /* Change aspect ratio for smaller screens */
+  }
+
+  .slider .content .description {
+    font-size: 1rem; /* Adjust font size for smaller screens */
+    margin-bottom: 1rem; /* Adjust spacing for smaller screens */
+  }
+}
+
+
 .mainContainer{
   display: flex;
   flex-direction: column;
