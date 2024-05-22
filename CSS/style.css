@@ -1886,7 +1886,7 @@ animation: spin 1s linear infinite; /* Rotate animation */
 
 /* CSS for job card */
 .job-card {
-  width: calc(33.33% - 1rem); /* Three cards per row with space between */
+  width: calc(33.33% - 0.66rem); /* Three cards per row with space between */
   margin-bottom: 1rem;
   padding: 1rem;
   box-sizing: border-box; /* Include padding in the width */
