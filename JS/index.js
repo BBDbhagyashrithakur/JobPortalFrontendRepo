@@ -246,9 +246,7 @@ function createCateTable(categories, currentPage, itemsPerPage) {
     listContainer.appendChild(container);
   });
 
-  mainScreen.appendChild(listContainer);
-
-  // Add pagination buttons
+  // Add pagination buttons before the category list container
   const totalPages = Math.ceil(categories.length / itemsPerPage);
   const paginationContainer = document.createElement("div");
   paginationContainer.classList.add("pagination");
@@ -264,7 +262,14 @@ function createCateTable(categories, currentPage, itemsPerPage) {
   }
 
   mainScreen.appendChild(paginationContainer);
+
+  mainScreen.appendChild(listContainer);
 }
+
+// Example usage:
+// Assuming categories is an array of category objects, currentPage is the current page number, and itemsPerPage is the number of items per page.
+// createCateTable(categories, currentPage, itemsPerPage);
+
 
 // Example usage:
 // Assuming categories is an array of category objects, currentPage is the current page number, and itemsPerPage is the number of items per page.
