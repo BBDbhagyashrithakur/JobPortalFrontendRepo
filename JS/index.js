@@ -549,6 +549,10 @@ function clearFormFields(elements) {
   });
 }
  function createJobs() {
+  document.querySelector('.loader').style.display = 'block';
+  setTimeout(function() {
+    document.querySelector('.loader').style.display = 'none';
+  }, 4000); 
   const mainScreen = document.querySelector(".mainScreen");
   mainScreen.style.justifyContent = "center";
   mainScreen.innerHTML = "";
