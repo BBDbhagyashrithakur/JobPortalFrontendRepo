@@ -232,19 +232,24 @@ function createCateTable(categories) {
       categoryDescription.textContent = category.description;
       card.appendChild(categoryDescription);
 
-      container.appendChild(card);
-
+      // Create a delete button for each card
       const deleteButton = document.createElement("button");
       deleteButton.textContent = "Delete";
       deleteButton.classList.add("delete-button");
       deleteButton.addEventListener("click", () => deleteCategory(category.id));
-      container.appendChild(deleteButton);
+
+      // Append the delete button to the card
+      card.appendChild(deleteButton);   
+
+      container.appendChild(card);
 
       listContainer.appendChild(container);
   });
 
   mainScreen.appendChild(listContainer);
 }
+
+
 
 
 // Example usage:
