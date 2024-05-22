@@ -1739,7 +1739,7 @@ label {
  
 /* Styling for the button */
 #addCategoryBtn {
-  display: block;
+  /* display: block;
   width: 17%;
   padding: 7px;
   background: #5161ce;
@@ -1748,7 +1748,15 @@ label {
   border-radius: 5px;
   cursor: pointer;
   margin-top: 2rem;
-  margin-left: 23rem;
+  margin-left: 23rem; */
+  display: block;
+  width: 100%;
+  padding: 7px;
+  background: #5161ce;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
  
 #addCategoryBtn:hover {
