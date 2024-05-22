@@ -44,7 +44,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 const token=sessionStorage.getItem("userToken");
-
 function showAllPost() {
   const url = "https://jobportal.projects.bbdgrad.com/api/jobs/all";
 
@@ -534,7 +533,7 @@ function clearFormFields(elements) {
   const mainScreen = document.querySelector(".mainScreen");
   mainScreen.style.justifyContent = "center";
   mainScreen.innerHTML = "";
-  const userEmail = localStorage.getItem("email");
+  // const userEmail = localStorage.getItem("email");
   const addJobsLink = document.getElementById("addJobsLink");
   // localStorage.setItem("email","baviskarritu02@gmail.com")
     const formContainer = document.createElement("div");
@@ -656,7 +655,7 @@ function clearFormFields(elements) {
         }
       }
     )
-      .then((response) => response.json())
+      .then((response) => response.json()) 
       .then((data) => {
         const experienceLevelSelect = createSelectElement(
           "experienceLevel",
@@ -769,8 +768,6 @@ function saveJob(formElements) {
 //     console.log(capitalizeFirstLetter(value)); // Output should be "Job title"
 // });
 
-
- 
   if (!allFieldsFilled) {
       displayAlert('Please Enter All the fields', 'error');
       return; 
