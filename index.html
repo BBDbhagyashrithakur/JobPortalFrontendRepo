@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -93,6 +94,41 @@
           getUserInfo(accessToken);
         }
       });
+    // function login(userType) {
+    //     // Redirect to GitHub OAuth page for authentication
+    //     var clientId = 'Ov23li6a5YYBt8pygF7X'; // Replace with your GitHub client ID
+    //     var redirectUri = encodeURIComponent(window.location.href);
+    //     var scope = 'user'; // Request user scope for demo
+    //     var oauthUrl = 'https://github.com/login/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirectUri + '&scope=' + scope;
+       
+    //     window.location.href = oauthUrl;
+    // }
+ 
+//     function updateNavbar() {
+//     // Get the elements of the navbar links
+//     var addCategoriesLink = document.getElementById("addCategoriesLink");
+//     var addJobsLink = document.getElementById("addJobsLink");
+//     var loginLink = document.getElementById("loginLink");
+ 
+//     // Check if the user is logged in
+//     var userEmail = localStorage.getItem("email");
+//     if (userEmail === "baviskarritu02@gamil.com@gmail.com") {
+//         // Show the "Add Categories" and "Add Jobs" links
+//         addCategoriesLink.style.display = "block";
+//         addJobsLink.style.display = "block";
+//         // Hide the login link
+//         loginLink.style.display = "none";
+//     } else {
+//         // Hide the "Add Categories" and "Add Jobs" links
+//         addCategoriesLink.style.display = "none";
+//         addJobsLink.style.display = "none";
+//         // Show the login link
+//         loginLink.style.display = "block";
+//     }
+// }
+ 
+    // Call the updateNavbar function when the page loads
+    // window.addEventListener("load", updateNavbar);
   </script>
   <script src="./auth.js"></script>
   <script>
@@ -101,5 +137,6 @@
       document.querySelector('.loader').style.display = 'none';
     }, 4000); 
   </script>
+ 
 </body>
 </html>
