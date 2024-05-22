@@ -182,6 +182,10 @@ document
 
 //Fethching All categeories:
 function showAllCategeories() {
+  document.querySelector('.loader').style.display = 'block';
+  setTimeout(function() {
+    document.querySelector('.loader').style.display = 'none';
+  }, 4000); 
   fetch("https://jobportal.projects.bbdgrad.com/api/api/job/category/all",
     {
       method:"GET",
@@ -253,6 +257,10 @@ function createCateTable(categories) {
 }
 
 function deleteCategory(id) {
+  document.querySelector('.loader').style.display = 'block';
+  setTimeout(function() {
+    document.querySelector('.loader').style.display = 'none';
+  }, 4000); 
   console.log(id);
   fetch(`https://jobportal.projects.bbdgrad.com/api/api/job/category/delete/${id}`, {
     method: "DELETE",
@@ -400,7 +408,10 @@ function deleteCategory(id) {
 //   loader.style.display = "none";
 // }
 
-function createCategoriesForm() {
+function createCategoriesForm() {   document.querySelector('.loader').style.display = 'block';
+setTimeout(function() {
+  document.querySelector('.loader').style.display = 'none';
+}, 4000); 
   const mainScreen = document.querySelector(".mainScreen");
   mainScreen.style.justifyContent = "center";
   mainScreen.innerHTML = "";
@@ -758,7 +769,10 @@ function clearFormFields(elements) {
   }
 // Save job function
 function saveJob(formElements) {
-
+  document.querySelector('.loader').style.display = 'block';
+    setTimeout(function() {
+      document.querySelector('.loader').style.display = 'none';
+    }, 4000); 
   const allFieldsFilled = formElements.every(element => {
       const inputElement = document.getElementById(element.id);
       return inputElement.value.trim() !== ''; 
