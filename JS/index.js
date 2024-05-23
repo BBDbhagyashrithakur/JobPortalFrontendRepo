@@ -501,47 +501,6 @@ function displayAlert(message, type) {
 }
 
 // Save categories function
-// function SaveCategories(e) {
-//   let name = "";
-//   let description = "";
-
-//   const formData = { name, description };
-//   e.forEach((element) => {
-//     let value = document.getElementById(element.id).value;
-//     if (element.id === "name") {
-//       value = capitalizeFirstLetter(value);
-//     }
-//     formData[element.id] = value;
-//   });
-//   fetch("https://jobportal.projects.bbdgrad.com/api/api/job/category/add", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//       Authorization:`Bearer ${token}`
-//     },
-//     body: JSON.stringify(formData),
-//   })
-//     .then((response) => {
-//       if (response.ok) {
-//         console.log("Category saved successfully:");
-//         clearFormFields(e);
-//         displayAlert("Category saved successfully", "success");
-//       }
-//       return response.json();
-//     })
-//     .then((data) => {
-//       console.log("Category saved successfully:", data);
-//     })
-//     .catch((error) => {
-//       console.error("There was a problem saving the category:", error);
-//       displayAlert("Failed to save category", "error");
-//     });
-// }
-
-// Define an array to store the names of categories
-let savedCategories = [];
-
-// Save categories function
 function SaveCategories(e) {
   let name = "";
   let description = "";
@@ -554,13 +513,6 @@ function SaveCategories(e) {
     }
     formData[element.id] = value;
   });
-
-  // Check if the category name is already saved
-  if (savedCategories.includes(formData.name)) {
-    displayAlert("Category already exists", "error");
-    return; // Stop execution if category already exists
-  }
-
   fetch("https://jobportal.projects.bbdgrad.com/api/api/job/category/add", {
     method: "POST",
     headers: {
@@ -572,8 +524,6 @@ function SaveCategories(e) {
     .then((response) => {
       if (response.ok) {
         console.log("Category saved successfully:");
-        // Add the new category name to the savedCategories array
-        savedCategories.push(formData.name);
         clearFormFields(e);
         displayAlert("Category saved successfully", "success");
       }
@@ -587,7 +537,6 @@ function SaveCategories(e) {
       displayAlert("Failed to save category", "error");
     });
 }
-
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
