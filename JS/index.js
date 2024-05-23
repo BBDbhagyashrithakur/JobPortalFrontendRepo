@@ -1,28 +1,28 @@
 document.addEventListener("DOMContentLoaded", function() {
  
-  // if (localStorage.getItem("email") == "baviskarritu02@gmail.com") {
-  //   const elementsToShow = [
-  //     document.getElementById("logout"),
-  //     document.getElementById("categoriesLink"),
-  //     document.getElementById("addCategoriesLink"),
-  //     document.getElementById("addJobsLink"),
-  //     document.getElementById("jobsLink")
-  // ];
+  if (localStorage.getItem("email") == "baviskarritu02@gmail.com") {
+    const elementsToShow = [
+      document.getElementById("logout"),
+      document.getElementById("categoriesLink"),
+      document.getElementById("addCategoriesLink"),
+      document.getElementById("addJobsLink"),
+      document.getElementById("jobsLink")
+  ];
 
-  //     if (elementsToShow) {
-  //       elementsToShow.style.display = "block";
-  //     } else {
-  //         console.error("Element not found");
-  //     }
-  // }
+      if (elementsToShow) {
+        elementsToShow.style.display = "block";
+      } else {
+          console.error("Element not found");
+      }
+  }
 
 
   if (localStorage.getItem("email") == null) {
     const elementsToHide = [
         document.getElementById("logout"),
-        document.getElementById("categoriesLink"),
-        document.getElementById("addCategoriesLink"),
-        document.getElementById("addJobsLink"),
+        // document.getElementById("categoriesLink"),
+        // document.getElementById("addCategoriesLink"),
+        // document.getElementById("addJobsLink"),
         document.getElementById("jobsLink")
     ];
     elementsToHide.forEach(element => {
