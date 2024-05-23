@@ -829,7 +829,12 @@ color: #fff;
 border: none;
 border-radius: 5px;
 cursor: pointer;
+<<<<<<< HEAD
 margin-top: 0rem;
+=======
+margin-top: 2rem;
+margin-left: 12rem;
+>>>>>>> 5a88a9df620762d53c5e77363500b081aae6c9c2
 }
 
 #addCategoryBtn:hover {
