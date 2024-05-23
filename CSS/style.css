@@ -829,12 +829,8 @@ color: #fff;
 border: none;
 border-radius: 5px;
 cursor: pointer;
-<<<<<<< HEAD
-margin-top: 0rem;
-=======
 margin-top: 2rem;
 margin-left: 12rem;
->>>>>>> 5a88a9df620762d53c5e77363500b081aae6c9c2
 }
 
 #addCategoryBtn:hover {
@@ -1927,15 +1923,6 @@ animation: spin 1s linear infinite; /* Rotate animation */
   .job-card {
     font-size: 14px;
     width: calc(86.33% - 0.66rem);
-  }
-  element.style
-  {
-    margin-left: -3rem;
-  }
-  .AddCategories{
-    width: 92%;
-    padding: 1rem; 
-    margin: 1rem;
   }
 }
 @media (min-width: 401x) and (max-width: 624px) {
