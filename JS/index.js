@@ -1,21 +1,4 @@
 document.addEventListener("DOMContentLoaded", function() {
- 
-  // if (localStorage.getItem("email") == "baviskarritu02@gmail.com") {
-  //   const elementsToShow = [
-  //     document.getElementById("logout"),
-  //     document.getElementById("categoriesLink"),
-  //     document.getElementById("addCategoriesLink"),
-  //     document.getElementById("addJobsLink"),
-  //     document.getElementById("jobsLink")
-  // ];
-
-  //     if (elementsToShow) {
-  //       elementsToShow.style.display = "block";
-  //     } else {
-  //         console.error("Element not found");
-  //     }
-  // }
-
 
   if (localStorage.getItem("email") == null) {
     const elementsToHide = [
@@ -32,17 +15,35 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error("Element not found:", element);
         }
     });
-} else {
-    const button =document.getElementById("SignUp");
-    const homeHeading = document.getElementById("Homeheading");
-    if (homeHeading,button) {
-        homeHeading.style.display = "none";
-        button.style.display = "none";
+  } else if (localStorage.getItem("email") == "baviskarritu02@gmail.com") {
+    const elementsToShow = [
+      document.getElementById("logout"),
+      document.getElementById("categoriesLink"),
+      document.getElementById("addCategoriesLink"),
+      document.getElementById("addJobsLink"),
+      document.getElementById("jobsLink")
+    ];
+
+    elementsToShow.forEach(element => {
+      if (element) {
+        element.style.display = "block";
+      } else {
+        console.error("Element not found:", element);
+      }
+    });
+  } else {
+    const addJobsLink = document.getElementById("addJobsLink");
+    const categoriesLink = document.getElementById("categoriesLink");
+
+    if (addJobsLink && categoriesLink) {
+      addJobsLink.style.display = "block";
+      categoriesLink.style.display = "block";
     } else {
-        console.error("Homeheading element not found");
+      console.error("One or more elements not found");
     }
-}
+  }
 });
+
 
 const token=sessionStorage.getItem("userToken");
 function showAllPost() {
