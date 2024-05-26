@@ -322,7 +322,7 @@ function showFormBtnClick() {
 
       // Check if category already exists
       if (checkCategoryExists(name)) {
-          displayAlert("Category already exists", "error");
+        displayAlert("Category already exists", "error");
           return;
       }
 
