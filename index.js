@@ -44,6 +44,7 @@
 });
 
 const token = sessionStorage.getItem("userToken");
+console.log(token);
 const mainScreen = document.getElementById("container");
 const popupContainer = document.getElementById("popupContainer");
 const addCategoryForm = document.getElementById("addCategoryForm");
