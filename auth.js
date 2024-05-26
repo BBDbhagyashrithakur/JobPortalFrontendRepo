@@ -83,7 +83,7 @@ async function getUserInfo(accessToken) {
         },
       }).then((data) => console.log(data));
       sessionStorage.clear();
-      var url = new URL("http://127.0.0.1:5502/index.html");
+      var url = new URL("http://127.0.0.1:5501/index.html");
       localStorage.clear();
       window.location.href = "https://jobportal.projects.bbdgrad.com/web/index.html";
       displayAlert(" LogOut sccssesfully..!", "success");
