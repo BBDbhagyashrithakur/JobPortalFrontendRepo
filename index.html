@@ -109,6 +109,15 @@
               </div>
         </div>
     </div>
+    <script>
+      window.addEventListener("load", function () {
+        let params = new URLSearchParams(window.location.hash.substring(1));
+        let accessToken = params.get("access_token");
+        if (accessToken) {
+          getUserInfo(accessToken);
+        }
+      });
+    </script>
     <script src="index.js"></script>
 </body>
 
