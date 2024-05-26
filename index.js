@@ -398,173 +398,173 @@ function createJobs() {
   formBody.classList.add("AddCategories");
 
   fetch("https://jobportal.projects.bbdgrad.com/api/api/job/category/all", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      const jobCategorySelect = document.createElement("select");
-      jobCategorySelect.id = "JobCategory";
-      jobCategorySelect.name = "JobCategory";
-      jobCategorySelect.required = true;
-      data.forEach((category) => {
-        const option = document.createElement("option");
-        option.value = category.id;
-        option.textContent = category.name;
-        jobCategorySelect.appendChild(option);
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+          },
+      })
+      .then((response) => response.json())
+      .then((data) => {
+          const jobCategorySelect = document.createElement("select");
+          jobCategorySelect.id = "JobCategory";
+          jobCategorySelect.name = "JobCategory";
+          jobCategorySelect.required = true;
+          data.forEach((category) => {
+              const option = document.createElement("option");
+              option.value = category.id;
+              option.textContent = category.name;
+              jobCategorySelect.appendChild(option);
+          });
+
+          const jobCategoryFormGroup = document.createElement("div");
+          jobCategoryFormGroup.classList.add("form-group");
+          const label = document.createElement("label");
+          label.textContent = "Job Category:";
+          jobCategoryFormGroup.appendChild(label);
+          jobCategoryFormGroup.appendChild(jobCategorySelect);
+          formBody.appendChild(jobCategoryFormGroup);
+      })
+      .catch((error) => console.error("Error fetching job categories:", error));
+
+  function createSelectElement(id, labelText, optionsData) {
+      const selectElement = document.createElement("select");
+      selectElement.id = id;
+      selectElement.name = id;
+      selectElement.required = true;
+
+      const label = document.createElement("label");
+      label.textContent = labelText;
+
+      optionsData.forEach((option) => {
+          const optionElement = document.createElement("option");
+          optionElement.value = option;
+          optionElement.textContent = option;
+          selectElement.appendChild(optionElement);
       });
 
-      const jobCategoryFormGroup = document.createElement("div");
-      jobCategoryFormGroup.classList.add("form-group");
-      const label = document.createElement("label");
-      label.textContent = "Job Category:";
-      jobCategoryFormGroup.appendChild(label);
-      jobCategoryFormGroup.appendChild(jobCategorySelect);
-      formBody.appendChild(jobCategoryFormGroup);
-    })
-    .catch((error) => console.error("Error fetching job categories:", error));
-     function createSelectElement(id, labelText, optionsData) {
-    const selectElement = document.createElement("select");
-    selectElement.id = id;
-    selectElement.name = id;
-    selectElement.required = true;
+      const formGroup = document.createElement("div");
+      formGroup.classList.add("form-group");
+      formGroup.appendChild(label);
+      formGroup.appendChild(selectElement);
 
-    const label = document.createElement("label");
-    label.textContent = labelText;
-
-    optionsData.forEach((option) => {
-      const optionElement = document.createElement("option");
-      optionElement.value = option;
-      optionElement.textContent = option;
-      selectElement.appendChild(optionElement);
-    });
-
-    const formGroup = document.createElement("div");
-    formGroup.classList.add("form-group");
-    formGroup.appendChild(label);
-    formGroup.appendChild(selectElement);
-
-    return formGroup;
+      return formGroup;
   }
 
   fetch("https://jobportal.projects.bbdgrad.com/api/jobs/types", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      const jobTypeSelect = createSelectElement("jobType", "Job Type:", data);
-      formBody.appendChild(jobTypeSelect);
-    })
-    .catch((error) => console.error("Error fetching job types:", error));
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+          },
+      })
+      .then((response) => response.json())
+      .then((data) => {
+          const jobTypeSelect = createSelectElement("jobType", "Job Type:", data);
+          formBody.appendChild(jobTypeSelect);
+      })
+      .catch((error) => console.error("Error fetching job types:", error));
 
   fetch("https://jobportal.projects.bbdgrad.com/api/jobs/salaryRanges", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      const salaryRangeSelect = createSelectElement(
-        "salaryRange",
-        "Salary Range:",
-        data
-      );
-      formBody.appendChild(salaryRangeSelect);
-    })
-    .catch((error) => console.error("Error fetching salary ranges:", error));
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+          },
+      })
+      .then((response) => response.json())
+      .then((data) => {
+          const salaryRangeSelect = createSelectElement(
+              "salaryRange",
+              "Salary Range:",
+              data
+          );
+          formBody.appendChild(salaryRangeSelect);
+      })
+      .catch((error) => console.error("Error fetching salary ranges:", error));
 
   fetch("https://jobportal.projects.bbdgrad.com/api/jobs/experienceLevels", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      const experienceLevelSelect = createSelectElement(
-        "experienceLevel",
-        "Experience Level:",
-        data
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+          },
+      })
+      .then((response) => response.json())
+      .then((data) => {
+          const experienceLevelSelect = createSelectElement(
+              "experienceLevel",
+              "Experience Level:",
+              data
+          );
+          formBody.appendChild(experienceLevelSelect);
+      })
+      .catch((error) =>
+          console.error("Error fetching experience levels:", error)
       );
-      formBody.appendChild(experienceLevelSelect);
-    })
-    .catch((error) =>
-      console.error("Error fetching experience levels:", error)
-    );
 
-  const formElements = [
-    {
-      type: "input",
-      inputType: "text",
-      id: "title",
-      name: "title",
-      labelText: "Job Title:",
-    },
-    {
-      type: "input",
-      inputType: "text",
-      id: "description",
-      name: "description",
-      labelText: "Job Description:",
-    },
-    {
-      type: "input",
-      inputType: "text",
-      id: "companyName",
-      name: "companyName",
-      labelText: "Company Name:",
-    },
-    {
-      type: "input",
-      inputType: "text",
-      id: "location",
-      name: "location",
-      labelText: "Location:",
-    },
+  const formElements = [{
+          type: "input",
+          inputType: "text",
+          id: "title",
+          name: "title",
+          labelText: "Job Title:",
+      },
+      {
+          type: "input",
+          inputType: "text",
+          id: "description",
+          name: "description",
+          labelText: "Job Description:",
+      },
+      {
+          type: "input",
+          inputType: "text",
+          id: "companyName",
+          name: "companyName",
+          labelText: "Company Name:",
+      },
+      {
+          type: "input",
+          inputType: "text",
+          id: "location",
+          name: "location",
+          labelText: "Location:",
+      },
 
-    {
-      type: "input",
-      inputType: "text",
-      id: "requiredSkills",
-      name: "skillsRequired",
-      labelText: "Skills Required:",
-    },
-    {
-      type: "input",
-      inputType: "text",
-      id: "visitLink",
-      name: "visitLink",
-      labelText: "Visit Link:",
-    },
+      {
+          type: "input",
+          inputType: "text",
+          id: "requiredSkills",
+          name: "skillsRequired",
+          labelText: "Skills Required:",
+      },
+      {
+          type: "input",
+          inputType: "text",
+          id: "visitLink",
+          name: "visitLink",
+          labelText: "Visit Link:",
+      },
   ];
 
   formElements.forEach((element) => {
-    const formGroup = document.createElement("div");
-    formGroup.classList.add("form-group");
+      const formGroup = document.createElement("div");
+      formGroup.classList.add("form-group");
 
-    const inputElement = document.createElement(element.type);
-    inputElement.type = element.inputType || "text";
-    inputElement.id = element.id;
-    inputElement.name = element.name;
-    inputElement.required = true;
+      const inputElement = document.createElement(element.type);
+      inputElement.type = element.inputType || "text";
+      inputElement.id = element.id;
+      inputElement.name = element.name;
+      inputElement.required = true;
 
-    const label = document.createElement("label");
-    label.textContent = element.labelText;
+      const label = document.createElement("label");
+      label.textContent = element.labelText;
 
-    formGroup.appendChild(label);
-    formGroup.appendChild(inputElement);
+      formGroup.appendChild(label);
+      formGroup.appendChild(inputElement);
 
-    formBody.appendChild(formGroup);
+      formBody.appendChild(formGroup);
   });
 
   formContainer.appendChild(formHeader);
@@ -588,29 +588,30 @@ function displayAlert(message, type) {
   alertBox.textContent = message;
   document.body.appendChild(alertBox);
   setTimeout(() => {
-    alertBox.remove();
+      alertBox.remove();
   }, 2000);
 }
+
 // Save job function
 function saveJob(formElements) {
   const allFieldsFilled = formElements.every((element) => {
-    const inputElement = document.getElementById(element.id);
-    return inputElement.value.trim() !== "";
+      const inputElement = document.getElementById(element.id);
+      return inputElement.value.trim() !== "";
   });
 
   if (!allFieldsFilled) {
-    displayAlert("Please Enter All the fields", "error");
-    return;
+      displayAlert("Please Enter All the fields", "error");
+      return;
   }
 
   let formData = {};
   formElements.forEach((element) => {
-    formData[element.id] = document.getElementById(element.id).value;
+      formData[element.id] = document.getElementById(element.id).value;
   });
 
   if (!isValidUrl(formData.visitLink)) {
-    displayAlert("Please enter a valid URL for the visit link", "error");
-    return;
+      displayAlert("Please enter a valid URL for the visit link", "error");
+      return;
   }
 
   formData.jobCategory = document.getElementById("JobCategory").value;
@@ -619,38 +620,45 @@ function saveJob(formElements) {
   formData.jobType = document.getElementById("jobType").value;
 
   fetch("https://jobportal.projects.bbdgrad.com/api/jobs/add", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify(formData),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(
-          "Failed to save job. Server responded with status " + response.status
-        );
-      }
-      return response.json();
-    })
-    .then((data) => {
-      console.log("Job saved successfully:", data);
-      clearFormFields(formElements);
-      displayAlert("Job saved successfully", "success");
-    })
-    .catch((error) => {
-      console.error("Error saving job:", error);
-      displayAlert(
-        "Failed to save job. Please check the form data and try again.",
-        "error"
-      );
-    });
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(formData),
+      })
+      .then((response) => {
+          if (!response.ok) {
+              throw new Error(
+                  "Failed to save job. Server responded with status " + response.status
+              );
+          }
+          return response.json();
+      })
+      .then((data) => {
+          console.log("Job saved successfully:", data);
+          clearFormFields(formElements);
+          displayAlert("Job saved successfully", "success");
+      })
+      .catch((error) => {
+          console.error("Error saving job:", error);
+          displayAlert(
+              "Failed to save job. Please check the form data and try again.",
+              "error"
+          );
+      });
 }
 
 function isValidUrl(url) {
   const pattern = /^(https?:\/\/)/i;
   return pattern.test(url);
+}
+
+// Clear form fields
+function clearFormFields(formElements) {
+  formElements.forEach((element) => {
+      document.getElementById(element.id).value = "";
+  });
 }
 
 //About us page:
