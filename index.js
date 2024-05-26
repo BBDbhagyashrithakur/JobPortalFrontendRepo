@@ -312,7 +312,7 @@ showLoader();
     });
     hideLoader();
 }
-// _______________________________________________________________________________
+
 
 function createCard(heading, link) {
   showLoader();
