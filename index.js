@@ -174,29 +174,30 @@ function showAllCategories() {
   mainScreen.appendChild(showFormBtn);
 
   fetch("https://jobportal.projects.bbdgrad.com/api/api/job/category/all", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      createCategoryCards(data);
-      console.log(data);
-      appendAddCategoryButton();
-      hideLoader(); // Hide the loader after the fetch request completes
-    })
-    .catch((error) => {
-      console.error("There was a problem with the fetch operation:", error);
-      hideLoader(); // Hide the loader in case of an error
-    });
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+          },
+      })
+      .then((response) => {
+          if (!response.ok) {
+              throw new Error("Network response was not ok");
+          }
+          return response.json();
+      })
+      .then((data) => {
+          createCategoryCards(data);
+          console.log(data);
+          appendAddCategoryButton();
+          hideLoader(); // Hide the loader after the fetch request completes
+      })
+      .catch((error) => {
+          console.error("There was a problem with the fetch operation:", error);
+          hideLoader(); // Hide the loader in case of an error
+      });
 }
+
 function showFormBtnClick() {
   popupContainer.style.display = "flex";
   closeBtn.addEventListener("click", function () {
@@ -255,90 +256,79 @@ function showFormBtnClick() {
   mainScreen.replaceChildren(popupContainer);
 }
 
-
 function createCategoryCards(categories) {
 
   if (!categories || categories.length == 0) {
-    const errorMessage = document.createElement("p");
-    errorMessage.textContent = "No categories found.";
-    mainScreen.appendChild(errorMessage);
-    return;
+      const errorMessage = document.createElement("p");
+      errorMessage.textContent = "No categories found.";
+      mainScreen.appendChild(errorMessage);
+      return;
   }
 
   const listContainer = document.createElement("div");
   listContainer.classList.add("category-list");
 
   categories.forEach((category) => {
-    const categoryCard = document.createElement("div");
-    categoryCard.classList.add("category-card");
+      const categoryCard = document.createElement("div");
+      categoryCard.classList.add("category-card");
 
-    const categoryName = document.createElement("h3");
-    categoryName.textContent = category.name;
+      const categoryName = document.createElement("h3");
+      categoryName.textContent = category.name;
 
-    const categoryDescription = document.createElement("p");
-    categoryDescription.textContent = category.description;
+      const categoryDescription = document.createElement("p");
+      categoryDescription.textContent = category.description;
 
-    const deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete";
-    deleteButton.classList.add("delete-button");
-    deleteButton.addEventListener("click", () => deleteCategory(category.id));
+      const deleteButton = document.createElement("button");
+      deleteButton.textContent = "Delete";
+      deleteButton.classList.add("delete-button");
+      deleteButton.addEventListener("click", () => deleteCategory(category.id));
 
-    categoryCard.appendChild(categoryName);
-    categoryCard.appendChild(categoryDescription);
-    categoryCard.appendChild(deleteButton);
+      categoryCard.appendChild(categoryName);
+      categoryCard.appendChild(categoryDescription);
+      categoryCard.appendChild(deleteButton);
 
-    listContainer.appendChild(categoryCard);
+      listContainer.appendChild(categoryCard);
   });
 
   mainScreen.appendChild(listContainer);
 }
+
 function deleteCategory(id) {
-showLoader();
+  showLoader();
   console.log(id);
   fetch(
-    `https://jobportal.projects.bbdgrad.com/api/api/job/category/delete/${id}`,
-    {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  )
-    .then((response) => {
-      if (response.ok) {
-        console.log("Category deleted successfully");
-        showAllCategories();
-      } else {
-        throw new Error("Failed to delete category");
+          `https://jobportal.projects.bbdgrad.com/api/api/job/category/delete/${id}`, {
+              method: "DELETE",
+              headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${token}`,
+              },
+          }
+      )
+      .then((response) => {
+          if (response.ok) {
+              console.log("Category deleted successfully");
+              showAllCategories();
+          } else {
+              throw new Error("Failed to delete category");
+          }
+      })
+      .catch((error) => {
+          console.error("Error deleting category:", error);
+      });
+  hideLoader();
+}
+
+function checkCategoryExists(name) {
+  const existingCategories = document.querySelectorAll(".category-card h3");
+
+  for (const category of existingCategories) {
+      if (category.textContent.trim().toLowerCase() === name.trim().toLowerCase()) {
+          return true;
       }
-    })
-    .catch((error) => {
-      console.error("Error deleting category:", error);
-    });
-    hideLoader();
+  }
+  return false;
 }
-
-
-function createCard(heading, link) {
-  showLoader();
-  const card = document.createElement("div");
-  card.classList.add("card");
-
-  const headingElement = document.createElement("h2");
-  headingElement.textContent = heading;
-
-  const linkElement = document.createElement("a");
-  linkElement.textContent = "Visit Website";
-  linkElement.href = link;
-  linkElement.target = "_blank";
-
-  card.appendChild(headingElement);
-  card.appendChild(linkElement);
-
-  return card;
-}
-  
 
 function renderCards() {
   const cardData = [
