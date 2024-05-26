@@ -70,7 +70,7 @@
 //       console.error("Error:", error);
 //     }
 //     setTimeout(() => {
-//       window.location.href = "https://jobportal.projects.bbdgrad.com/web/index.html";
+//       window.location.href = "https://jobportal.projects.bbdgrad.com/web/index.htmlindex.html";
 //     }, 1500);
 //   }
    
@@ -86,7 +86,7 @@
 //       sessionStorage.clear();
 //       var url = new URL("http://127.0.0.1:5502/index.html");
 //       localStorage.clear();
-//       window.location.href = "https://jobportal.projects.bbdgrad.com/web/index.html";
+//       window.location.href = "https://jobportal.projects.bbdgrad.com/web/index.htmlindex.html";
 //       displayAlert(" LogOut sccssesfully..!", "success");
 //       return;
 //     } else {
@@ -105,7 +105,7 @@
 //     let params = {
 //       client_id:
 //         "468372946465-krq376qfcuqklalvshtilmbhgt34auvg.apps.googleusercontent.com",
-//       redirect_uri: "https://jobportal.projects.bbdgrad.com/web/index.html",
+//       redirect_uri: "https://jobportal.projects.bbdgrad.com/web/index.htmlindex.html",
 //       response_type: "token",
 //       scope:
 //         "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email",
@@ -199,7 +199,7 @@ async function getJwtToken(data) {
     
     console.error("Error:", error);
   }
-    window.location.href = "https://jobportal.projects.bbdgrad.com/web/";
+    window.location.href = "https://jobportal.projects.bbdgrad.com/web/index.html";
 
 }
 
@@ -213,9 +213,9 @@ function LogOut() {
       },
     }).then((data) => console.log(data));
     sessionStorage.clear();
-    var url = new URL("https://jobportal.projects.bbdgrad.com/web/");
+    var url = new URL("https://jobportal.projects.bbdgrad.com/web/index.html");
     localStorage.clear();
-    window.location.href = "https://jobportal.projects.bbdgrad.com/web/";
+    window.location.href = "https://jobportal.projects.bbdgrad.com/web/index.html";
   } else {
     window.alert("Already Logged Out");
   }
@@ -229,7 +229,7 @@ function SignIn() {
   let params = {
     client_id:
       "468372946465-krq376qfcuqklalvshtilmbhgt34auvg.apps.googleusercontent.com",
-    redirect_uri: "https://jobportal.projects.bbdgrad.com/web/",
+    redirect_uri: "https://jobportal.projects.bbdgrad.com/web/index.html",
     response_type: "token",
     scope:
       "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email",
