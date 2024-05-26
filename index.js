@@ -261,7 +261,6 @@ function checkCategoryExists(name) {
       }, 2000);
   }
   mainScreen.replaceChildren(popupContainer);
-}
 
 function createCategoryCards(categories) {
 
