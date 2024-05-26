@@ -1,24 +1,9 @@
-
-
 document.addEventListener("DOMContentLoaded", function() {
+  const userEmail = localStorage.getItem("email");
 
-  //     // if (localStorage.getItem("email") == "baviskarritu02@gmail.com") {
-  //     //   const elementsToShow = [
-  //     //     document.getElementById("logout"),
-  //     //     document.getElementById("categoriesLink"),
-  //     //     document.getElementById("addCategoriesLink"),
-  //     //     document.getElementById("addJobsLink"),
-  //     //     document.getElementById("jobsLink")
-  //     // ];
-  
-  //     //     if (elementsToShow) {
-  //     //       elementsToShow.style.display = "block";
-  //     //     } else {
-  //     //         console.error("Element not found");
-  //     //     }
-  //     // }
-  
-    if (localStorage.getItem("email") == null) {
+  // Check if user email is null
+  if (userEmail === null) {
+      // Hide navigation elements if user email is null
       const elementsToHide = [
           document.getElementById("logout"),
           document.getElementById("categoriesLink"),
@@ -34,30 +19,32 @@ document.addEventListener("DOMContentLoaded", function() {
           }
       });
   } else {
-      const button =document.getElementById("SignUp");
-    
-      if (button) {
-          button.style.display = "none";
+      // Hide the sign-up button if user email is not null
+      const signUpButton = document.getElementById("SignUp");
+      if (signUpButton) {
+          signUpButton.style.display = "none";
       } else {
-          console.error("button element not found");
+          console.error("Sign-up button element not found");
       }
-     }
-       // Check if user email is not ritu's email
-       if (userEmail != "baviskarritu02@gmail.com") {
-        // Show only jobs and documentation nav links if user email is not ritu's email
-        const navLinksToShow = [
-            document.getElementById("showAllPostLink"),
-            document.getElementById("notes"),
-        ];
-        navLinksToShow.forEach(element => {
-            if (element) {
-                element.style.display = "block";
-            } else {
-                console.error("Navigation element not found:", element);
-            }
-        });
-    }
-  });
+
+      // Check if user email is not ritu's email
+      if (userEmail !== "baviskarritu02@gmail.com") {
+          // Show only jobs and documentation nav links if user email is not ritu's email
+          const navLinksToShow = [
+              document.getElementById("showAllPostLink"),
+              document.getElementById("notes"),
+          ];
+          navLinksToShow.forEach(element => {
+              if (element) {
+                  element.style.display = "block";
+              } else {
+                  console.error("Navigation element not found:", element);
+              }
+          });
+      }
+  }
+});
+
 
 const token = sessionStorage.getItem("userToken");
 const mainScreen = document.getElementById("container");
