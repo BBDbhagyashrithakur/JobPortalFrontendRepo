@@ -1,142 +1,132 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="./CSS/style.css" />
-  <title></title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-Z30py3k2Yd8bbEVwEahQmQVez1i4FzAaAtfQzXdkMXChyyNn6RjQJ+s1ZL0G3B3xx3d+aFY67BeD3zHIUslN/g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <title>Document</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+   
 </head>
 <body>
-  <div class="loader"></div>
-  <div class="container">
-    <div class="mainContainer">
-      <nav class="navbar navbar-expand-custom navbar-mainbg">
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-              <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
-              <!-- <li class="nav-item">
-                <a class="nav-link" href="#" id="loginLink" onclick="createForm()">Login</a>
-              </li> -->
-              <li class="nav-item">
-                <a class="nav-link" href="#" id="jobsLink" onclick="showAllPost()">Jobs</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" id="categoriesLink" onclick="showAllCategeories()">Categories</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" id="addCategoriesLink" onclick="createCategoriesForm()">Add Categories</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" id="addJobsLink" onclick="createJobs()">Add Jobs</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" id="logout" onclick="LogOut()">LogOut</a>
-              </li>
-              <h1 id="Homeheading" style="color: white;">Job Hub</h1>
-            </ul>
-          </div>
-        </nav>
-       
-      </nav>
-      <div class="navBar">
-        <div class="navBarContent">
-   
-          <!-- <h1>JobHub</h1> -->
-         
+    <div class="loader"></div>
+    <div >
+    <div class="sidebar">
+        <div class="top">
+            <div class="logo">
+                <i class='bx bx-home'></i>
+                <span id="jobHub" style="color: cornflowerblue;text-shadow: 2px 2px 4px rgba(255, 102, 204, 0.5); font-weight: bold;">JOB HUB</span>
+            </div>
+            <i class="bx bx-menu" id="btn"></i>
         </div>
+        <div class="user">
+            <img src="./image/e_logo.png" alt="me" class="user-img">
+            <div>
+                <p class="bold">Welcome</p>
+                <p></p>
+            </div>
+        </div>
+        
+        <ul>
+            <li> 
+            <a href="#"  id="showAllPostLink" onclick="showAllPost()">
+                <i class="bx bx-home"></i>
+                <span class="nav-item">Jobs</span>
+            </a> 
+            <span class="tooltip"></span>
+        </li>
+    
+        <li>
+            <a href="#" id="categoriesLink" onclick="showAllCategories()">
+                <i class='bx bx-category'></i>
+                <span class="nav-item">Categories</span>
+            </a> 
+            <span class="tooltip"></span>
+        </li>
+        <li>
+            <a href="#"  id="addJobsLink" onclick="createJobs()">
+                <i class='bx bx-laptop'></i>
+                <span class="nav-item">AddJobs</span>
+            </a> 
+            <span class="tooltip"></span>
+        </li>
+        <li>
+            <a href="#" id="notes" class="nav-link" onclick="renderCards()">
+                <i class='bx bx-book-reader'></i>
+                <span class="nav-item">Documentation</span>
+            </a> 
+            <span class="tooltip"></span>
+        </li>
+        <li>
+            <a href="#"  id="logout"onclick="LogOut()">
+                <i class="bx bx-log-out"></i>
+                <span class="nav-item">Logout</span>
+            </a> 
+            <span class="tooltip"></span>
+        </li>
+       
+        </ul>
+    </div>
+    <div class="card-container">
+        <!-- Cards will be dynamically added here -->
       </div>
-     <div class="sideNavBarContainer">
-         <div class="sideNavBar">
-          <!-- <div class="sideNavBar">
-           <a href="#" id="registrationLink" onclick="createRegistrationForm()">Registration</a>
-            <a href="#" id="loginLink" onclick="createForm()">Login</a>
-            <a href="#" id="jobsLink" onclick="showAllPost()">Jobs</a>
-            <a href="#" id="categoriesLink" onclick="showAllCategeories()">Categories</a>
-            <a href="#" id="addCategoriesLink" onclick="createCategoriesForm()">Add Categories</a>
-            <a href="#" id="addJobsLink" onclick="createJobs()">Add Jobs</a>
-            <a href="#" id="aboutLink" onclick="showAboutContent()">About</a>
-          </div> -->
-        </div> 
-        <div class="mainScreen">
-          <main>
-            <div class='slider'>
-             <div class='content'>
-                  <h2 class='title'>"JobHub"</h2>
-                  <p class='description'>  Easy Way to see the job On JobHub according to the category wise and find the Job Details where the Job vacances are available. </p>
+    <div class="main-content">
+        <div class="container" id="container">
+            <button id="showFormBtn" style="display: none; cursor: pointer;" onclick="showFormBtnClick()">add category</button>
+            <div class="popup-container" id="popupContainer">
+              
+                <div class="popup-form">
+                  
+                  <span class="close-btn" id="closeBtn">&times;</span>
+                
+                  <div class="postHeader">
+                    <h2>Add Category</h2>
+                  </div>
+                
+                  <form id="addCategoryForm">
+                    <div class="form-group">
+                      <label for="name">Category Title:</label>
+                      <input type="text" id="name" name="CategoryTitle" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="description">Category Description:</label>
+                      <input type="text" id="description" name="CategoryDescription" required>
+                    </div>
+                    <button type="submit" id="showFormBtn">Add Category</button>
+                  </form>
                 </div>
+                
               </div>
-              <div class='item' style="background-image: url(./Imeges/home1.jpg )">
+              <div class='item' style="background-image: url(./image/home5.jpg )">
                 <div class='content'>
                   <b><h2 class='title'>"Welcome to JobHub"</h2></b>
                   <p class='description'>  Easy Way to see the job On JobHub where the Job vacancies are available..!</p>
                   <!-- <button onclick="">LogIn</button> -->
                   <!-- <button onclick="LogOut()">Admin</button> -->
-                  <span> <button id="SignUp" onclick="SignIn()">SignUp</button></span>
+                  <span> <button id="SignUp" class="home-image" onclick="SignIn()">SignUp</button></span>
                 </div>
               </div>
-            </div>
-           </main>
-          <div id="about"></div>
-          <div id="categoryListContainer"></div>
         </div>
-      </div>
     </div>
-  </div>
-  <div id="status"></div>
-  <script src="./JS/index.js"></script>
-  <script>
-     window.addEventListener("load", function () {
-        let params = new URLSearchParams(window.location.hash.substring(1));
-        let accessToken = params.get("access_token");
-        if (accessToken) {
-          getUserInfo(accessToken);
-        }
-      });
-    // function login(userType) {
-    //     // Redirect to GitHub OAuth page for authentication
-    //     var clientId = 'Ov23li6a5YYBt8pygF7X'; // Replace with your GitHub client ID
-    //     var redirectUri = encodeURIComponent(window.location.href);
-    //     var scope = 'user'; // Request user scope for demo
-    //     var oauthUrl = 'https://github.com/login/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirectUri + '&scope=' + scope;
-       
-    //     window.location.href = oauthUrl;
-    // }
- 
-//     function updateNavbar() {
-//     // Get the elements of the navbar links
-//     var addCategoriesLink = document.getElementById("addCategoriesLink");
-//     var addJobsLink = document.getElementById("addJobsLink");
-//     var loginLink = document.getElementById("loginLink");
- 
-//     // Check if the user is logged in
-//     var userEmail = localStorage.getItem("email");
-//     if (userEmail === "baviskarritu02@gamil.com@gmail.com") {
-//         // Show the "Add Categories" and "Add Jobs" links
-//         addCategoriesLink.style.display = "block";
-//         addJobsLink.style.display = "block";
-//         // Hide the login link
-//         loginLink.style.display = "none";
-//     } else {
-//         // Hide the "Add Categories" and "Add Jobs" links
-//         addCategoriesLink.style.display = "none";
-//         addJobsLink.style.display = "none";
-//         // Show the login link
-//         loginLink.style.display = "block";
-//     }
-// }
- 
-    // Call the updateNavbar function when the page loads
-    // window.addEventListener("load", updateNavbar);
-  </script>
-  <script src="./auth.js"></script>
-  <script>
+    <script src="../fronted/index.js"></script>
+</body>
+
+<script>
+    let btn = document.querySelector('#btn');
+    let sidebar = document.querySelector('.sidebar')
+
+    btn.onclick = function(){
+    sidebar.classList.toggle('active');
+    }
+</script>
+<!-- <script>
     document.querySelector('.loader').style.display = 'block';
     setTimeout(function() {
       document.querySelector('.loader').style.display = 'none';
     }, 4000); 
-  </script>
- 
-</body>
+  </script> -->
+  
+
+<script src="../fronted/auth.js"></script>
 </html>
