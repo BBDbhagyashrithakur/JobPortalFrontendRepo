@@ -164,8 +164,80 @@ document
   .addEventListener("click", showAllPost);
 
 // ----------------------------------------------------------------------------
+// Function to check if a category already exists
+function checkCategoryExists(name) {
+  const existingCategories = document.querySelectorAll(".category-card h3");
+
+  for (const category of existingCategories) {
+      if (category.textContent.trim().toLowerCase() === name.trim().toLowerCase()) {
+          return true;
+      }
+  }
+  return false;
+}
+
+// Function to handle the click event of the show form button
+function showFormBtnClick() {
+  popupContainer.style.display = "flex";
+  closeBtn.addEventListener("click", function () {
+      popupContainer.style.display = "none";
+      showAllCategories();
+  });
+
+  addCategoryForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      const formData = new FormData(addCategoryForm);
+      const name = formData.get("CategoryTitle");
+      const description = formData.get("CategoryDescription");
+      const data = { name, description };
+
+      // Check if category already exists
+      if (checkCategoryExists(name)) {
+          displayAlert("Category already exists", "error");
+          return;
+      }
+
+      fetch("https://jobportal.projects.bbdgrad.com/api/api/job/category/add", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify(data),
+          })
+          .then((response) => {
+              if (!response.ok) {
+                  throw new Error("Network response was not ok");
+              }
+              return response.json();
+          })
+          .then((data) => {
+              console.log("Category saved successfully:", data);
+              displayAlert("Category saved successfully", "success");
+              addCategoryForm.reset();
+              popupContainer.style.display = "none";
+          })
+          .catch((error) => {
+              console.error("There was a problem saving the category:", error);
+              displayAlert("Failed to save category", "error");
+          });
+  });
+
+  function displayAlert(message, type) {
+      const alertBox = document.createElement("div");
+      alertBox.className = `alert ${type}`;
+      alertBox.textContent = message;
+      document.body.appendChild(alertBox);
+      setTimeout(() => {
+          alertBox.remove();
+      }, 2000);
+  }
+  mainScreen.replaceChildren(popupContainer);
+}
+
+// Function to fetch and display all categories
 function showAllCategories() {
-  showLoader(); // Show the loader before making the fetch request
+  showLoader(); // Show loader before making the fetch request
 
   mainScreen.innerHTML = "";
   mainScreen.style.display = "block";
