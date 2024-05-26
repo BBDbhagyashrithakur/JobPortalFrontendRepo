@@ -17,31 +17,31 @@
 //     //     }
 //     // }
 
-//   if (localStorage.getItem("email") == null) {
-//     const elementsToHide = [
-//         document.getElementById("logout"),
-//         document.getElementById("categoriesLink"),
-//         document.getElementById("addJobsLink"),
-//         document.getElementById("notes"),
-//         document.getElementById("showAllPostLink"),
-//     ];
-//     elementsToHide.forEach(element => {
-//         if (element) {
-//             element.style.display = "none";
-//         } else {
-//             console.error("Element not found:", element);
-//         }
-//     });
-// } else {
-//     const button =document.getElementById("SignUp");
-//     const homeHeading = document.getElementById("Homeheading");
-//     if (homeHeading,button) {
-//         homeHeading.style.display = "none";
-//         button.style.display = "none";
-//     } else {
-//         console.error("Homeheading element not found");
-//     }
-// }
+  if (localStorage.getItem("email") == null) {
+    const elementsToHide = [
+        document.getElementById("logout"),
+        document.getElementById("categoriesLink"),
+        document.getElementById("addJobsLink"),
+        document.getElementById("notes"),
+        document.getElementById("showAllPostLink"),
+    ];
+    elementsToHide.forEach(element => {
+        if (element) {
+            element.style.display = "none";
+        } else {
+            console.error("Element not found:", element);
+        }
+    });
+} else {
+    const button =document.getElementById("SignUp");
+    const homeHeading = document.getElementById("Homeheading");
+    if (homeHeading,button) {
+        homeHeading.style.display = "none";
+        button.style.display = "none";
+    } else {
+        console.error("Homeheading element not found");
+    }
+}
 });
 
 const token = sessionStorage.getItem("userToken");
