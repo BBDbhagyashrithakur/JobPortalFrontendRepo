@@ -205,6 +205,7 @@ function handleAddCategoryFormSubmission() {
       const name = formData.get("CategoryTitle");
       const description = formData.get("CategoryDescription");
 
+      // Check if the category already exists
       if (checkCategoryExists(name)) {
           displayAlert("Category already exists", "error");
           return;
@@ -248,19 +249,19 @@ function checkCategoryExists(name) {
   }
   return false;
 }
-
 // Other functions (createCategoryCards, deleteCategory, displayAlert) remain unchanged
 
-  function displayAlert(message, type) {
-      const alertBox = document.createElement("div");
-      alertBox.className = `alert ${type}`;
-      alertBox.textContent = message;
-      document.body.appendChild(alertBox);
-      setTimeout(() => {
-          alertBox.remove();
-      }, 2000);
-  }
-  mainScreen.replaceChildren(popupContainer);
+function displayAlert(message, type) {
+  const alertBox = document.createElement("div");
+  alertBox.className = `alert ${type}`;
+  alertBox.textContent = message;
+  document.body.appendChild(alertBox);
+  setTimeout(() => {
+      alertBox.remove();
+  }, 2000);
+}
+
+mainScreen.replaceChildren(popupContainer);
 
 function createCategoryCards(categories) {
 
