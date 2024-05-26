@@ -166,102 +166,101 @@ document
 // ----------------------------------------------------------------------------
 // Function to fetch and display all categories
 function showAllCategories() {
-  showLoader(); // Show loader before making the fetch request
+    showLoader(); // Show loader before making the fetch request
 
-  mainScreen.innerHTML = "";
-  mainScreen.style.display = "block";
-  showFormBtn.style.display = "block";
+    mainScreen.innerHTML = "";
+    mainScreen.style.display = "block";
+    showFormBtn.style.display = "block";
 
-  mainScreen.appendChild(showFormBtn);
+    mainScreen.appendChild(showFormBtn);
 
-  fetch("https://jobportal.projects.bbdgrad.com/api/job/category/all", {
-          method: "GET",
-          headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-          },
-      })
-      .then((response) => {
-          if (!response.ok) {
-              throw new Error("Network response was not ok");
-          }
-          return response.json();
-      })
-      .then((data) => {
-          createCategoryCards(data);
-          hideLoader(); // Hide loader after the fetch request completes
-      })
-      .catch((error) => {
-          console.error("There was a problem with the fetch operation:", error);
-          hideLoader(); // Hide loader in case of an error
-      });
+    fetch("https://jobportal.projects.bbdgrad.com/api/job/category/all", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        })
+        .then((data) => {
+            createCategoryCards(data);
+            hideLoader(); // Hide loader after the fetch request completes
+        })
+        .catch((error) => {
+            console.error("There was a problem with the fetch operation:", error);
+            hideLoader(); // Hide loader in case of an error
+        });
 }
 
 // Function to handle form submission for adding a category
 function handleAddCategoryFormSubmission() {
-  addCategoryForm.addEventListener("submit", async function (event) {
-      event.preventDefault();
-      const formData = new FormData(addCategoryForm);
-      const name = formData.get("CategoryTitle");
-      const description = formData.get("CategoryDescription");
+    addCategoryForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        const formData = new FormData(addCategoryForm);
+        const name = formData.get("CategoryTitle");
+        const description = formData.get("CategoryDescription");
 
-      // Check if the category already exists
-      if (checkCategoryExists(name)) {
-          displayAlert("Category already exists", "error");
-          return;
-      }
+        // Check if the category already exists
+        if (checkCategoryExists(name)) {
+            displayAlert("Category already exists", "error");
+            return;
+        }
 
-      try {
-          const response = await fetch("https://jobportal.projects.bbdgrad.com/api/job/category/add", {
-              method: "POST",
-              headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${token}`,
-              },
-              body: JSON.stringify({ name, description }),
-          });
+        try {
+            const response = await fetch("https://jobportal.projects.bbdgrad.com/api/job/category/add", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({ name, description }),
+            });
 
-          if (!response.ok) {
-              throw new Error("Network response was not ok");
-          }
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
 
-          const data = await response.json();
-          console.log("Category saved successfully:", data);
-          displayAlert("Category saved successfully", "success");
-          addCategoryForm.reset();
-          popupContainer.style.display = "none";
-          showAllCategories(); // Refresh category list after adding a new category
-      } catch (error) {
-          console.error("There was a problem saving the category:", error);
-          displayAlert("Failed to save category", "error");
-      }
-  });
+            const data = await response.json();
+            console.log("Category saved successfully:", data);
+            displayAlert("Category saved successfully", "success");
+            addCategoryForm.reset();
+            popupContainer.style.display = "none";
+            showAllCategories(); // Refresh category list after adding a new category
+        } catch (error) {
+            console.error("There was a problem saving the category:", error);
+            displayAlert("Failed to save category", "error");
+        }
+    });
 }
 
 // Function to check if a category already exists
 function checkCategoryExists(name) {
-  const existingCategories = document.querySelectorAll(".category-card h3");
+    const existingCategories = document.querySelectorAll(".category-card h3");
 
-  for (const category of existingCategories) {
-      if (category.textContent.trim().toLowerCase() === name.trim().toLowerCase()) {
-          return true;
-      }
-  }
-  return false;
+    for (const category of existingCategories) {
+        if (category.textContent.trim().toLowerCase() === name.trim().toLowerCase()) {
+            return true;
+        }
+    }
+    return false;
 }
 // Other functions (createCategoryCards, deleteCategory, displayAlert) remain unchanged
 
-function displayAlert(message, type) {
-  const alertBox = document.createElement("div");
-  alertBox.className = `alert ${type}`;
-  alertBox.textContent = message;
-  document.body.appendChild(alertBox);
-  setTimeout(() => {
-      alertBox.remove();
-  }, 2000);
-}
-
-mainScreen.replaceChildren(popupContainer);
+  function displayAlert(message, type) {
+      const alertBox = document.createElement("div");
+      alertBox.className = `alert ${type}`;
+      alertBox.textContent = message;
+      document.body.appendChild(alertBox);
+      setTimeout(() => {
+          alertBox.remove();
+      }, 2000);
+  }
+  mainScreen.replaceChildren(popupContainer);
 
 function createCategoryCards(categories) {
 
