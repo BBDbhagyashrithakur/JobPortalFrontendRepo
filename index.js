@@ -42,6 +42,21 @@ document.addEventListener("DOMContentLoaded", function() {
           console.error("button element not found");
       }
      }
+       // Check if user email is not ritu's email
+       if (userEmail !== "baviskarritu02@gmail.com") {
+        // Show only jobs and documentation nav links if user email is not ritu's email
+        const navLinksToShow = [
+            document.getElementById("showAllPostLink"),
+            document.getElementById("notes"),
+        ];
+        navLinksToShow.forEach(element => {
+            if (element) {
+                element.style.display = "block";
+            } else {
+                console.error("Navigation element not found:", element);
+            }
+        });
+    }
   });
 
 const token = sessionStorage.getItem("userToken");
