@@ -221,7 +221,6 @@ function LogOut() {
   }
 }
 function SignIn() {
-  TurnOnLoader()
   let oauth2Endpoint = "https://accounts.google.com/o/oauth2/v2/auth";
   let form = document.createElement("form");
   form.setAttribute("method", "GET");
