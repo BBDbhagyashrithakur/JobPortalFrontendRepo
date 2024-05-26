@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
      }
        // Check if user email is not ritu's email
-       if (userEmail !== "baviskarritu02@gmail.com") {
+       if (userEmail != "baviskarritu02@gmail.com") {
         // Show only jobs and documentation nav links if user email is not ritu's email
         const navLinksToShow = [
             document.getElementById("showAllPostLink"),
