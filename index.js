@@ -34,14 +34,13 @@
     });
 } else {
     const button =document.getElementById("SignUp");
-    const homeHeading = document.getElementById("Homeheading");
-    if (homeHeading,button) {
-        homeHeading.style.display = "none";
+  
+    if (button) {
         button.style.display = "none";
     } else {
-        console.error("Homeheading element not found");
+        console.error("button element not found");
     }
-}
+   }
 });
 
 const token = sessionStorage.getItem("userToken");
