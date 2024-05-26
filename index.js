@@ -17,30 +17,30 @@
 //     //     }
 //     // }
 
-  if (localStorage.getItem("email") == null) {
-    const elementsToHide = [
-        document.getElementById("logout"),
-        document.getElementById("categoriesLink"),
-        document.getElementById("addJobsLink"),
-        document.getElementById("notes"),
-        document.getElementById("showAllPostLink"),
-    ];
-    elementsToHide.forEach(element => {
-        if (element) {
-            element.style.display = "none";
-        } else {
-            console.error("Element not found:", element);
-        }
-    });
-} else {
-    const button =document.getElementById("SignUp");
+//   if (localStorage.getItem("email") == null) {
+//     const elementsToHide = [
+//         document.getElementById("logout"),
+//         document.getElementById("categoriesLink"),
+//         document.getElementById("addJobsLink"),
+//         document.getElementById("notes"),
+//         document.getElementById("showAllPostLink"),
+//     ];
+//     elementsToHide.forEach(element => {
+//         if (element) {
+//             element.style.display = "none";
+//         } else {
+//             console.error("Element not found:", element);
+//         }
+//     });
+// } else {
+//     const button =document.getElementById("SignUp");
   
-    if (button) {
-        button.style.display = "none";
-    } else {
-        console.error("button element not found");
-    }
-   }
+//     if (button) {
+//         button.style.display = "none";
+//     } else {
+//         console.error("button element not found");
+//     }
+//    }
 });
 
 const token = sessionStorage.getItem("userToken");
