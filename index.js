@@ -373,7 +373,7 @@ function renderCards() {
   hideLoader();
 }
 
-// ________________________________________________________________________________________________________________
+
 function createJobs() {
   // showLoader();
   const mainScreen = document.querySelector(".container");
