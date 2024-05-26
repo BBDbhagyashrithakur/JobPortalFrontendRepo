@@ -216,7 +216,7 @@ function showFormBtnClick() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer YOUR_ACCESS_TOKEN_HERE", // Replace with your access token
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(data),
     })
