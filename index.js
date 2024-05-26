@@ -197,58 +197,64 @@ function showAllCategories() {
       hideLoader(); // Hide the loader in case of an error
     });
 }
-
 function showFormBtnClick() {
   popupContainer.style.display = "flex";
   closeBtn.addEventListener("click", function () {
-    popupContainer.style.display = "none";
-    showAllCategories();
+      popupContainer.style.display = "none";
+      showAllCategories();
   });
 
   addCategoryForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-    const formData = new FormData(addCategoryForm);
-    const name = formData.get("CategoryTitle");
-    const description = formData.get("CategoryDescription");
-    const data = { name, description };
+      event.preventDefault();
+      const formData = new FormData(addCategoryForm);
+      const name = formData.get("CategoryTitle");
+      const description = formData.get("CategoryDescription");
+      const data = { name, description };
 
-    fetch("https://jobportal.projects.bbdgrad.com/api/api/job/category/add", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Category saved successfully:", data);
-        displayAlert("Category saved successfully", "success");
-        addCategoryForm.reset();
-        popupContainer.style.display = "none";
-      })
-      .catch((error) => {
-        console.error("There was a problem saving the category:", error);
-        displayAlert("Failed to save category", "error");
-      });
+      // Check if category already exists
+      if (checkCategoryExists(name)) {
+          displayAlert("Category already exists", "error");
+          return;
+      }
+
+      fetch("https://jobportal.projects.bbdgrad.com/api/api/job/category/add", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify(data),
+          })
+          .then((response) => {
+              if (!response.ok) {
+                  throw new Error("Network response was not ok");
+              }
+              return response.json();
+          })
+          .then((data) => {
+              console.log("Category saved successfully:", data);
+              displayAlert("Category saved successfully", "success");
+              addCategoryForm.reset();
+              popupContainer.style.display = "none";
+          })
+          .catch((error) => {
+              console.error("There was a problem saving the category:", error);
+              displayAlert("Failed to save category", "error");
+          });
   });
 
   function displayAlert(message, type) {
-    const alertBox = document.createElement("div");
-    alertBox.className = `alert ${type}`;
-    alertBox.textContent = message;
-    document.body.appendChild(alertBox);
-    setTimeout(() => {
-      alertBox.remove();
-    }, 2000);
+      const alertBox = document.createElement("div");
+      alertBox.className = `alert ${type}`;
+      alertBox.textContent = message;
+      document.body.appendChild(alertBox);
+      setTimeout(() => {
+          alertBox.remove();
+      }, 2000);
   }
   mainScreen.replaceChildren(popupContainer);
 }
+
 
 function createCategoryCards(categories) {
 
