@@ -164,8 +164,9 @@ document
   .addEventListener("click", showAllPost);
 
 // ----------------------------------------------------------------------------
+// Function to fetch and display all categories
 function showAllCategories() {
-  showLoader(); // Show the loader before making the fetch request
+  showLoader(); // Show loader before making the fetch request
 
   mainScreen.innerHTML = "";
   mainScreen.style.display = "block";
@@ -173,7 +174,7 @@ function showAllCategories() {
 
   mainScreen.appendChild(showFormBtn);
 
-  fetch("https://jobportal.projects.bbdgrad.com/api/api/job/category/all", {
+  fetch("https://jobportal.projects.bbdgrad.com/api/job/category/all", {
           method: "GET",
           headers: {
               "Content-Type": "application/json",
@@ -188,61 +189,67 @@ function showAllCategories() {
       })
       .then((data) => {
           createCategoryCards(data);
-          console.log(data);
-          appendAddCategoryButton();
-          hideLoader(); // Hide the loader after the fetch request completes
+          hideLoader(); // Hide loader after the fetch request completes
       })
       .catch((error) => {
           console.error("There was a problem with the fetch operation:", error);
-          hideLoader(); // Hide the loader in case of an error
+          hideLoader(); // Hide loader in case of an error
       });
 }
 
-function showFormBtnClick() {
-  popupContainer.style.display = "flex";
-  closeBtn.addEventListener("click", function () {
-      popupContainer.style.display = "none";
-      showAllCategories();
-  });
-
-  addCategoryForm.addEventListener("submit", function (event) {
+// Function to handle form submission for adding a category
+function handleAddCategoryFormSubmission() {
+  addCategoryForm.addEventListener("submit", async function (event) {
       event.preventDefault();
       const formData = new FormData(addCategoryForm);
       const name = formData.get("CategoryTitle");
       const description = formData.get("CategoryDescription");
-      const data = { name, description };
 
-      // Check if category already exists
       if (checkCategoryExists(name)) {
           displayAlert("Category already exists", "error");
           return;
       }
 
-      fetch("https://jobportal.projects.bbdgrad.com/api/api/job/category/add", {
+      try {
+          const response = await fetch("https://jobportal.projects.bbdgrad.com/api/job/category/add", {
               method: "POST",
               headers: {
                   "Content-Type": "application/json",
                   Authorization: `Bearer ${token}`,
               },
-              body: JSON.stringify(data),
-          })
-          .then((response) => {
-              if (!response.ok) {
-                  throw new Error("Network response was not ok");
-              }
-              return response.json();
-          })
-          .then((data) => {
-              console.log("Category saved successfully:", data);
-              displayAlert("Category saved successfully", "success");
-              addCategoryForm.reset();
-              popupContainer.style.display = "none";
-          })
-          .catch((error) => {
-              console.error("There was a problem saving the category:", error);
-              displayAlert("Failed to save category", "error");
+              body: JSON.stringify({ name, description }),
           });
+
+          if (!response.ok) {
+              throw new Error("Network response was not ok");
+          }
+
+          const data = await response.json();
+          console.log("Category saved successfully:", data);
+          displayAlert("Category saved successfully", "success");
+          addCategoryForm.reset();
+          popupContainer.style.display = "none";
+          showAllCategories(); // Refresh category list after adding a new category
+      } catch (error) {
+          console.error("There was a problem saving the category:", error);
+          displayAlert("Failed to save category", "error");
+      }
   });
+}
+
+// Function to check if a category already exists
+function checkCategoryExists(name) {
+  const existingCategories = document.querySelectorAll(".category-card h3");
+
+  for (const category of existingCategories) {
+      if (category.textContent.trim().toLowerCase() === name.trim().toLowerCase()) {
+          return true;
+      }
+  }
+  return false;
+}
+
+// Other functions (createCategoryCards, deleteCategory, displayAlert) remain unchanged
 
   function displayAlert(message, type) {
       const alertBox = document.createElement("div");
@@ -319,16 +326,6 @@ function deleteCategory(id) {
   hideLoader();
 }
 
-function checkCategoryExists(name) {
-  const existingCategories = document.querySelectorAll(".category-card h3");
-
-  for (const category of existingCategories) {
-      if (category.textContent.trim().toLowerCase() === name.trim().toLowerCase()) {
-          return true;
-      }
-  }
-  return false;
-}
 
 function renderCards() {
   const cardData = [
