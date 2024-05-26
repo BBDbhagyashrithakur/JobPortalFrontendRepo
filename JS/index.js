@@ -435,7 +435,7 @@ setTimeout(function() {
       id: "name",
       name: "CategoryTitle",
       labelText: " Category Title:",
-      required: true,
+      required: true,  
     },
     {
       type: "input",
