@@ -1,47 +1,61 @@
+document.addEventListener("DOMContentLoaded", function() {
+  const userEmail = localStorage.getItem("email");
 
- document.addEventListener("DOMContentLoaded", function() {
+  // Check if the user's email is ritu's email
+  if (userEmail === "ritu@example.com") {
+      // Show all elements
+      const elementsToShow = [
+          document.getElementById("logout"),
+          document.getElementById("categoriesLink"),
+          document.getElementById("addJobsLink"),
+          document.getElementById("notes"),
+          document.getElementById("showAllPostLink"),
+      ];
+      elementsToShow.forEach(element => {
+          if (element) {
+              element.style.display = "block";
+          } else {
+              console.error("Element not found:", element);
+          }
+      });
 
-//     // if (localStorage.getItem("email") == "baviskarritu02@gmail.com") {
-//     //   const elementsToShow = [
-//     //     document.getElementById("logout"),
-//     //     document.getElementById("categoriesLink"),
-//     //     document.getElementById("addCategoriesLink"),
-//     //     document.getElementById("addJobsLink"),
-//     //     document.getElementById("jobsLink")
-//     // ];
+      // Hide the signup button
+      const signUpButton = document.getElementById("SignUp");
+      if (signUpButton) {
+          signUpButton.style.display = "none";
+      } else {
+          console.error("Signup button element not found");
+      }
+  } else {
+      // Show only jobs and documentation for other users
+      const elementsToShow = [
+          document.getElementById("showAllPostLink"),
+          document.getElementById("notes"),
+      ];
+      elementsToShow.forEach(element => {
+          if (element) {
+              element.style.display = "block";
+          } else {
+              console.error("Element not found:", element);
+          }
+      });
 
-//     //     if (elementsToShow) {
-//     //       elementsToShow.style.display = "block";
-//     //     } else {
-//     //         console.error("Element not found");
-//     //     }
-//     // }
-
-//   if (localStorage.getItem("email") == null) {
-//     const elementsToHide = [
-//         document.getElementById("logout"),
-//         document.getElementById("categoriesLink"),
-//         document.getElementById("addJobsLink"),
-//         document.getElementById("notes"),
-//         document.getElementById("showAllPostLink"),
-//     ];
-//     elementsToHide.forEach(element => {
-//         if (element) {
-//             element.style.display = "none";
-//         } else {
-//             console.error("Element not found:", element);
-//         }
-//     });
-// } else {
-//     const button =document.getElementById("SignUp");
-  
-//     if (button) {
-//         button.style.display = "none";
-//     } else {
-//         console.error("button element not found");
-//     }
-//    }
+      // Hide all other elements
+      const elementsToHide = [
+          document.getElementById("logout"),
+          document.getElementById("categoriesLink"),
+          document.getElementById("addJobsLink"),
+      ];
+      elementsToHide.forEach(element => {
+          if (element) {
+              element.style.display = "none";
+          } else {
+              console.error("Element not found:", element);
+          }
+      });
+  }
 });
+
 
 const token = sessionStorage.getItem("userToken");
 const mainScreen = document.getElementById("container");
@@ -261,7 +275,7 @@ function showAllCategories() {
       .then((data) => {
           createCategoryCards(data);
           console.log(data);
-          appendAddCategoryButton();
+          // appendAddCategoryButton();
           hideLoader(); // Hide the loader after the fetch request completes
       })
       .catch((error) => {
