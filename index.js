@@ -653,7 +653,7 @@ function isValidUrl(url) {
   return pattern.test(url);
 }
 
-//About us page:__________________________________________________________________________________________________
+//About us page:
 
 function showAboutContent() {
   const aboutPage = document.getElementById("about");
