@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
   const userEmail = localStorage.getItem("email");
+  console.log("User Email:", userEmail);
 
   // Check if user email is null
   if (userEmail === null) {
@@ -27,8 +28,10 @@ document.addEventListener("DOMContentLoaded", function() {
           console.error("Sign-up button element not found");
       }
 
+      console.log("Condition Result:", userEmail !== "baviskarritu02@gmail.com");
+
       // Check if user email is not ritu's email
-      if (userEmail !== "baviskarritu02@gmail.com") {
+      if (userEmail != "baviskarritu02@gmail.com") {
           // Show only jobs and documentation nav links if user email is not ritu's email
           const navLinksToShow = [
               document.getElementById("showAllPostLink"),
