@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const userEmail = localStorage.getItem("email");
 
   // Check if the user's email is ritu's email
-  if (userEmail === "ritu@example.com") {
+  if (userEmail === "baviskarritu02@gmail.com") {
       // Show all elements
       const elementsToShow = [
           document.getElementById("logout"),
