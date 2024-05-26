@@ -179,6 +179,17 @@ document
 
 // ----------------------------------------------------------------------------
 // Function to check if a category already exists
+
+function displayAlert(message, type) {
+  const alertBox = document.createElement("div");
+  alertBox.className = `alert ${type}`;
+  alertBox.textContent = message;
+  document.body.appendChild(alertBox);
+  setTimeout(() => {
+      alertBox.remove();
+  }, 2000);
+}
+
 function checkCategoryExists(name) {
   const existingCategories = document.querySelectorAll(".category-card h3");
 
@@ -203,13 +214,16 @@ function showFormBtnClick() {
       const formData = new FormData(addCategoryForm);
       const name = formData.get("CategoryTitle");
       const description = formData.get("CategoryDescription");
-      const data = { name, description };
 
+      console.log(name);
+      console.log(description);
       // Check if category already exists
       if (checkCategoryExists(name)) {
           displayAlert("Category already exists", "error");
           return;
       }
+
+      const data = { name, description };
 
       fetch("https://jobportal.projects.bbdgrad.com/api/api/job/category/add", {
               method: "POST",
@@ -237,15 +251,6 @@ function showFormBtnClick() {
           });
   });
 
-  function displayAlert(message, type) {
-      const alertBox = document.createElement("div");
-      alertBox.className = `alert ${type}`;
-      alertBox.textContent = message;
-      document.body.appendChild(alertBox);
-      setTimeout(() => {
-          alertBox.remove();
-      }, 2000);
-  }
   mainScreen.replaceChildren(popupContainer);
 }
 
