@@ -26,6 +26,20 @@ document.addEventListener("DOMContentLoaded", function() {
       } else {
           console.error("Signup button element not found");
       }
+  } else if (userEmail === null) {
+      // Hide all navigation elements
+      const navElements = document.querySelectorAll(".nav-item");
+      navElements.forEach(element => {
+          element.style.display = "none";
+      });
+
+      // Show the sign-up button
+      const signUpButton = document.getElementById("SignUp");
+      if (signUpButton) {
+          signUpButton.style.display = "block";
+      } else {
+          console.error("Signup button element not found");
+      }
   } else {
       // Show only jobs and documentation for other users
       const elementsToShow = [
@@ -53,6 +67,14 @@ document.addEventListener("DOMContentLoaded", function() {
               console.error("Element not found:", element);
           }
       });
+
+      // Show the sign-in button
+      const signInButton = document.getElementById("SignUp");
+      if (signInButton) {
+          signInButton.style.display = "block";
+      } else {
+          console.error("Sign-in button element not found");
+      }
   }
 });
 
