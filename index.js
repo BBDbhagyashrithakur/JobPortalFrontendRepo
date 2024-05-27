@@ -176,8 +176,17 @@ function displayAlert(message, type) {
   }, 2000);
 }
 
-function checkCategoryExists(name) {
+async function checkCategoryExists(name) {
   const existingCategories = document.querySelectorAll(".category-card h3");
+
+  let category = await getAllCategory();
+
+  category.map((cate)=>{
+      if(cate.name == name){
+        return true;
+      }
+      return false;
+  })
 
   for (const category of existingCategories) {
     // Extract the text content of each category
@@ -192,7 +201,7 @@ function checkCategoryExists(name) {
 }
 
 // Function to fetch and display all categories
-function showAllCategories() {
+async function showAllCategories() {
   showLoader(); // Show loader before making the fetch request
 
   mainScreen.innerHTML = "";
@@ -201,7 +210,13 @@ function showAllCategories() {
 
   mainScreen.appendChild(showFormBtn);
 
-  fetch("https://jobportal.projects.bbdgrad.com/api/api/job/category/all", {
+      let r =await getAllCategory();
+      createCategoryCards(r);
+      hideLoader();
+}
+
+async function getAllCategory(){
+  let res = await fetch("https://jobportal.projects.bbdgrad.com/api/api/job/category/all", {
           method: "GET",
           headers: {
               "Content-Type": "application/json",
@@ -214,16 +229,7 @@ function showAllCategories() {
           }
           return response.json();
       })
-      .then((data) => {
-          createCategoryCards(data);
-          console.log(data);
-          // appendAddCategoryButton();
-          hideLoader(); // Hide the loader after the fetch request completes
-      })
-      .catch((error) => {
-          console.error("There was a problem with the fetch operation:", error);
-          hideLoader(); // Hide the loader in case of an error
-      });
+    return res;
 }
 // Function to handle the click event of the show form button
 
