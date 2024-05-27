@@ -15,6 +15,21 @@ document.addEventListener("DOMContentLoaded", function() {
   //     //         console.error("Element not found");
   //     //     }
   //     // }
+
+
+
+  //     // else if (localStorage.getItem("email") != "baviskarritu02@gmail.com" && localStorage.getItem("email")!=null) {
+  //     //   const elementsToShow = [
+  //     //     document.getElementById("logout"),
+  //     //     document.getElementById("jobsLink")
+  //     // ];
+  
+  //     //     if (elementsToShow) {
+  //     //       elementsToShow.style.display = "block";
+  //     //     } else {
+  //     //         console.error("Element not found");
+  //     //     }
+  //     // }
   
     if (localStorage.getItem("email") == null) {
       const elementsToHide = [
@@ -189,16 +204,15 @@ async function checkCategoryExists(name) {
   })
 
   for (const category of existingCategories) {
-    // Extract the text content of each category
-    const categoryName = category.textContent.trim();
-
-    // Compare the category name with the provided name
-    if (categoryName === name.trim()) {
-        return true; // Category already exists
-    }
-}
+      if (category.textContent.trim().toLowerCase() === name.trim().toLowerCase()) {
+          return true;
+      }
+  }
   return false;
 }
+
+// Function to handle the click event of the show form button
+
 
 // Function to fetch and display all categories
 async function showAllCategories() {
@@ -231,7 +245,6 @@ async function getAllCategory(){
       })
     return res;
 }
-// Function to handle the click event of the show form button
 
 function showFormBtnClick() {
   popupContainer.style.display = "flex";
@@ -243,11 +256,8 @@ function showFormBtnClick() {
   addCategoryForm.addEventListener("submit", function (event) {
       event.preventDefault();
       const formData = new FormData(addCategoryForm);
-      let name = formData.get("CategoryTitle");
+      const name = formData.get("CategoryTitle");
       const description = formData.get("CategoryDescription");
-
-      name = name.charAt(0).toUpperCase() + name.slice(1);
-
       const data = { name, description };
 
       // Check if category already exists
