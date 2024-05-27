@@ -19,6 +19,12 @@ document.addEventListener("DOMContentLoaded", function() {
         console.error("Element not found:", element);
       }
     });
+    const button = document.getElementById("signIn");
+    if (button) {
+      button.style.display = "block";
+    } else {
+      console.error("Sign-in button element not found");
+    }
   } else {
     // Case 2: User is signed in
     console.log("User is signed in");
@@ -49,7 +55,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       });
     } else {
-      // Case 2.2: User is "ritu@example.com"
       console.log("User is ritu@example.com");
       const button = document.getElementById("signIn");
       if (button) {
@@ -60,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 });
+
 
 
 const token = sessionStorage.getItem("userToken");
