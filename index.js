@@ -28,6 +28,13 @@ document.addEventListener("DOMContentLoaded", function() {
   } else {
     // Case 2: User is signed in
     console.log("User is signed in");
+    const button = document.getElementById("signIn");
+    if (button) {
+      button.style.display = "none"; // Hide sign-in button
+    } else {
+      console.error("Sign-in button element not found");
+    }
+    
     if (email !== "baviskarritu02@gmail.com") {
       // Case 2.1: User is signed in and not "ritu"
       console.log("User is not ritu@example.com");
@@ -55,16 +62,12 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       });
     } else {
-      console.log("User is ritu@example.com");
-      const button = document.getElementById("signIn");
-      if (button) {
-        button.style.display = "none";
-      } else {
-        console.error("Sign-in button element not found");
-      }
+      // Case 2.2: User is "baviskarritu02@gmail.com"
+      console.log("User is baviskarritu02@gmail.com");
     }
   }
 });
+
 
 
 
