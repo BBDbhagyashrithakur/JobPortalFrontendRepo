@@ -32,15 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
           }
       });
   } 
-  else {
-    const button =document.getElementById("SignUp");
   
-    if (button) {
-        button.style.display = "none";
-    } else {
-        console.error("button element not found");
-    }
-   }
   
   if (localStorage.getItem("email") != "baviskarritu02@gmail.com" && localStorage.getItem("email")!=null) {
     const elementsToShow = [
@@ -55,8 +47,15 @@ document.addEventListener("DOMContentLoaded", function() {
           console.error("Element not found");
       }
   }
-
-
+  else {
+    const button =document.getElementById("SignUp");
+  
+    if (button) {
+        button.style.display = "none";
+    } else {
+        console.error("button element not found");
+    }
+   }
   });
 
 
