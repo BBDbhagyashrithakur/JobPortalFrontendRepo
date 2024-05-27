@@ -42,32 +42,6 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 });
 
-  
-  
-  // if (localStorage.getItem("email") != "baviskarritu02@gmail.com" && localStorage.getItem("email")!=null) {
-  //   const elementsToShow = [
-  //     document.getElementById("notes"),
-  //     document.getElementById("jobsLink"),
-  //     document.getElemetById("logout")
-  // ];
-
-  //     if (elementsToShow) {
-  //       elementsToShow.style.display = "block";
-  //     } else {
-  //         console.error("Element not found");
-  //     }
-  // }
-  else {
-    const button =document.getElementById("SignUp");
-  
-    if (button) {
-        button.style.display = "none";
-    } else {
-        console.error("button element not found");
-    }
-   }
-  });
-
 
 const token = sessionStorage.getItem("userToken");
 const mainScreen = document.getElementById("container");
