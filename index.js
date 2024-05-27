@@ -396,6 +396,24 @@ function deleteCategory(id) {
   hideLoader();
 }
 
+// Function to create card elements
+function createCard(heading, link) {
+  const card = document.createElement('div');
+  card.classList.add('card');
+ 
+  const headingElement = document.createElement('h2');
+  headingElement.textContent = heading;
+ 
+  const linkElement = document.createElement('a');
+  linkElement.textContent = "Visit Website";
+  linkElement.href = link;
+  linkElement.target = "_blank";
+ 
+  card.appendChild(headingElement);
+  card.appendChild(linkElement);
+
+  return card;
+}
 
 function renderCards() {
   const cardData = [
