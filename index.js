@@ -1,28 +1,41 @@
 document.addEventListener("DOMContentLoaded", function() {
-  if (localStorage.getItem("email") == null) {
+  const email = localStorage.getItem("email");
+  console.log("Email:", email);
+
+  if (email === null) {
+    // Case 1: User is not signed in
+    console.log("User is not signed in");
     const elementsToHide = [
+      document.getElementById("logout"),
+      document.getElementById("jobsLink"),
+      document.getElementById("documentationLink"),
+      document.getElementById("notes"),
+      document.getElementById("showAllPostLink"),
+    ];
+    elementsToHide.forEach(element => {
+      if (element) {
+        element.style.display = "none";
+      } else {
+        console.error("Element not found:", element);
+      }
+    });
+  } else {
+    // Case 2: User is signed in
+    console.log("User is signed in");
+    if (email !== "baviskarritu02@gmail.com") {
+      // Case 2.1: User is signed in and not "ritu"
+      console.log("User is not ritu@example.com");
+      const elementsToShow = [
         document.getElementById("logout"),
+        document.getElementById("jobsLink"),
+        document.getElementById("documentationLink")
+      ];
+      const elementsToHide = [
         document.getElementById("categoriesLink"),
         document.getElementById("addJobsLink"),
         document.getElementById("notes"),
         document.getElementById("showAllPostLink"),
-    ];
-    elementsToHide.forEach(element => {
-        if (element) {
-            element.style.display = "none";
-        } else {
-            console.error("Element not found:", element);
-        }
-    });
-  } else {
-    const email = localStorage.getItem("email");
-    if (email !== "baviskarritu02@gmail.com") {
-      const elementsToShow = [
-        document.getElementById("logout"),
-        document.getElementById("jobsLink"),
-        document.getElementById("notes")
       ];
-
       elementsToShow.forEach(element => {
         if (element) {
           element.style.display = "block";
@@ -30,12 +43,21 @@ document.addEventListener("DOMContentLoaded", function() {
           console.error("Element not found:", element);
         }
       });
+      elementsToHide.forEach(element => {
+        if (element) {
+          element.style.display = "none";
+        } else {
+          console.error("Element not found:", element);
+        }
+      });
     } else {
-      const button = document.getElementById("SignUp");
+      // Case 2.2: User is "ritu@example.com"
+      console.log("User is ritu@example.com");
+      const button = document.getElementById("signIn");
       if (button) {
-          button.style.display = "none";
+        button.style.display = "none";
       } else {
-          console.error("button element not found");
+        console.error("Sign-in button element not found");
       }
     }
   }
