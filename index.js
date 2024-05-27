@@ -103,7 +103,7 @@ function createJobCards(jobs) {
       job.location
     }`;
     const description = document.createElement("p");
-    description.innerHTML = `<strong>Description:</strong> ${job.description}`;
+    description.innerHTML = `<strong>Requirnment:</strong> ${job.description}`;
 
     const jobType = document.createElement("p");
     jobType.innerHTML = `<strong>Work Time:</strong> ${job.jobType}`;
@@ -385,10 +385,6 @@ function renderCards() {
     {
       heading: "Java Interview Questions and Answers",
       link: "https://www.geeksforgeeks.org/java-interview-questions/",
-    },
-    {
-      heading: "JavaScript Interview Questions and Answers to tackel interview",
-      link: "https://www.geeksforgeeks.org/javascript-interview-questions-and-answers/",
     },
   ];
   const cardContainer = document.querySelector(".main-content");
