@@ -188,57 +188,7 @@ function checkCategoryExists(name) {
 }
 
 // Function to handle the click event of the show form button
-function showFormBtnClick() {
-  popupContainer.style.display = "flex";
-  closeBtn.addEventListener("click", function () {
-      popupContainer.style.display = "none";
-      showAllCategories();
-  });
 
-  addCategoryForm.addEventListener("submit", function (event) {
-      event.preventDefault();
-      const formData = new FormData(addCategoryForm);
-      const name = formData.get("CategoryTitle");
-      const description = formData.get("CategoryDescription");
-
-      console.log(name);
-      console.log(description);
-      // Check if category already exists
-      if (checkCategoryExists(name)) {
-          displayAlert("Category already exists", "error");
-          return;
-      }
-
-      const data = { name, description };
-
-      fetch("https://jobportal.projects.bbdgrad.com/api/api/job/category/add", {
-              method: "POST",
-              headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${token}`,
-              },
-              body: JSON.stringify(data),
-          })
-          .then((response) => {
-              if (!response.ok) {
-                  throw new Error("Network response was not ok");
-              }
-              return response.json();
-          })
-          .then((data) => {
-              console.log("Category saved successfully:", data);
-              displayAlert("Category saved successfully", "success");
-              addCategoryForm.reset();
-              popupContainer.style.display = "none";
-          })
-          .catch((error) => {
-              console.error("There was a problem saving the category:", error);
-              displayAlert("Failed to save category", "error");
-          });
-  });
-
-  mainScreen.replaceChildren(popupContainer);
-}
 
 // Function to fetch and display all categories
 function showAllCategories() {
