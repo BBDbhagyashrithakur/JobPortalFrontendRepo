@@ -18,18 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-  //     // else if (localStorage.getItem("email") != "baviskarritu02@gmail.com" && localStorage.getItem("email")!=null) {
-  //     //   const elementsToShow = [
-  //     //     document.getElementById("logout"),
-  //     //     document.getElementById("jobsLink")
-  //     // ];
-  
-  //     //     if (elementsToShow) {
-  //     //       elementsToShow.style.display = "block";
-  //     //     } else {
-  //     //         console.error("Element not found");
-  //     //     }
-  //     // }
+     
   
     if (localStorage.getItem("email") == null) {
       const elementsToHide = [
@@ -46,15 +35,32 @@ document.addEventListener("DOMContentLoaded", function() {
               console.error("Element not found:", element);
           }
       });
-  } else {
-      const button =document.getElementById("SignUp");
-    
-      if (button) {
-          button.style.display = "none";
+  } 
+  else {
+    const button =document.getElementById("SignUp");
+  
+    if (button) {
+        button.style.display = "none";
+    } else {
+        console.error("button element not found");
+    }
+   }
+  
+  if (localStorage.getItem("email") != "baviskarritu02@gmail.com" && localStorage.getItem("email")!=null) {
+    const elementsToShow = [
+      document.getElementById("notes"),
+      document.getElementById("jobsLink"),
+      document.getElemetById("logout")
+  ];
+
+      if (elementsToShow) {
+        elementsToShow.style.display = "block";
       } else {
-          console.error("button element not found");
+          console.error("Element not found");
       }
-     }
+  }
+
+
   });
 
 
