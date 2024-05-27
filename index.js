@@ -187,9 +187,6 @@ function checkCategoryExists(name) {
   return false;
 }
 
-// Function to handle the click event of the show form button
-
-
 // Function to fetch and display all categories
 function showAllCategories() {
   showLoader(); // Show loader before making the fetch request
@@ -224,6 +221,7 @@ function showAllCategories() {
           hideLoader(); // Hide the loader in case of an error
       });
 }
+// Function to handle the click event of the show form button
 
 function showFormBtnClick() {
   popupContainer.style.display = "flex";
@@ -237,6 +235,9 @@ function showFormBtnClick() {
       const formData = new FormData(addCategoryForm);
       const name = formData.get("CategoryTitle");
       const description = formData.get("CategoryDescription");
+      
+      name = name.charAt(0).toUpperCase() + name.slice(1);
+
       const data = { name, description };
 
       // Check if category already exists
