@@ -1,64 +1,28 @@
 document.addEventListener("DOMContentLoaded", function() {
-  const userEmail = localStorage.getItem("email");
 
-  // Check if the user's email is ritu's email
-  if (userEmail === "baviskarritu02@gmail.com") {
-      // Show all elements
-      const elementsToShow = [
-          document.getElementById("logout"),
-          document.getElementById("categoriesLink"),
-          document.getElementById("addJobsLink"),
-          document.getElementById("notes"),
-          document.getElementById("showAllPostLink"),
-      ];
-      elementsToShow.forEach(element => {
-          if (element) {
-              element.style.display = "block";
-          } else {
-              console.error("Element not found:", element);
-          }
-      });
-
-      // Hide the signup button
-      const signUpButton = document.getElementById("SignUp");
-      if (signUpButton) {
-          signUpButton.style.display = "none";
-      } else {
-          console.error("Signup button element not found");
-      }
-  } else if (userEmail === null) {
-      // Hide all navigation elements
-      const navElements = document.querySelectorAll(".nav-item");
-      navElements.forEach(element => {
-          element.style.display = "none";
-      });
-
-      // Show the sign-up button
-      const signUpButton = document.getElementById("SignUp");
-      if (signUpButton) {
-          signUpButton.style.display = "block";
-      } else {
-          console.error("Signup button element not found");
-      }
-  } else {
-      // Show only jobs and documentation for other users
-      const elementsToShow = [
-          document.getElementById("showAllPostLink"),
-          document.getElementById("notes"),
-      ];
-      elementsToShow.forEach(element => {
-          if (element) {
-              element.style.display = "block";
-          } else {
-              console.error("Element not found:", element);
-          }
-      });
-
-      // Hide all other elements
+  //     // if (localStorage.getItem("email") == "baviskarritu02@gmail.com") {
+  //     //   const elementsToShow = [
+  //     //     document.getElementById("logout"),
+  //     //     document.getElementById("categoriesLink"),
+  //     //     document.getElementById("addCategoriesLink"),
+  //     //     document.getElementById("addJobsLink"),
+  //     //     document.getElementById("jobsLink")
+  //     // ];
+  
+  //     //     if (elementsToShow) {
+  //     //       elementsToShow.style.display = "block";
+  //     //     } else {
+  //     //         console.error("Element not found");
+  //     //     }
+  //     // }
+  
+    if (localStorage.getItem("email") == null) {
       const elementsToHide = [
           document.getElementById("logout"),
           document.getElementById("categoriesLink"),
           document.getElementById("addJobsLink"),
+          document.getElementById("notes"),
+          document.getElementById("showAllPostLink"),
       ];
       elementsToHide.forEach(element => {
           if (element) {
@@ -67,17 +31,16 @@ document.addEventListener("DOMContentLoaded", function() {
               console.error("Element not found:", element);
           }
       });
-
-      // Show the sign-in button
-      const signInButton = document.getElementById("SignUp");
-      if (signInButton) {
-          signInButton.style.display = "block";
+  } else {
+      const button =document.getElementById("SignUp");
+    
+      if (button) {
+          button.style.display = "none";
       } else {
-          console.error("Sign-in button element not found");
+          console.error("button element not found");
       }
-  }
-});
-
+     }
+  });
 
 
 const token = sessionStorage.getItem("userToken");
