@@ -29,7 +29,9 @@ document.addEventListener("DOMContentLoaded", function() {
     // Case 2: User is signed in
     console.log("User is signed in");
     const button = document.getElementById("signIn");
+    console.log("Sign-in button:", button);
     if (button) {
+      console.log("Hiding sign-in button"); // Debugging statement
       button.style.display = "none"; // Hide sign-in button
     } else {
       console.error("Sign-in button element not found");
@@ -67,6 +69,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 });
+
 
 
 
