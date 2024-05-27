@@ -15,21 +15,6 @@ document.addEventListener("DOMContentLoaded", function() {
   //     //         console.error("Element not found");
   //     //     }
   //     // }
-
-
-
-  //     // else if (localStorage.getItem("email") != "baviskarritu02@gmail.com" && localStorage.getItem("email")!=null) {
-  //     //   const elementsToShow = [
-  //     //     document.getElementById("logout"),
-  //     //     document.getElementById("jobsLink")
-  //     // ];
-  
-  //     //     if (elementsToShow) {
-  //     //       elementsToShow.style.display = "block";
-  //     //     } else {
-  //     //         console.error("Element not found");
-  //     //     }
-  //     // }
   
     if (localStorage.getItem("email") == null) {
       const elementsToHide = [
@@ -191,17 +176,8 @@ function displayAlert(message, type) {
   }, 2000);
 }
 
-async function checkCategoryExists(name) {
+function checkCategoryExists(name) {
   const existingCategories = document.querySelectorAll(".category-card h3");
-
-  let category = await getAllCategory();
-
-  category.map((cate)=>{
-      if(cate.name == name){
-        return true;
-      }
-      return false;
-  })
 
   for (const category of existingCategories) {
       if (category.textContent.trim().toLowerCase() === name.trim().toLowerCase()) {
@@ -211,11 +187,8 @@ async function checkCategoryExists(name) {
   return false;
 }
 
-// Function to handle the click event of the show form button
-
-
 // Function to fetch and display all categories
-async function showAllCategories() {
+function showAllCategories() {
   showLoader(); // Show loader before making the fetch request
 
   mainScreen.innerHTML = "";
@@ -224,13 +197,7 @@ async function showAllCategories() {
 
   mainScreen.appendChild(showFormBtn);
 
-      let r =await getAllCategory();
-      createCategoryCards(r);
-      hideLoader();
-}
-
-async function getAllCategory(){
-  let res = await fetch("https://jobportal.projects.bbdgrad.com/api/api/job/category/all", {
+  fetch("https://jobportal.projects.bbdgrad.com/api/api/job/category/all", {
           method: "GET",
           headers: {
               "Content-Type": "application/json",
@@ -243,8 +210,18 @@ async function getAllCategory(){
           }
           return response.json();
       })
-    return res;
+      .then((data) => {
+          createCategoryCards(data);
+          console.log(data);
+          // appendAddCategoryButton();
+          hideLoader(); // Hide the loader after the fetch request completes
+      })
+      .catch((error) => {
+          console.error("There was a problem with the fetch operation:", error);
+          hideLoader(); // Hide the loader in case of an error
+      });
 }
+// Function to handle the click event of the show form button
 
 function showFormBtnClick() {
   popupContainer.style.display = "flex";
@@ -285,6 +262,7 @@ function showFormBtnClick() {
               displayAlert("Category saved successfully", "success");
               addCategoryForm.reset();
               popupContainer.style.display = "none";
+              showAllCategories();
           })
           .catch((error) => {
               console.error("There was a problem saving the category:", error);
