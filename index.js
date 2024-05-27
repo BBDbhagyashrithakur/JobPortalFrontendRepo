@@ -390,10 +390,6 @@ function renderCards() {
       heading: "JavaScript Interview Questions and Answers to tackel interview",
       link: "https://www.geeksforgeeks.org/javascript-interview-questions-and-answers/",
     },
-    {
-      heading: "10 Common Job Interview Questions and How to Answer Them",
-      link: "https://hbr.org/2021/11/10-common-job-interview-questions-and-how-to-answer-them",
-    },
   ];
   const cardContainer = document.querySelector(".main-content");
   cardContainer.innerHTML = "";
@@ -547,7 +543,7 @@ function createJobs() {
           inputType: "text",
           id: "description",
           name: "description",
-          labelText: "Job Description:",
+          labelText: "Requirnment:",
       },
       {
           type: "input",
