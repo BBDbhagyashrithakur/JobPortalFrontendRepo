@@ -233,9 +233,9 @@ function showFormBtnClick() {
   addCategoryForm.addEventListener("submit", function (event) {
       event.preventDefault();
       const formData = new FormData(addCategoryForm);
-      const name = formData.get("CategoryTitle");
+      let name = formData.get("CategoryTitle");
       const description = formData.get("CategoryDescription");
-      
+
       name = name.charAt(0).toUpperCase() + name.slice(1);
 
       const data = { name, description };
