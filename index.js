@@ -1,37 +1,47 @@
 document.addEventListener("DOMContentLoaded", function() {
 
-  //     // if (localStorage.getItem("email") == "baviskarritu02@gmail.com") {
-  //     //   const elementsToShow = [
-  //     //     document.getElementById("logout"),
-  //     //     document.getElementById("categoriesLink"),
-  //     //     document.getElementById("addCategoriesLink"),
-  //     //     document.getElementById("addJobsLink"),
-  //     //     document.getElementById("jobsLink")
-  //     // ];
-  
-  //     //     if (elementsToShow) {
-  //     //       elementsToShow.style.display = "block";
-  //     //     } else {
-  //     //         console.error("Element not found");
-  //     //     }
-  //     // }
-  
-    if (localStorage.getItem("email") == null) {
-      const elementsToHide = [
-          document.getElementById("logout"),
-          document.getElementById("categoriesLink"),
-          document.getElementById("addJobsLink"),
-          document.getElementById("notes"),
-          document.getElementById("showAllPostLink"),
+  if (localStorage.getItem("email") == null) {
+    const elementsToHide = [
+        document.getElementById("logout"),
+        document.getElementById("categoriesLink"),
+        document.getElementById("addJobsLink"),
+        document.getElementById("notes"),
+        document.getElementById("showAllPostLink"),
+    ];
+    elementsToHide.forEach(element => {
+        if (element) {
+            element.style.display = "none";
+        } else {
+            console.error("Element not found:", element);
+        }
+    });
+  } else {
+    const email = localStorage.getItem("email");
+    if (email === "baviskarritu02@gmail.com") {
+      const elementsToShow = [
+        document.getElementById("logout"),
+        document.getElementById("jobsLink"),
+        document.getElementById("notes")
       ];
-      elementsToHide.forEach(element => {
-          if (element) {
-              element.style.display = "none";
-          } else {
-              console.error("Element not found:", element);
-          }
+
+      elementsToShow.forEach(element => {
+        if (element) {
+          element.style.display = "block";
+        } else {
+          console.error("Element not found:", element);
+        }
       });
-  } 
+    } else {
+      const button = document.getElementById("SignUp");
+      if (button) {
+          button.style.display = "none";
+      } else {
+          console.error("button element not found");
+      }
+    }
+  }
+});
+
   
   
   // if (localStorage.getItem("email") != "baviskarritu02@gmail.com" && localStorage.getItem("email")!=null) {
