@@ -15,13 +15,6 @@ document.addEventListener("DOMContentLoaded", function() {
   //     //         console.error("Element not found");
   //     //     }
   //     // }
-<<<<<<< HEAD
-
-
-
-     
-=======
->>>>>>> 94aec11aec2e403c1eb6f0147348770d198844df
   
     if (localStorage.getItem("email") == null) {
       const elementsToHide = [
