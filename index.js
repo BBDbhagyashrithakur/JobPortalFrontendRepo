@@ -7,8 +7,8 @@ document.addEventListener("DOMContentLoaded", function() {
     console.log("User is not signed in");
     const elementsToHide = [
       document.getElementById("logout"),
-      document.getElementById("jobsLink"),
-      document.getElementById("documentationLink"),
+      document.getElementById("addJobsLink"),
+      document.getElementById("categoriesLink"),
       document.getElementById("notes"),
       document.getElementById("showAllPostLink"),
     ];
@@ -27,14 +27,12 @@ document.addEventListener("DOMContentLoaded", function() {
       console.log("User is not ritu@example.com");
       const elementsToShow = [
         document.getElementById("logout"),
-        document.getElementById("jobsLink"),
-        document.getElementById("documentationLink")
+        document.getElementById("showAllPostLink"),
+        document.getElementById("notes")
       ];
       const elementsToHide = [
         document.getElementById("categoriesLink"),
         document.getElementById("addJobsLink"),
-        document.getElementById("notes"),
-        document.getElementById("showAllPostLink"),
       ];
       elementsToShow.forEach(element => {
         if (element) {
