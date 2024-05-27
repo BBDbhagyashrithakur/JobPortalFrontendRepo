@@ -386,6 +386,10 @@ function renderCards() {
       heading: "Java Interview Questions and Answers",
       link: "https://www.geeksforgeeks.org/java-interview-questions/",
     },
+    {
+      heading: "JavaScript Interview Questions and Answers to tackel interview",
+      link: "https://www.geeksforgeeks.org/javascript-interview-questions-and-answers/",
+    },
   ];
   const cardContainer = document.querySelector(".main-content");
   cardContainer.innerHTML = "";
