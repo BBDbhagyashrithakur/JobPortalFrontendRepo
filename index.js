@@ -15,10 +15,13 @@ document.addEventListener("DOMContentLoaded", function() {
   //     //         console.error("Element not found");
   //     //     }
   //     // }
+<<<<<<< HEAD
 
 
 
      
+=======
+>>>>>>> 94aec11aec2e403c1eb6f0147348770d198844df
   
     if (localStorage.getItem("email") == null) {
       const elementsToHide = [
@@ -208,9 +211,6 @@ function checkCategoryExists(name) {
   return false;
 }
 
-// Function to handle the click event of the show form button
-
-
 // Function to fetch and display all categories
 function showAllCategories() {
   showLoader(); // Show loader before making the fetch request
@@ -245,6 +245,7 @@ function showAllCategories() {
           hideLoader(); // Hide the loader in case of an error
       });
 }
+// Function to handle the click event of the show form button
 
 function showFormBtnClick() {
   popupContainer.style.display = "flex";
@@ -256,8 +257,11 @@ function showFormBtnClick() {
   addCategoryForm.addEventListener("submit", function (event) {
       event.preventDefault();
       const formData = new FormData(addCategoryForm);
-      const name = formData.get("CategoryTitle");
+      let name = formData.get("CategoryTitle");
       const description = formData.get("CategoryDescription");
+      
+      name = name.charAt(0).toUpperCase() + name.slice(1);
+
       const data = { name, description };
 
       // Check if category already exists
@@ -285,6 +289,7 @@ function showFormBtnClick() {
               displayAlert("Category saved successfully", "success");
               addCategoryForm.reset();
               popupContainer.style.display = "none";
+              showAllCategories();
           })
           .catch((error) => {
               console.error("There was a problem saving the category:", error);
