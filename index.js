@@ -180,10 +180,14 @@ function checkCategoryExists(name) {
   const existingCategories = document.querySelectorAll(".category-card h3");
 
   for (const category of existingCategories) {
-      if (category.textContent.trim().toLowerCase() === name.trim().toLowerCase()) {
-          return true;
-      }
-  }
+    // Extract the text content of each category
+    const categoryName = category.textContent.trim();
+
+    // Compare the category name with the provided name
+    if (categoryName === name.trim()) {
+        return true; // Category already exists
+    }
+}
   return false;
 }
 
