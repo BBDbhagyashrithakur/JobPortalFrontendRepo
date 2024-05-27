@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function() {
-
   if (localStorage.getItem("email") == null) {
     const elementsToHide = [
         document.getElementById("logout"),
@@ -17,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   } else {
     const email = localStorage.getItem("email");
-    if (email != "baviskarritu02@gmail.com") {
+    if (email !== "baviskarritu02@gmail.com") {
       const elementsToShow = [
         document.getElementById("logout"),
         document.getElementById("jobsLink"),
