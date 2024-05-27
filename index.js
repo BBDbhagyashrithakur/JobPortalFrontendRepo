@@ -215,15 +215,16 @@ function checkCategoryExists(name) {
   const existingCategories = document.querySelectorAll(".category-card h3");
 
   for (const category of existingCategories) {
-      if (category.textContent.trim().toLowerCase() === name.trim().toLowerCase()) {
-          return true;
-      }
-  }
+    // Extract the text content of each category
+    const categoryName = category.textContent.trim();
+
+    // Compare the category name with the provided name
+    if (categoryName === name.trim()) {
+        return true; // Category already exists
+    }
+}
   return false;
 }
-
-// Function to handle the click event of the show form button
-
 
 // Function to fetch and display all categories
 function showAllCategories() {
@@ -259,6 +260,7 @@ function showAllCategories() {
           hideLoader(); // Hide the loader in case of an error
       });
 }
+// Function to handle the click event of the show form button
 
 function showFormBtnClick() {
   popupContainer.style.display = "flex";
@@ -270,8 +272,11 @@ function showFormBtnClick() {
   addCategoryForm.addEventListener("submit", function (event) {
       event.preventDefault();
       const formData = new FormData(addCategoryForm);
-      const name = formData.get("CategoryTitle");
+      let name = formData.get("CategoryTitle");
       const description = formData.get("CategoryDescription");
+
+      name = name.charAt(0).toUpperCase() + name.slice(1);
+
       const data = { name, description };
 
       // Check if category already exists
