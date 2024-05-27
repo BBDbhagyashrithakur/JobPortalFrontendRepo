@@ -34,19 +34,19 @@ document.addEventListener("DOMContentLoaded", function() {
   } 
   
   
-  if (localStorage.getItem("email") != "baviskarritu02@gmail.com" && localStorage.getItem("email")!=null) {
-    const elementsToShow = [
-      document.getElementById("notes"),
-      document.getElementById("jobsLink"),
-      document.getElemetById("logout")
-  ];
+  // if (localStorage.getItem("email") != "baviskarritu02@gmail.com" && localStorage.getItem("email")!=null) {
+  //   const elementsToShow = [
+  //     document.getElementById("notes"),
+  //     document.getElementById("jobsLink"),
+  //     document.getElemetById("logout")
+  // ];
 
-      if (elementsToShow) {
-        elementsToShow.style.display = "block";
-      } else {
-          console.error("Element not found");
-      }
-  }
+  //     if (elementsToShow) {
+  //       elementsToShow.style.display = "block";
+  //     } else {
+  //         console.error("Element not found");
+  //     }
+  // }
   else {
     const button =document.getElementById("SignUp");
   
