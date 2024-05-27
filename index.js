@@ -1,64 +1,43 @@
 document.addEventListener("DOMContentLoaded", function() {
-  const userEmail = localStorage.getItem("email");
 
-  // Check if the user's email is ritu's email
-  if (userEmail === "baviskarritu02@gmail.com") {
-      // Show all elements
-      const elementsToShow = [
-          document.getElementById("logout"),
-          document.getElementById("categoriesLink"),
-          document.getElementById("addJobsLink"),
-          document.getElementById("notes"),
-          document.getElementById("showAllPostLink"),
-      ];
-      elementsToShow.forEach(element => {
-          if (element) {
-              element.style.display = "block";
-          } else {
-              console.error("Element not found:", element);
-          }
-      });
+  //     // if (localStorage.getItem("email") == "baviskarritu02@gmail.com") {
+  //     //   const elementsToShow = [
+  //     //     document.getElementById("logout"),
+  //     //     document.getElementById("categoriesLink"),
+  //     //     document.getElementById("addCategoriesLink"),
+  //     //     document.getElementById("addJobsLink"),
+  //     //     document.getElementById("jobsLink")
+  //     // ];
+  
+  //     //     if (elementsToShow) {
+  //     //       elementsToShow.style.display = "block";
+  //     //     } else {
+  //     //         console.error("Element not found");
+  //     //     }
+  //     // }
 
-      // Hide the signup button
-      const signUpButton = document.getElementById("SignUp");
-      if (signUpButton) {
-          signUpButton.style.display = "none";
-      } else {
-          console.error("Signup button element not found");
-      }
-  } else if (userEmail === null) {
-      // Hide all navigation elements
-      const navElements = document.querySelectorAll(".nav-item");
-      navElements.forEach(element => {
-          element.style.display = "none";
-      });
 
-      // Show the sign-up button
-      const signUpButton = document.getElementById("SignUp");
-      if (signUpButton) {
-          signUpButton.style.display = "block";
-      } else {
-          console.error("Signup button element not found");
-      }
-  } else {
-      // Show only jobs and documentation for other users
-      const elementsToShow = [
-          document.getElementById("showAllPostLink"),
-          document.getElementById("notes"),
-      ];
-      elementsToShow.forEach(element => {
-          if (element) {
-              element.style.display = "block";
-          } else {
-              console.error("Element not found:", element);
-          }
-      });
 
-      // Hide all other elements
+  //     // else if (localStorage.getItem("email") != "baviskarritu02@gmail.com" && localStorage.getItem("email")!=null) {
+  //     //   const elementsToShow = [
+  //     //     document.getElementById("logout"),
+  //     //     document.getElementById("jobsLink")
+  //     // ];
+  
+  //     //     if (elementsToShow) {
+  //     //       elementsToShow.style.display = "block";
+  //     //     } else {
+  //     //         console.error("Element not found");
+  //     //     }
+  //     // }
+  
+    if (localStorage.getItem("email") == null) {
       const elementsToHide = [
           document.getElementById("logout"),
           document.getElementById("categoriesLink"),
           document.getElementById("addJobsLink"),
+          document.getElementById("notes"),
+          document.getElementById("showAllPostLink"),
       ];
       elementsToHide.forEach(element => {
           if (element) {
@@ -67,16 +46,17 @@ document.addEventListener("DOMContentLoaded", function() {
               console.error("Element not found:", element);
           }
       });
-
-      // Show the sign-in button
-      const signInButton = document.getElementById("SignUp");
-      if (signInButton) {
-          signInButton.style.display = "block";
+  } else {
+      const button =document.getElementById("SignUp");
+    
+      if (button) {
+          button.style.display = "none";
       } else {
-          console.error("Sign-in button element not found");
+          console.error("button element not found");
       }
-  }
-});
+     }
+  });
+
 
 const token = sessionStorage.getItem("userToken");
 const mainScreen = document.getElementById("container");
@@ -215,16 +195,15 @@ function checkCategoryExists(name) {
   const existingCategories = document.querySelectorAll(".category-card h3");
 
   for (const category of existingCategories) {
-    // Extract the text content of each category
-    const categoryName = category.textContent.trim();
-
-    // Compare the category name with the provided name
-    if (categoryName === name.trim()) {
-        return true; // Category already exists
-    }
-}
+      if (category.textContent.trim().toLowerCase() === name.trim().toLowerCase()) {
+          return true;
+      }
+  }
   return false;
 }
+
+// Function to handle the click event of the show form button
+
 
 // Function to fetch and display all categories
 function showAllCategories() {
@@ -260,7 +239,6 @@ function showAllCategories() {
           hideLoader(); // Hide the loader in case of an error
       });
 }
-// Function to handle the click event of the show form button
 
 function showFormBtnClick() {
   popupContainer.style.display = "flex";
@@ -272,11 +250,8 @@ function showFormBtnClick() {
   addCategoryForm.addEventListener("submit", function (event) {
       event.preventDefault();
       const formData = new FormData(addCategoryForm);
-      let name = formData.get("CategoryTitle");
+      const name = formData.get("CategoryTitle");
       const description = formData.get("CategoryDescription");
-
-      name = name.charAt(0).toUpperCase() + name.slice(1);
-
       const data = { name, description };
 
       // Check if category already exists
