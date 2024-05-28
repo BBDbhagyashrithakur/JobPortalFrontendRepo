@@ -121,24 +121,6 @@
 </body>
 
 <script>
-   function adjustSidebarHeight() {
-          let sidebar = document.getElementById('sidebar');
-          let visibleItems = document.querySelectorAll('.sidebar ul li:not(.hidden)');
-          let height = visibleItems.length * 60; // Assuming each item has a height of 60px
-          sidebar.style.height = height + 'px';
-      }
-
-      window.addEventListener("load", function () {
-          let isLoggedIn = false; // Set this based on user login status
-          if (!isLoggedIn) {
-              let hiddenItems = document.querySelectorAll('.sidebar ul li.hide-on-logout');
-              hiddenItems.forEach(item => {
-                  item.style.display = 'none';
-              });
-          }
-          adjustSidebarHeight();
-      });
-      
     let btn = document.querySelector('#btn');
     let sidebar = document.querySelector('.sidebar')
 
