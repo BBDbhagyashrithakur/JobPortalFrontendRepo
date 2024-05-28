@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
   const email = localStorage.getItem("email");
-  console.log("Email:", email);
+  // console.log("Email:");
 
   if (email === null) {
     // Case 1: User is not signed in
@@ -65,7 +65,8 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     } else {
       // Case 2.2: User is "baviskarritu02@gmail.com"
-      console.log("User is baviskarritu02@gmail.com");
+      console.log("Admin");
+      // console.log("User is baviskarritu02@gmail.com");
     }
   }
 });
