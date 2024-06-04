@@ -1,9 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
   const email = localStorage.getItem("email");
-  // console.log("Email:");
 
   if (email === null) {
-    // Case 1: User is not signed in
     console.log("User is not signed in");
     const elementsToHide = [
       document.getElementById("logout"),
@@ -26,19 +24,17 @@ document.addEventListener("DOMContentLoaded", function() {
       console.error("Sign-in button element not found");
     }
   } else {
-    // Case 2: User is signed in
     console.log("User is signed in");
     const button = document.getElementById("signIn");
     console.log("Sign-in button:", button);
     if (button) {
-      console.log("Hiding sign-in button"); // Debugging statement
-      button.style.display = "none"; // Hide sign-in button
+      console.log("Hiding sign-in button"); 
+      button.style.display = "none"; 
     } else {
       console.error("Sign-in button element not found");
     }
     
     if (email !== "baviskarritu02@gmail.com") {
-      // Case 2.1: User is signed in and not "ritu"
       console.log("User is not ritu@example.com");
       const elementsToShow = [
         document.getElementById("logout"),
@@ -64,16 +60,10 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       });
     } else {
-      // Case 2.2: User is "baviskarritu02@gmail.com"
       console.log("Admin");
-      // console.log("User is baviskarritu02@gmail.com");
     }
   }
 });
-
-
-
-
 
 const token = sessionStorage.getItem("userToken");
 const mainScreen = document.getElementById("container");
@@ -103,14 +93,10 @@ function showAllPost() {
     .then((data) => {
       createJobCards(data);
       console.log(data);
-
-      // Hide the loader after the fetch request completes successfully
       hideLoader();
     })
     .catch((error) => {
       console.error("There was a problem with the fetch operation:", error);
-
-      // Hide the loader in case of an error
       hideLoader();
     });
 }
@@ -125,8 +111,8 @@ function createJobCards(jobs) {
 
     const title = document.createElement("h3");
     title.innerHTML = `<strong>Post:</strong> ${job.title}`;
-    title.style.color = "red"; // Change color as needed
-    title.style.textShadow = "2px 2px 4px rgba(0, 0, 0, 0.2)"; // Add shadow
+    title.style.color = "red"; 
+    title.style.textShadow = "2px 2px 4px rgba(0, 0, 0, 0.2)"; 
 
     const companyName = document.createElement("p");
     companyName.innerHTML = `<strong>Company:</strong> ${job.companyName}`;
@@ -151,7 +137,7 @@ function createJobCards(jobs) {
 
     const applyButton = document.createElement("button");
     applyButton.textContent = "Apply Now";
-    applyButton.classList.add("btn-7"); // Add class name
+    applyButton.classList.add("btn-7"); 
 
     const span = document.createElement("span");
     applyButton.appendChild(span);
@@ -185,18 +171,15 @@ function getWatchSymbol() {
 }
 
 function getLocation() {
-  return "🌎"; // Globe Showing Americas
+  return "🌎"; 
 }
 function getSalarySymbol() {
-  return "💵"; // Banknote with dollar sign
+  return "💵"; 
 }
 
 document
   .getElementById("fetchDataButton")
   .addEventListener("click", showAllPost);
-
-// ----------------------------------------------------------------------------
-// Function to check if a category already exists
 
 function displayAlert(message, type) {
   const alertBox = document.createElement("div");
@@ -221,7 +204,7 @@ function checkCategoryExists(name) {
 
 // Function to fetch and display all categories
 function showAllCategories() {
-  showLoader(); // Show loader before making the fetch request
+  showLoader(); 
 
   mainScreen.innerHTML = "";
   mainScreen.style.display = "block";
@@ -245,15 +228,14 @@ function showAllCategories() {
       .then((data) => {
           createCategoryCards(data);
           console.log(data);
-          // appendAddCategoryButton();
-          hideLoader(); // Hide the loader after the fetch request completes
+          hideLoader(); 
       })
       .catch((error) => {
           console.error("There was a problem with the fetch operation:", error);
-          hideLoader(); // Hide the loader in case of an error
+          hideLoader(); 
       });
 }
-// Function to handle the click event of the show form button
+
 
 function showFormBtnClick() {
   popupContainer.style.display = "flex";
