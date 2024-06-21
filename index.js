@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function() {
       console.error("Sign-in button element not found");
     }
     
-    if (email !== "baviskarritu02@gmail.com") {
+    if (email !== "thakurbhagyashri078@gmail.com") {
       console.log("User is not ritu@example.com");
       const elementsToShow = [
         document.getElementById("logout"),
